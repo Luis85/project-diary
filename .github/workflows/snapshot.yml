@@ -37,30 +37,36 @@ jobs:
           node-version: '24'
           package-manager-cache: false
 
-      - name: Test the collector
+      - name: Test the collector and diary
         run: npm test
 
-      - name: Collect the snapshot
+      - name: Collect the snapshot and create the diary
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: npm run snapshot
 
-      - name: Commit and push snapshot files
+      - name: Commit and push the snapshot and diary
         env:
           DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         shell: bash
         run: |
           set -euo pipefail
-          git add -- data/snapshot.json data/snapshots
+          SNAPSHOT_DATE=$(node --input-type=module <<'NODE'
+          import { readFile } from 'node:fs/promises';
+          const { snapshot_date: date } = JSON.parse(await readFile('data/snapshot.json', 'utf8'));
+          if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) throw new Error('Invalid snapshot date');
+          console.log(date);
+          NODE
+          )
+          git add -- data/snapshot.json "data/snapshots/${SNAPSHOT_DATE}.json" "data/diary/${SNAPSHOT_DATE}.md"
           if git diff --cached --quiet; then
-            echo "No snapshot changes to commit."
+            echo "No snapshot or diary changes to commit."
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          SNAPSHOT_DATE=$(node --input-type=module -e 'import { readFile } from "node:fs/promises"; console.log(JSON.parse(await readFile("data/snapshot.json", "utf8")).snapshot_date)')
-          git commit -m "chore(data): snapshot GitHub repositories ${SNAPSHOT_DATE}"
+          git commit -m "chore(data): capture GitHub diary ${SNAPSHOT_DATE}"
 
           # A developer may push while collection is running. Rebase only;
           # conflicts or branch protection fail the job instead of overwriting work.
@@ -76,21 +82,25 @@ jobs:
             git rebase FETCH_HEAD
           done
 
-      - name: Summarize the capture
+      - name: Link the snapshot and diary
         run: |
           node --input-type=module <<'NODE'
+          import { execFileSync } from 'node:child_process';
           import { appendFile, readFile } from 'node:fs/promises';
           const snapshot = JSON.parse(await readFile('data/snapshot.json', 'utf8'));
+          const commit = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
+          const base = `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/blob/${commit}/data`;
           await appendFile(process.env.GITHUB_STEP_SUMMARY, [
-            '## GitHub snapshot',
+            '## GitHub snapshot and diary',
             '',
             `- Account: **${snapshot.owner}**`,
             `- Public repositories: **${snapshot.repository_count}**`,
-            `- Captured at: ${snapshot.captured_at}`,
-            '- Latest: `data/snapshot.json`',
-            `- Daily history: \`data/snapshots/${snapshot.snapshot_date}.json\``,
+            `- Latest capture: ${snapshot.captured_at}`,
+            `- [Latest JSON](${base}/snapshot.json)`,
+            `- [Daily JSON archive](${base}/snapshots/${snapshot.snapshot_date}.json)`,
+            `- [Obsidian diary entry](${base}/diary/${snapshot.snapshot_date}.md)`,
             '',
-            'Same-day reruns refresh the latest file and preserve the first successful daily capture.',
+            'Same-day reruns refresh the latest JSON. The daily archive and diary preserve the first capture; personal notes stay intact.',
             '',
           ].join('\n'));
           NODE

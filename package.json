@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Daily snapshots of public GitHub repositories",
+  "description": "Daily GitHub snapshots and Obsidian Markdown diary entries",
   "engines": {
     "node": ">=24"
   },

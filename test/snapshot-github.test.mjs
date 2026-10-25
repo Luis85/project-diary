@@ -292,7 +292,7 @@ test('same-day reruns preserve the first archive, update latest, and create a ne
   const thirdResult = await writeSnapshot(third, { dataDir });
   assert.equal(thirdResult.historyCreated, true);
   assert.deepEqual((await readdir(join(dataDir, 'snapshots'))).sort(), ['2026-10-25.json', '2026-10-26.json']);
-  assert.deepEqual((await readdir(dataDir)).sort(), ['snapshot.json', 'snapshots']);
+  assert.deepEqual((await readdir(dataDir)).sort(), ['diary', 'snapshot.json', 'snapshots']);
   assert.deepEqual(JSON.parse(await readFile(thirdResult.latestPath, 'utf8')), third);
 });
 
@@ -340,7 +340,7 @@ test('a failure after collecting one repository leaves all previously successful
   assert.equal(await readFile(paths.latestPath, 'utf8'), latestBefore);
   assert.equal(await readFile(paths.historyPath, 'utf8'), historyBefore);
   assert.deepEqual(await readdir(join(dataDir, 'snapshots')), ['2026-10-24.json']);
-  assert.deepEqual((await readdir(dataDir)).sort(), ['snapshot.json', 'snapshots']);
+  assert.deepEqual((await readdir(dataDir)).sort(), ['diary', 'snapshot.json', 'snapshots']);
 });
 
 test('HTTP client retries timeout and transient service failure with bounded backoff', async () => {
@@ -400,4 +400,45 @@ test('pagination refuses an external next URL before forwarding credentials', as
 
   assert.equal(calls.length, 1);
   assert.equal(calls[0].url.origin, 'https://api.github.com');
+});
+
+test('pagination accepts relation parameters after other parameters and unquoted relations', async () => {
+  const { client, calls } = clientFor((_url, _init, attempt) => attempt === 1
+    ? json([repository(1)], 200, { link: '<https://api.github.com/users/Luis85/repos?page=2>; title="next, page"; rel=next' })
+    : json([repository(2)], 200, { link: '<https://api.github.com/users/Luis85/repos?page=1>; rel="prev first"' }));
+
+  const repositories = await listPublicRepositories(client, OWNER);
+
+  assert.equal(repositories.length, 2);
+  assert.equal(calls.length, 2);
+});
+
+test('malformed, ambiguous, or repeated pagination links cannot silently publish a partial inventory', async () => {
+  const links = [
+    'not a link',
+    '<https://api.github.com/users/Luis85/repos?page=2>',
+    '<https://api.github.com/users/Luis85/repos?page=2>; rel="next',
+    '<https://api.github.com/users/Luis85/repos?page=2>; rel="next"; rel="last"',
+    '<https://api.github.com/users/Luis85/repos?page=2>; rel=next, <https://api.github.com/users/Luis85/repos?page=3>; rel=next',
+    '<https://api.github.com/users/Luis85/repos?type=owner&sort=full_name&direction=asc&per_page=100>; rel=next',
+  ];
+  for (const link of links) {
+    const { client, calls } = clientFor(() => json([repository()], 200, { link }));
+    await assert.rejects(listPublicRepositories(client, OWNER));
+    assert.equal(calls.length, 1);
+  }
+});
+
+test('missing or invalid API counters fail collection rather than being recorded as zero', async () => {
+  for (const value of [undefined, null, -1, '5']) {
+    const { client } = emptyActivityClient([repository(1, { stargazers_count: value })]);
+    await assert.rejects(collectSnapshot({ client, owner: OWNER, now: clock() }), /counts.stars/);
+  }
+});
+
+test('malformed API topics and flags fail instead of being coerced into misleading metadata', async () => {
+  for (const overrides of [{ topics: 'typescript' }, { disabled: 'false' }, { archived: null }, { fork: 0 }]) {
+    const { client } = emptyActivityClient([repository(1, overrides)]);
+    await assert.rejects(listPublicRepositories(client, OWNER), /GitHub returned an invalid/);
+  }
 });

@@ -1,4 +1,4 @@
-name: Test snapshot collector
+name: Test project diary
 
 on:
   pull_request:

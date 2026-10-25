@@ -1,143 +1,10 @@
-import { randomUUID } from 'node:crypto';
-import { link, mkdir, readFile, rename, unlink, writeFile } from 'node:fs/promises';
-import { dirname, join, resolve } from 'node:path';
+import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { setTimeout as delay } from 'node:timers/promises';
+import { API_VERSION, createGitHubClient } from './lib/github-client.mjs';
+import { assertOwner, assertEventLimit, assertSnapshot } from './lib/snapshot-schema.mjs';
+import { writeSnapshot } from './lib/snapshot-store.mjs';
 
-export const API_VERSION = '2026-03-10';
-const API_ORIGIN = 'https://api.github.com';
-const MAX_RETRY_WAIT_MS = 60_000;
-
-function assertOwner(owner) {
-  if (typeof owner !== 'string' || !/^[a-z\d](?:[a-z\d-]{0,37}[a-z\d])?$/i.test(owner)) {
-    throw new Error('GITHUB_OWNER must be a GitHub username (1–39 letters, digits, or hyphens).');
-  }
-}
-
-function assertEventLimit(value) {
-  if (!Number.isInteger(value) || value < 0 || value > 100) {
-    throw new Error('SNAPSHOT_EVENTS_PER_REPO must be an integer from 0 to 100.');
-  }
-}
-
-function apiUrl(path) {
-  const url = new URL(path, API_ORIGIN);
-  // Pagination URLs are server input. Never forward the token to another host.
-  if (url.origin !== API_ORIGIN || url.username || url.password || url.hash) {
-    throw new Error('Refusing a GitHub API URL outside https://api.github.com.');
-  }
-  return url;
-}
-
-function nextPage(linkHeader) {
-  for (const part of (linkHeader ?? '').split(',')) {
-    const match = part.match(/<([^>]+)>\s*;\s*rel="([^"]+)"/);
-    if (match?.[2].split(/\s+/).includes('next')) return match[1];
-  }
-  return null;
-}
-
-function retryWait(response, attempt, now, isRateLimit) {
-  const retryAfter = response.headers.get('retry-after');
-  if (retryAfter !== null) {
-    const seconds = Number(retryAfter);
-    const wait = Number.isFinite(seconds) ? seconds * 1000 : Date.parse(retryAfter) - now();
-    if (Number.isFinite(wait)) return Math.max(0, wait);
-  }
-  if (response.headers.get('x-ratelimit-remaining') === '0') {
-    const reset = Number(response.headers.get('x-ratelimit-reset'));
-    if (Number.isFinite(reset) && reset > 0) return Math.max(1000, reset * 1000 - now() + 1000);
-  }
-  return isRateLimit ? 60_000 : 1000 * 2 ** attempt;
-}
-
-/** Serial, authenticated public API reads with bounded retries and timeouts. */
-export function createGitHubClient({
-  token = '',
-  fetchImpl = globalThis.fetch,
-  sleep = delay,
-  now = Date.now,
-  maxAttempts = 3,
-  timeoutMs = 30_000,
-} = {}) {
-  if (!Number.isInteger(maxAttempts) || maxAttempts < 1 || maxAttempts > 5) {
-    throw new Error('maxAttempts must be an integer from 1 to 5.');
-  }
-  const headers = {
-    Accept: 'application/vnd.github+json',
-    'X-GitHub-Api-Version': API_VERSION,
-    'User-Agent': 'project-diary-snapshot',
-    ...(token ? { Authorization: `Bearer ${token}` } : {}),
-  };
-
-  async function get(path, { allowedStatuses = [] } = {}) {
-    const url = apiUrl(path);
-    const label = `${url.pathname}${url.search}`;
-    for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
-      let response;
-      let body;
-      try {
-        response = await fetchImpl(url.href, {
-          headers,
-          signal: AbortSignal.timeout(timeoutMs),
-          redirect: 'error',
-        });
-        body = await response.text();
-      } catch {
-        if (attempt + 1 === maxAttempts) {
-          throw new Error(`GitHub request failed or timed out: ${label} (${maxAttempts} attempts).`);
-        }
-        await sleep(1000 * 2 ** attempt);
-        continue;
-      }
-
-      let data;
-      try {
-        data = body ? JSON.parse(body) : null;
-      } catch {
-        // Transient gateway responses are sometimes HTML; retry their status below.
-        data = null;
-      }
-      if (response.ok || allowedStatuses.includes(response.status)) {
-        if (data === null) throw new Error(`GitHub returned an invalid JSON response: ${label}.`);
-        return { data, headers: response.headers, status: response.status };
-      }
-
-      const isRateLimit = response.status === 429 || (response.status === 403 && (
-        response.headers.has('retry-after') ||
-        response.headers.get('x-ratelimit-remaining') === '0' ||
-        /rate limit|secondary rate|abuse/i.test(data?.message ?? '')
-      ));
-      const retryable = isRateLimit || response.status >= 500;
-      const error = new Error(`GitHub HTTP ${response.status}: ${label}${isRateLimit ? ' (rate limit)' : ''}.`);
-      if (!retryable || attempt + 1 === maxAttempts) throw error;
-      const wait = retryWait(response, attempt, now, isRateLimit);
-      if (wait > MAX_RETRY_WAIT_MS) {
-        throw new Error(`${error.message} Required retry wait exceeds 60 seconds; try again later.`);
-      }
-      await sleep(wait);
-    }
-    throw new Error('GitHub request exhausted its retry budget.');
-  }
-
-  async function paginate(path) {
-    const result = [];
-    const visited = new Set();
-    let next = path;
-    while (next) {
-      const url = apiUrl(next).href;
-      if (visited.has(url)) throw new Error('GitHub returned a repeated pagination URL.');
-      visited.add(url);
-      const response = await get(url);
-      if (!Array.isArray(response.data)) throw new Error('Expected a paginated GitHub JSON array.');
-      result.push(...response.data);
-      next = nextPage(response.headers.get('link'));
-    }
-    return result;
-  }
-
-  return { get, paginate };
-}
+export { API_VERSION, createGitHubClient, writeSnapshot };
 
 /** Enumerate public repositories owned by the account, including forks and archives. */
 export async function listPublicRepositories(client, owner) {
@@ -156,6 +23,12 @@ export async function listPublicRepositories(client, owner) {
         typeof repo.name !== 'string' || typeof repo.html_url !== 'string') {
       throw new Error('GitHub returned an invalid repository identity.');
     }
+    if (repo.topics !== undefined && (!Array.isArray(repo.topics) || repo.topics.some(topic => typeof topic !== 'string'))) {
+      throw new Error(`GitHub returned an invalid topics list for ${repo.full_name}.`);
+    }
+    for (const flag of ['fork', 'archived', 'disabled']) {
+      if (typeof repo[flag] !== 'boolean') throw new Error(`GitHub returned an invalid ${flag} flag for ${repo.full_name}.`);
+    }
     unique.set(repo.id, repo);
   }
   return [...unique.values()].sort((a, b) => a.full_name < b.full_name ? -1 : a.full_name > b.full_name ? 1 : 0);
@@ -170,14 +43,14 @@ function repositoryMetadata(repo) {
     owner: repo.owner.login,
     url: repo.html_url,
     about: repo.description ?? null,
-    website: repo.homepage || null,
-    topics: [...(repo.topics ?? [])].sort(),
+    website: repo.homepage === '' ? null : repo.homepage ?? null,
+    topics: [...new Set(repo.topics ?? [])].sort(),
     language: repo.language ?? null,
     default_branch: repo.default_branch ?? null,
     visibility: 'public',
-    fork: Boolean(repo.fork),
-    archived: Boolean(repo.archived),
-    disabled: Boolean(repo.disabled),
+    fork: repo.fork,
+    archived: repo.archived,
+    disabled: repo.disabled,
     created_at: repo.created_at ?? null,
     updated_at: repo.updated_at ?? null,
     pushed_at: repo.pushed_at ?? null,
@@ -189,10 +62,10 @@ function repositoryMetadata(repo) {
       url: repo.license.url ?? null,
     } : null,
     counts: {
-      stars: repo.stargazers_count ?? 0,
-      forks: repo.forks_count ?? 0,
+      stars: repo.stargazers_count,
+      forks: repo.forks_count,
       // GitHub's open_issues_count includes pull requests. Preserve that distinction.
-      open_issues_and_pull_requests: repo.open_issues_count ?? 0,
+      open_issues_and_pull_requests: repo.open_issues_count,
     },
   };
 }
@@ -266,10 +139,10 @@ async function collectActivity(client, repo, eventsPerRepo) {
   if (eventsPerRepo > 0) {
     const events = await client.get(`${base}/events?per_page=${eventsPerRepo}`);
     if (!Array.isArray(events.data)) throw new Error(`Invalid event list for ${repo.full_name}.`);
-    activity.recent_events = events.data
+    const unique = new Map(events.data
       .filter(event => event.public === true)
-      .slice(0, eventsPerRepo)
-      .map(event => summarizeEvent(event, repo.html_url));
+      .map(event => [String(event.id), summarizeEvent(event, repo.html_url)]));
+    activity.recent_events = [...unique.values()].slice(0, eventsPerRepo);
   }
   return activity;
 }
@@ -284,7 +157,7 @@ export async function collectSnapshot({ client, owner, eventsPerRepo = 10, now =
   for (const repo of repos) {
     repositories.push({ ...repositoryMetadata(repo), activity: await collectActivity(client, repo, eventsPerRepo) });
   }
-  return {
+  const snapshot = {
     schema_version: 1,
     snapshot_date: capturedAt.slice(0, 10),
     captured_at: capturedAt,
@@ -302,75 +175,8 @@ export async function collectSnapshot({ client, owner, eventsPerRepo = 10, now =
     repository_count: repositories.length,
     repositories,
   };
-}
-
-async function readIfExists(path) {
-  try {
-    return JSON.parse(await readFile(path, 'utf8'));
-  } catch (error) {
-    if (error.code === 'ENOENT') return undefined;
-    throw error;
-  }
-}
-
-function assertSnapshot(snapshot) {
-  if (snapshot?.schema_version !== 1 || !/^\d{4}-\d{2}-\d{2}$/.test(snapshot.snapshot_date) ||
-      typeof snapshot.captured_at !== 'string' || !Number.isFinite(Date.parse(snapshot.captured_at)) ||
-      snapshot.captured_at.slice(0, 10) !== snapshot.snapshot_date ||
-      !Array.isArray(snapshot.repositories) || snapshot.repository_count !== snapshot.repositories.length) {
-    throw new Error('Refusing to write an invalid snapshot.');
-  }
-  assertOwner(snapshot.owner);
-}
-
-async function atomicWrite(path, content, { exclusive = false } = {}) {
-  const temporary = join(dirname(path), `.snapshot-${randomUUID()}.tmp`);
-  try {
-    await writeFile(temporary, content, { encoding: 'utf8', flag: 'wx' });
-    if (exclusive) {
-      try {
-        // Hard-linking the completed file provides atomic creation without overwriting an archive.
-        await link(temporary, path);
-      } catch (error) {
-        if (error.code === 'EEXIST') return false;
-        throw error;
-      }
-    } else {
-      await rename(temporary, path);
-    }
-    return true;
-  } finally {
-    await unlink(temporary).catch(error => { if (error.code !== 'ENOENT') throw error; });
-  }
-}
-
-/** Keep the first successful UTC-day archive; refresh the convenient latest file. */
-export async function writeSnapshot(snapshot, { dataDir = 'data' } = {}) {
   assertSnapshot(snapshot);
-  const latestPath = resolve(dataDir, 'snapshot.json');
-  const historyPath = resolve(dataDir, 'snapshots', `${snapshot.snapshot_date}.json`);
-  const previous = await readIfExists(latestPath);
-  if (previous !== undefined) {
-    assertSnapshot(previous);
-    if (previous.owner.toLowerCase() !== snapshot.owner.toLowerCase()) {
-      throw new Error('The data directory already tracks a different owner; use a separate directory.');
-    }
-    if (Date.parse(previous.captured_at) > Date.parse(snapshot.captured_at)) {
-      throw new Error('Refusing to replace a newer snapshot with an older capture.');
-    }
-  }
-  const archive = await readIfExists(historyPath);
-  if (archive !== undefined) {
-    assertSnapshot(archive);
-    if (archive.snapshot_date !== snapshot.snapshot_date || archive.owner.toLowerCase() !== snapshot.owner.toLowerCase()) {
-      throw new Error('The existing daily archive does not match this capture date and owner.');
-    }
-  }
-  const content = `${JSON.stringify(snapshot, null, 2)}\n`;
-  await mkdir(dirname(historyPath), { recursive: true });
-  const historyCreated = archive !== undefined ? false : await atomicWrite(historyPath, content, { exclusive: true });
-  await atomicWrite(latestPath, content);
-  return { latestPath, historyPath, historyCreated };
+  return snapshot;
 }
 
 export async function runSnapshot({ client, owner, eventsPerRepo = 10, dataDir = 'data', now = () => new Date() }) {
@@ -392,6 +198,7 @@ async function main() {
   console.log(`Captured ${result.snapshot.repository_count} public repositories for ${owner}.`);
   console.log(`Latest: ${result.latestPath}`);
   console.log(`History: ${result.historyPath} (${result.historyCreated ? 'created' : 'preserved'})`);
+  console.log(`Diary: ${result.diaryPath} (${result.diaryCreated ? 'created' : 'preserved'})`);
 }
 
 if (process.argv[1] && pathToFileURL(resolve(process.argv[1])).href === import.meta.url) {
