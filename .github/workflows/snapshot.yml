@@ -1,0 +1,211 @@
+name: Daily GitHub snapshot
+
+on:
+  schedule:
+    # First attempt at 04:17 UTC; later runs recover an incomplete day.
+    # A complete current-day bundle is checked locally and skipped.
+    - cron: '17 4,10,16,22 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: daily-github-snapshot
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    # Manual runs from other branches must not write to the default branch.
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    env:
+      GITHUB_OWNER: ${{ vars.SNAPSHOT_OWNER || github.repository_owner }}
+      SNAPSHOT_EVENTS_PER_REPO: ${{ vars.SNAPSHOT_EVENTS_PER_REPO || '10' }}
+    steps:
+      - name: Check out the default branch
+        id: checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        id: runtime
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: '.node-version'
+          package-manager-cache: false
+
+      - name: Test the collector and diary
+        id: tests
+        # Native Node.js TypeScript execution needs no compiler or npm install.
+        run: npm test
+
+      - name: Collect the snapshot and create the diary
+        id: capture
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          EVENT_NAME: ${{ github.event_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" = "schedule" ]; then
+            npm run snapshot -- --if-needed
+          else
+            npm run snapshot
+          fi
+
+          node --input-type=module <<'NODE'
+          import { appendFile, readFile } from 'node:fs/promises';
+          const { snapshot_date: date } = JSON.parse(await readFile('data/snapshot.json', 'utf8'));
+          if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) throw new Error('Invalid snapshot date');
+          await appendFile(process.env.GITHUB_OUTPUT, `date=${date}\n`);
+          NODE
+
+      - name: Stage a recovery bundle before publishing
+        id: recovery_bundle
+        # A failed rebase can modify the working tree. Keep the captured bytes
+        # separately, but never let this optional backup block normal publication.
+        continue-on-error: true
+        env:
+          SNAPSHOT_DATE: ${{ steps.capture.outputs.date }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          RECOVERY_DIR=$(mktemp -d "$RUNNER_TEMP/project-diary-recovery.XXXXXX")
+          mkdir -p "$RECOVERY_DIR/data/snapshots" "$RECOVERY_DIR/data/diary"
+          cp -- data/snapshot.json "$RECOVERY_DIR/data/snapshot.json"
+          cp -- "data/snapshots/${SNAPSHOT_DATE}.json" "$RECOVERY_DIR/data/snapshots/${SNAPSHOT_DATE}.json"
+          cp -- "data/diary/${SNAPSHOT_DATE}.md" "$RECOVERY_DIR/data/diary/${SNAPSHOT_DATE}.md"
+          printf 'path=%s\n' "$RECOVERY_DIR" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push the snapshot and diary
+        id: publish
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          SNAPSHOT_DATE: ${{ steps.capture.outputs.date }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -- data/snapshot.json "data/snapshots/${SNAPSHOT_DATE}.json" "data/diary/${SNAPSHOT_DATE}.md"
+          if git diff --cached --quiet; then
+            echo "No snapshot or diary changes to commit."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(data): update GitHub diary ${SNAPSHOT_DATE}"
+
+          # A developer may push while collection is running. Rebase only;
+          # conflicts or branch protection fail the job instead of overwriting work.
+          for attempt in 1 2 3; do
+            if git push origin "HEAD:refs/heads/${DEFAULT_BRANCH}"; then
+              echo "changed=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            if [ "$attempt" -eq 3 ]; then
+              echo "::error::Could not push the snapshot after three attempts. Check branch rules and workflow permissions."
+              exit 1
+            fi
+            git fetch origin "$DEFAULT_BRANCH"
+            git rebase FETCH_HEAD
+          done
+
+      - name: Retain the captured bundle after a publishing failure
+        id: recovery_upload
+        if: failure() && steps.capture.outcome == 'success' && steps.publish.outcome == 'failure' && steps.recovery_bundle.outcome == 'success'
+        continue-on-error: true
+        timeout-minutes: 2
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: github-diary-recovery-${{ steps.capture.outputs.date }}-${{ github.run_id }}-${{ github.run_attempt }}
+          # The isolated staging root contains exactly three files under data/.
+          path: ${{ steps.recovery_bundle.outputs.path }}/
+          retention-days: 7
+          if-no-files-found: error
+          include-hidden-files: false
+
+      - name: Link the snapshot and diary
+        id: summary
+        env:
+          PUBLISHED_CHANGES: ${{ steps.publish.outputs.changed }}
+        run: |
+          node --input-type=module <<'NODE'
+          import { execFileSync } from 'node:child_process';
+          import { appendFile, readFile } from 'node:fs/promises';
+          const snapshot = JSON.parse(await readFile('data/snapshot.json', 'utf8'));
+          const commit = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
+          const base = `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/blob/${commit}/data`;
+          await appendFile(process.env.GITHUB_STEP_SUMMARY, [
+            '## GitHub snapshot and diary',
+            '',
+            `- Account: **${snapshot.owner}**`,
+            `- Public repositories: **${snapshot.repository_count}**`,
+            `- Latest capture: ${snapshot.captured_at}`,
+            `- [Latest JSON](${base}/snapshot.json)`,
+            `- [Daily JSON archive](${base}/snapshots/${snapshot.snapshot_date}.json)`,
+            `- [Obsidian diary entry](${base}/diary/${snapshot.snapshot_date}.md)`,
+            '',
+            process.env.PUBLISHED_CHANGES === 'true'
+              ? 'The snapshot and diary changes were committed successfully.'
+              : 'The daily files were already complete; no new capture was committed.',
+            '',
+            'Scheduled recovery runs skip complete days. Manual reruns can refresh the latest JSON; the daily archive, diary, and personal notes stay intact.',
+            '',
+          ].join('\n'));
+          NODE
+
+      - name: Summarize a failed run
+        if: failure()
+        env:
+          CHECKOUT_OUTCOME: ${{ steps.checkout.outcome }}
+          RUNTIME_OUTCOME: ${{ steps.runtime.outcome }}
+          TESTS_OUTCOME: ${{ steps.tests.outcome }}
+          CAPTURE_OUTCOME: ${{ steps.capture.outcome }}
+          RECOVERY_BUNDLE_OUTCOME: ${{ steps.recovery_bundle.outcome }}
+          PUBLISH_OUTCOME: ${{ steps.publish.outcome }}
+          RECOVERY_UPLOAD_OUTCOME: ${{ steps.recovery_upload.outcome }}
+          RECOVERY_ARTIFACT_URL: ${{ steps.recovery_upload.outputs.artifact-url }}
+          SUMMARY_OUTCOME: ${{ steps.summary.outcome }}
+        shell: bash
+        run: |
+          {
+            echo '## Snapshot workflow failed'
+            echo
+            echo '| Stage | Outcome |'
+            echo '| --- | --- |'
+            printf '| Checkout | %s |\n' "$CHECKOUT_OUTCOME"
+            printf '| Node.js setup | %s |\n' "$RUNTIME_OUTCOME"
+            printf '| Offline tests | %s |\n' "$TESTS_OUTCOME"
+            printf '| Capture / current-day check / repair | %s |\n' "$CAPTURE_OUTCOME"
+            printf '| Recovery bundle preparation | %s |\n' "$RECOVERY_BUNDLE_OUTCOME"
+            printf '| Commit and push | %s |\n' "$PUBLISH_OUTCOME"
+            printf '| Recovery artifact upload | %s |\n' "$RECOVERY_UPLOAD_OUTCOME"
+            printf '| Success summary | %s |\n' "$SUMMARY_OUTCOME"
+            echo
+            printf '[Open run logs](%s/%s/actions/runs/%s)\n' "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID"
+            echo
+            echo 'Check the failed stage above. Publication may have completed before a later summary failure; the publish outcome identifies that case.'
+            echo
+            if [ "$RECOVERY_UPLOAD_OUTCOME" = 'success' ] && [ -n "$RECOVERY_ARTIFACT_URL" ]; then
+              printf '[Download the captured recovery bundle](%s) (7-day retention; GitHub sign-in required).\n' "$RECOVERY_ARTIFACT_URL"
+              echo
+              echo 'The bundle contains data/snapshot.json and the matching dated JSON archive and Markdown diary, copied before publishing. It excludes unrelated history and source files.'
+              echo
+              echo 'Extract it into a separate directory and inspect it before restoring missing data through your normal Git workflow. Preserve existing daily archives and personal notes; do not replace a newer latest snapshot. Fix the publication failure before resuming automated writes.'
+            elif [ "$CAPTURE_OUTCOME" = 'success' ] && [ "$PUBLISH_OUTCOME" = 'failure' ]; then
+              echo 'No recovery artifact is available. Check the recovery preparation and upload outcomes above. This best-effort backup cannot recover data after the runner is discarded if preparation or upload failed.'
+            else
+              echo 'No recovery artifact was created for this failure. Artifacts are retained only when capture succeeds and publication fails.'
+            fi
+            echo
+            echo 'Scheduled runs check again at 04:17, 10:17, 16:17, and 22:17 UTC. They skip complete days and can retry an incomplete current day. Missing past-day state cannot be reconstructed.'
+            echo
+            echo 'This summary does not change the failed run result. Persistent permission, validation, or branch-rule errors need attention in the run logs.'
+          } >> "$GITHUB_STEP_SUMMARY"
