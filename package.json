@@ -1,0 +1,14 @@
+{
+  "name": "project-diary",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Daily snapshots of public GitHub repositories",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "snapshot": "node scripts/snapshot-github.mjs",
+    "test": "node --test"
+  }
+}

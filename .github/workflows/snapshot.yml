@@ -1,0 +1,96 @@
+name: Daily GitHub snapshot
+
+on:
+  schedule:
+    # 04:17 UTC daily (05:17 Berlin in winter, 06:17 in summer).
+    - cron: '17 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: daily-github-snapshot
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    # Manual runs from other branches must not write to the default branch.
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    env:
+      GITHUB_OWNER: ${{ vars.SNAPSHOT_OWNER || github.repository_owner }}
+      SNAPSHOT_EVENTS_PER_REPO: ${{ vars.SNAPSHOT_EVENTS_PER_REPO || '10' }}
+    steps:
+      - name: Check out the default branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          package-manager-cache: false
+
+      - name: Test the collector
+        run: npm test
+
+      - name: Collect the snapshot
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: npm run snapshot
+
+      - name: Commit and push snapshot files
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -- data/snapshot.json data/snapshots
+          if git diff --cached --quiet; then
+            echo "No snapshot changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          SNAPSHOT_DATE=$(node --input-type=module -e 'import { readFile } from "node:fs/promises"; console.log(JSON.parse(await readFile("data/snapshot.json", "utf8")).snapshot_date)')
+          git commit -m "chore(data): snapshot GitHub repositories ${SNAPSHOT_DATE}"
+
+          # A developer may push while collection is running. Rebase only;
+          # conflicts or branch protection fail the job instead of overwriting work.
+          for attempt in 1 2 3; do
+            if git push origin "HEAD:refs/heads/${DEFAULT_BRANCH}"; then
+              exit 0
+            fi
+            if [ "$attempt" -eq 3 ]; then
+              echo "::error::Could not push the snapshot after three attempts. Check branch rules and workflow permissions."
+              exit 1
+            fi
+            git fetch origin "$DEFAULT_BRANCH"
+            git rebase FETCH_HEAD
+          done
+
+      - name: Summarize the capture
+        run: |
+          node --input-type=module <<'NODE'
+          import { appendFile, readFile } from 'node:fs/promises';
+          const snapshot = JSON.parse(await readFile('data/snapshot.json', 'utf8'));
+          await appendFile(process.env.GITHUB_STEP_SUMMARY, [
+            '## GitHub snapshot',
+            '',
+            `- Account: **${snapshot.owner}**`,
+            `- Public repositories: **${snapshot.repository_count}**`,
+            `- Captured at: ${snapshot.captured_at}`,
+            '- Latest: `data/snapshot.json`',
+            `- Daily history: \`data/snapshots/${snapshot.snapshot_date}.json\``,
+            '',
+            'Same-day reruns refresh the latest file and preserve the first successful daily capture.',
+            '',
+          ].join('\n'));
+          NODE
