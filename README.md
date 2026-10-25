@@ -75,6 +75,7 @@ Each entry includes:
 - Inventory totals for repositories, stars, forks, and open issues/pull requests.
 - Changes against the nearest earlier archived capture, matched by repository ID.
 - Added, renamed, and no-longer-listed repositories; metadata and activity changes.
+- Concise before-and-after About text and website values when those fields change.
 - Recent activity highlights, a language breakdown, and links to the source JSON.
 - Typed frontmatter values for trends, filtering, and your own processing.
 
@@ -251,6 +252,7 @@ and require no network token.
 | Periodic verification | The same read-only CI check runs Mondays at 08:37 UTC and can be started manually to detect toolchain drift. |
 | Dependency proposals | Dependabot checks weekly for grouped npm development-dependency and GitHub Actions updates; updates remain reviewable pull requests. |
 | Failure visibility | A failed capture retains its failed Actions status and adds a stage/outcome table with a link to the run logs. |
+| Publication recovery | If collection succeeds but Git publication fails, retain the exact captured JSON/diary bundle as a seven-day Actions artifact when artifact upload is available. |
 
 GitHub Actions use pinned commit references. The runner OS is fixed to
 `ubuntu-24.04`, and Node remains on the supported 24 line while receiving that
@@ -263,6 +265,51 @@ summary step fails; check the listed outcome before rerunning manually. Persiste
 validation failures, permission changes, or branch-rule conflicts require a fix;
 recovery scheduling does not bypass those protections. GitHub's own scheduled-run
 and inactivity limits still apply.
+
+Validation errors identify the repository and collection stage, so an invalid
+response can be traced without exposing API payloads or credentials in the logs.
+
+A fresh capture makes one repository-list request per page, two activity requests
+per non-disabled repository, and one additional event request per non-disabled
+repository when event collection is enabled. Retries can add requests. Complete
+scheduled days make no API calls. Historical JSON and Markdown are retained
+indefinitely; their size grows with the repository inventory, event sample size,
+and capture history. Setting `SNAPSHOT_EVENTS_PER_REPO=0` reduces request and data
+volume while retaining repository metadata, commits, and releases.
+
+GitHub documents a normal built-in `GITHUB_TOKEN` budget of **1,000 requests per
+hour per repository**, while unauthenticated reads have a **60-request hourly
+budget**. A capture that consistently needs more requests than its available
+budget requires a deliberate change to authentication or the collection strategy;
+additional daily opportunities alone cannot solve that limit. See GitHub's
+[REST API rate-limit guidance](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api).
+
+### Recover a capture after a failed push
+
+The workflow keeps a temporary copy of the three generated files **before** Git
+publication. If commit or push fails, it attempts to upload that copy as a
+seven-day recovery artifact. This also preserves valid data if a failed rebase
+leaves conflicts in the working tree. The failure summary links to the artifact
+when upload succeeds; the original run still fails so the publishing problem
+remains visible. An artifact upload failure is reported separately.
+Cancelled or timed-out jobs may end before a backup can be uploaded.
+
+1. Open the failed run under **Actions → Daily GitHub snapshot** and follow the
+   recovery-artifact link, or download it from the run's **Artifacts** section.
+2. Extract it into a separate directory and inspect the capture owner, date, and
+   collection timestamps before restoring files.
+3. Compare it with the repository's current `data/` files. Restore missing dated
+   archives and diaries only after reviewing any existing files. Preserve personal
+   notes and a newer `snapshot.json`; do not overwrite them with an older capture.
+4. Fix the permission or branch-rule issue, then commit the reviewed recovery
+   changes through the repository's normal process.
+
+Artifacts are temporary recovery copies. The committed daily archives remain
+the durable history. Later scheduled opportunities still retry an incomplete
+current day; recovery does not fabricate a missing past day's state.
+
+The [product review](docs/product-review.md) records the perspectives checked,
+the focused improvements, and the remaining operational limits.
 
 ## Interpreting the data
 
@@ -304,7 +351,9 @@ and inactivity limits still apply.
 - [Repository listing and metadata](https://docs.github.com/en/rest/repos/repos#list-repositories-for-a-user)
 - [API pagination](https://docs.github.com/en/rest/using-the-rest-api/using-pagination-in-the-rest-api)
 - [Public events and their limits](https://docs.github.com/en/rest/activity/events)
+- [Event payload fields](https://docs.github.com/en/rest/using-the-rest-api/github-event-types)
 - [Latest default-branch commits](https://docs.github.com/en/rest/commits/commits#list-commits)
 - [Latest release semantics](https://docs.github.com/en/rest/releases/releases#get-the-latest-release)
 - [Scheduled workflows](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule)
 - [Workflow token and downstream triggers](https://docs.github.com/en/actions/concepts/security/github_token)
+- [Downloading recovery artifacts](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/download-workflow-artifacts)

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { buildDiary } from '../scripts/lib/diary.ts';
+import { assertSnapshot } from '../scripts/lib/snapshot-schema.ts';
 import type {
   CommitSummary, ComparisonMetrics, EventSummary, ReleaseSummary,
   RepositorySnapshot, SnapshotSource, SnapshotV1,
@@ -165,6 +166,53 @@ test('head, release, push and metadata changes are measured as repository observ
   assert.doesNotMatch(markdown, /Details stay in JSON/);
 });
 
+test('About and website changes show old and new values with explicit additions and removals', () => {
+  const previous = snapshot('2026-10-24', [
+    repository(1, { about: 'Original About', website: 'https://old.example.com' }),
+    repository(2, { about: null, website: null }),
+    repository(3, { about: 'Retired description', website: 'https://retired.example.com' }),
+  ]);
+  const current = snapshot('2026-10-25', [
+    repository(1, { about: 'Useful new About', website: 'https://new.example.com/a)b', topics: ['updated'] }),
+    repository(2, { about: 'First description', website: 'https://added.example.com' }),
+    repository(3, { about: null, website: null }),
+  ]);
+  const { markdown, metrics } = buildDiary(current, previous);
+
+  assert.equal(metrics.repositories_with_metadata_changes, 3);
+  assert.ok(markdown.includes('About: Original About → Useful new About'));
+  assert.ok(markdown.includes('Website: [https://old.example.com](https://old.example.com/) → [https://new.example.com/a\\)b](https://new.example.com/a%29b)'));
+  assert.ok(markdown.includes('About: _empty_ → First description'));
+  assert.ok(markdown.includes('Website: _empty_ → [https://added.example.com](https://added.example.com/)'));
+  assert.ok(markdown.includes('About: Retired description → _empty_'));
+  assert.ok(markdown.includes('Website: [https://retired.example.com](https://retired.example.com/) → _empty_'));
+  assert.ok(markdown.includes('Metadata: topics'));
+  assert.doesNotMatch(markdown, /Metadata: (?:about|website)/);
+});
+
+test('metadata change details are bounded and keep hostile website fallbacks out of links', () => {
+  const veryLongWebsite = `https://example.com/${'x'.repeat(2_100)}hiddenWebsiteTail`;
+  const previous = snapshot('2026-10-24', [repository(1, {
+    about: 'Old | [label](javascript:alert(1))',
+    website: 'https://user:password@example.com/a`b\\|c',
+  })]);
+  const current = snapshot('2026-10-25', [repository(1, {
+    about: `<img src=x onerror=alert(1)>\n# Heading | ${'a'.repeat(140)}hiddenAboutTail`,
+    website: veryLongWebsite,
+  })]);
+  const { markdown } = buildDiary(current, previous);
+  const row = markdown.split('\n').find(line => line.includes('About:'));
+  assert.ok(row);
+
+  assert.doesNotMatch(markdown, /<img|^# Heading|hiddenAboutTail|hiddenWebsiteTail|\]\(javascript:|\]\(https:\/\/user:password/m);
+  assert.ok(row.includes('&lt;img'));
+  assert.ok(row.includes('…'));
+  assert.ok(row.includes('`` https://user:password@example.com/a`b\\ ``\\|` c `'));
+  assert.ok(row.includes('` https://example.com/'));
+  assert.equal((row.match(/(?<!\\)\|/g) ?? []).length, 6);
+  assert.ok(row.length < 800, 'Long metadata is summarized without copying its full value into the note');
+});
+
 test('comparison reports the actual interval and links a previous diary only when it exists', () => {
   const { markdown, metrics } = buildDiary(snapshot('2026-10-27'), snapshot('2026-10-24'));
 
@@ -201,6 +249,33 @@ test('event IDs deduplicate repeated samples and distinguish delayed observation
   assert.match(markdown, /2026-10-22T00:00:00Z/);
   assert.match(markdown, /does not mean “happened today/);
   assert.equal((markdown.match(/Delayed issue/g) ?? []).length, 1);
+});
+
+test('activity and commit timelines compare instants across supported timestamp precision', () => {
+  const second = '2026-10-24T12:00:00Z';
+  const zeroFraction = '2026-10-24T12:00:00.000Z';
+  const later = '2026-10-24T12:00:00.100Z';
+  const repos = [
+    repository(1, { activity: {
+      status: 'available', latest_commit: commit({ message: 'Whole-second commit', committed_at: second }), latest_release: null,
+      recent_events: [
+        event('b', { title: 'Whole-second event', created_at: second }),
+        event('z', { title: 'Later fractional event', created_at: later }),
+        event('a', { title: 'Zero-fraction event', created_at: zeroFraction }),
+        event('unknown', { title: 'Unknown-time event', created_at: null }),
+      ],
+    } }),
+    repository(2, { activity: { status: 'available', latest_commit: commit({ message: 'Later fractional commit', committed_at: later }), latest_release: null, recent_events: [] } }),
+    repository(3, { activity: { status: 'available', latest_commit: commit({ message: 'Zero-fraction commit', committed_at: zeroFraction }), latest_release: null, recent_events: [] } }),
+    repository(4, { activity: { status: 'available', latest_commit: commit({ message: 'Unknown-time commit', committed_at: null }), latest_release: null, recent_events: [] } }),
+  ];
+  const current = snapshot('2026-10-25', repos);
+  assertSnapshot(current);
+  const { markdown } = buildDiary(current);
+
+  assert.match(markdown, /Later fractional event[\s\S]*Zero-fraction event[\s\S]*Whole-second event[\s\S]*Unknown-time event/);
+  assert.match(markdown, /Later fractional commit[\s\S]*Whole-second commit[\s\S]*Zero-fraction commit[\s\S]*Unknown-time commit/);
+  assert.equal(buildDiary({ ...current, repositories: [...repos].reverse() }).markdown, markdown);
 });
 
 test('unavailable activity never produces false head or release changes', () => {

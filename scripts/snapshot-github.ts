@@ -2,11 +2,11 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
 import { API_VERSION, createGitHubClient } from './lib/github-client.ts';
-import { githubArray, githubObject, normalizeRepository, summarizeCommit, summarizeEvent, summarizeRelease } from './lib/github-data.ts';
+import { githubArray, githubObject, normalizeRepository, repositoryLabel, summarizeCommit, summarizeEvent, summarizeRelease } from './lib/github-data.ts';
 import { assertOwner, assertEventLimit, assertSnapshot } from './lib/snapshot-schema.ts';
 import { recoverDailyCapture, writeSnapshot } from './lib/snapshot-store.ts';
-import { errorMessage } from './lib/errors.ts';
-import type { AvailableActivity, CaptureResult, CollectionOptions, EventSummary, GitHubClient, RepositoryActivity, RepositoryMetadata, RepositorySnapshot, RunOptions, SnapshotV1 } from './lib/types.ts';
+import { contextualError, errorMessage } from './lib/errors.ts';
+import type { CaptureResult, CollectionOptions, EventSummary, GitHubClient, RepositoryActivity, RepositoryMetadata, RepositorySnapshot, RunOptions, SnapshotV1 } from './lib/types.ts';
 
 export { API_VERSION, createGitHubClient, writeSnapshot };
 export type { SnapshotV1, RepositorySnapshot, DiaryMetrics } from './lib/types.ts';
@@ -16,37 +16,54 @@ export async function listPublicRepositories(client: GitHubClient, owner: string
   assertOwner(owner);
   const repos = await client.paginate(`/users/${encodeURIComponent(owner)}/repos?type=owner&sort=full_name&direction=asc&per_page=100`);
   const unique = new Map<number, RepositoryMetadata>();
-  for (const value of repos) {
-    const repo = normalizeRepository(value, owner);
-    if (repo) unique.set(repo.id, repo);
+  for (const [index, value] of repos.entries()) {
+    try {
+      const repo = normalizeRepository(value, owner);
+      if (repo) unique.set(repo.id, repo);
+    } catch (error) {
+      throw contextualError(`Could not read metadata for ${repositoryLabel(value)} at inventory item ${index + 1}`, error);
+    }
   }
   return [...unique.values()].sort((a, b) => a.full_name < b.full_name ? -1 : a.full_name > b.full_name ? 1 : 0);
 }
 
+async function readActivity<T>(repo: RepositoryMetadata, stage: string, read: () => Promise<T>): Promise<T> {
+  try {
+    return await read();
+  } catch (error) {
+    throw contextualError(`Could not read ${stage} for ${repositoryLabel(repo)}`, error);
+  }
+}
+
 async function collectActivity(client: GitHubClient, repo: RepositoryMetadata, eventsPerRepo: number): Promise<RepositoryActivity> {
   if (repo.disabled) return { status: 'unavailable', reason: 'repository_disabled', latest_commit: null, latest_release: null, recent_events: [] };
-  const activity: AvailableActivity = { status: 'available', latest_commit: null, latest_release: null, recent_events: [] };
   const base = `/repos/${encodeURIComponent(repo.owner)}/${encodeURIComponent(repo.name)}`;
   const branch = repo.default_branch ? `&sha=${encodeURIComponent(repo.default_branch)}` : '';
-  const commits = await client.get(`${base}/commits?per_page=1${branch}`, { allowedStatuses: [409] });
-  if (commits.status === 409) {
-    const { message } = githubObject(commits.data, 'commit error response');
-    if (typeof message !== 'string' || !/\b(?:git\s+)?repository\s+is\s+empty\b/i.test(message)) {
-      throw new Error(`Unexpected GitHub conflict reading commits for ${repo.full_name}.`);
+  const latestCommit = await readActivity(repo, 'latest commit', async () => {
+    const commits = await client.get(`${base}/commits?per_page=1${branch}`, { allowedStatuses: [409] });
+    if (commits.status === 409) {
+      const { message } = githubObject(commits.data, 'commit error response');
+      if (typeof message !== 'string' || !/\b(?:git\s+)?repository\s+is\s+empty\b/i.test(message)) {
+        throw new Error('Unexpected GitHub conflict response.');
+      }
+      return null;
     }
-  } else activity.latest_commit = summarizeCommit(githubArray(commits.data, 'commit list')[0]);
-  const release = await client.get(`${base}/releases/latest`, { allowedStatuses: [404] });
-  if (release.status !== 404) activity.latest_release = summarizeRelease(release.data);
-  if (eventsPerRepo > 0) {
+    return summarizeCommit(githubArray(commits.data, 'commit list')[0]);
+  });
+  const latestRelease = await readActivity(repo, 'latest release', async () => {
+    const release = await client.get(`${base}/releases/latest`, { allowedStatuses: [404] });
+    return release.status === 404 ? null : summarizeRelease(release.data);
+  });
+  const recentEvents = eventsPerRepo > 0 ? await readActivity(repo, 'public events', async () => {
     const response = await client.get(`${base}/events?per_page=${eventsPerRepo}`);
     const unique = new Map<string, EventSummary>();
     for (const value of githubArray(response.data, 'event list')) {
       const event = summarizeEvent(value, repo.url);
       if (event) unique.set(event.id, event);
     }
-    activity.recent_events = [...unique.values()].slice(0, eventsPerRepo);
-  }
-  return activity;
+    return [...unique.values()].slice(0, eventsPerRepo);
+  }) : [];
+  return { status: 'available', latest_commit: latestCommit, latest_release: latestRelease, recent_events: recentEvents };
 }
 
 /** The complete normalized inventory must pass runtime validation before persistence. */

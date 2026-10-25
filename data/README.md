@@ -75,6 +75,11 @@ fails explicitly rather than silently yielding misleading deltas.
 | `activity.latest_release` | GitHub's latest stable published release, or `null` if there is none or the repository is disabled. |
 | `activity.recent_events` | Bounded list of recent public activity summaries; deduplicate by event ID. |
 
+Event summaries retain a relevant item title and link when the payload provides
+them. This includes discussion titles/links and direct pull-request review or
+comment links. These are observations from the same sampled Events API response;
+the collector does not make extra requests to populate them.
+
 Unknown or absent values remain `null` where appropriate. An empty event list
 means no events were returned in the configured sample, or event collection was
 disabled or unavailable; it does not prove the repository has never had activity.
@@ -192,6 +197,14 @@ highlights, a primary-language breakdown, and relative links to their source JSO
 and comparison snapshot. A link to the earlier diary is included when that file
 exists. Long tables show a bounded selection with an omitted-item
 count; frontmatter totals still cover the full dataset.
+
+Changed About text and website values are shown as concise before-and-after
+details, including an explicit empty value when one is removed. Text is escaped
+and displayed values are limited to 120 characters. Valid HTTP(S) website
+addresses remain clickable; unsupported, credentialed, or unusually long targets
+appear as code text without a link. The JSON archives retain the full values.
+Activity is ordered by its actual timestamp,
+including fractional seconds, with unknown dates last and deterministic ties.
 
 The **Personal notes** section can be edited in Obsidian. Existing entries are
 preserved byte for byte by later captures, so neither annotations nor an edited

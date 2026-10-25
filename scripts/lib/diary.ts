@@ -4,6 +4,8 @@ import type {
 } from './types.ts';
 
 const SECTION_LIMIT = 20;
+const METADATA_VALUE_LIMIT = 120;
+const WEBSITE_LINK_LIMIT = 2_048;
 const DAY_MS = 86_400_000;
 const EMPTY_COMPARISON: ComparisonMetrics = {
   comparison_date: null,
@@ -53,6 +55,12 @@ function compareText(a: string, b: string): number {
   return a < b ? -1 : a > b ? 1 : 0;
 }
 
+function compareTimestamp(a: string | null, b: string | null): number {
+  if (a === null) return b === null ? 0 : -1;
+  if (b === null) return 1;
+  return Date.parse(a) - Date.parse(b);
+}
+
 function singleLine(value: unknown, maximum = 180): string {
   const text = String(value ?? '')
     .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f\u202a-\u202e\u2066-\u2069]/g, '')
@@ -68,22 +76,44 @@ function escapeText(value: unknown, maximum = 180): string {
     .replace(/[\\`*_{}\[\]()#|!~]/g, '\\$&');
 }
 
-function externalLink(label: unknown, target: unknown): string {
+function inlineCode(value: string): string {
+  // Keep table separators outside code spans, where the Markdown escape is effective.
+  return value.split('|').map(part => {
+    if (!part) return '';
+    const longestFence = Math.max(0, ...(part.match(/`+/g) ?? []).map(run => run.length));
+    const fence = '`'.repeat(longestFence + 1);
+    return `${fence} ${part} ${fence}`;
+  }).join('\\|');
+}
+
+function externalLink(label: unknown, target: unknown, { codeFallback = false }: { codeFallback?: boolean } = {}): string {
   const safeLabel = escapeText(label);
-  if (typeof target !== 'string' || /[\u0000-\u0020\u007f<>]/.test(target)) return safeLabel;
+  const fallback = codeFallback ? inlineCode(singleLine(label)) : safeLabel;
+  if (typeof target !== 'string' || /[\u0000-\u0020\u007f<>]/.test(target)) return fallback;
   try {
     const url = new URL(target);
-    if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password) return safeLabel;
+    if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password) return fallback;
     // A valid URL can still contain Markdown delimiters and table separators.
     const destination = url.href.replace(/[()\[\]\\|]/g, character => `%${character.charCodeAt(0).toString(16).toUpperCase()}`);
     return `[${safeLabel}](${destination})`;
   } catch {
-    return safeLabel;
+    return fallback;
   }
 }
 
 function repoLink(repo: RepositorySnapshot): string {
   return externalLink(repo.full_name, repo.url);
+}
+
+function aboutValue(value: string | null): string {
+  return escapeText(value, METADATA_VALUE_LIMIT) || '_empty_';
+}
+
+function websiteValue(value: string | null): string {
+  const label = singleLine(value, METADATA_VALUE_LIMIT);
+  if (!label) return '_empty_';
+  // Keep even unusually long website values bounded in the note; JSON retains them in full.
+  return externalLink(label, value !== null && value.length <= WEBSITE_LINK_LIMIT ? value : null, { codeFallback: true });
 }
 
 function number(value: number): string {
@@ -130,7 +160,7 @@ function eventSamples(repositories: readonly RepositorySnapshot[]): EventSample[
     }
   }
   return [...unique.values()].sort((a, b) => (
-    compareText(b.event.created_at ?? '', a.event.created_at ?? '') || compareText(String(a.event.id), String(b.event.id))
+    compareTimestamp(b.event.created_at, a.event.created_at) || compareText(String(a.event.id), String(b.event.id))
   ));
 }
 
@@ -264,7 +294,9 @@ function updateDescription(change: RepositoryChange): string {
     const release = change.repo.activity.latest_release;
     reasons.push(release ? `Latest release changed to ${externalLink(release.tag_name, release.url)}` : 'No latest stable release is now available');
   }
-  const fields = change.metadata.filter(field => !change.renamed || !['name', 'full_name'].includes(field));
+  if (change.metadata.includes('about')) reasons.push(`About: ${aboutValue(change.previous.about)} → ${aboutValue(change.repo.about)}`);
+  if (change.metadata.includes('website')) reasons.push(`Website: ${websiteValue(change.previous.website)} → ${websiteValue(change.repo.website)}`);
+  const fields = change.metadata.filter(field => !['about', 'website'].includes(field) && (!change.renamed || !['name', 'full_name'].includes(field)));
   if (fields.length) reasons.push(`Metadata: ${fields.map(field => escapeText(field)).join(', ')}`);
   if (!reasons.length) reasons.push('Counter changes');
   return reasons.join('; ');
@@ -346,7 +378,7 @@ export function buildDiary(
     const commits = repositories.flatMap(repo => {
       const commit = available(repo) ? repo.activity.latest_commit : null;
       return commit ? [{ repo, commit }] : [];
-    }).sort((a, b) => compareText(b.commit.committed_at ?? '', a.commit.committed_at ?? '') || compareText(a.repo.full_name, b.repo.full_name));
+    }).sort((a, b) => compareTimestamp(b.commit.committed_at, a.commit.committed_at) || compareText(a.repo.full_name, b.repo.full_name));
     if (commits.length) {
       lines.push('## Latest default-branch commits', '', ...boundedTable(['Repository', 'Commit time (UTC)', 'Latest commit'], commits, ({ repo, commit }) => [repoLink(repo), escapeText(commit.committed_at) || '—', externalLink(singleLine(commit.message.split(/\r?\n/)[0], 120), commit.url)]), '');
     }

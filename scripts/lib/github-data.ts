@@ -1,4 +1,5 @@
 import type { CommitSummary, EventSummary, License, ReleaseSummary, RepositoryMetadata } from './types.ts';
+import { diagnosticLabel } from './errors.ts';
 
 function invalid(field: string): never {
   throw new Error(`GitHub returned an invalid ${field}.`);
@@ -6,6 +7,14 @@ function invalid(field: string): never {
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
+/** Identify a failing repository without including raw response data in logs. */
+export function repositoryLabel(value: unknown): string {
+  const item = isRecord(value) ? value : {};
+  const name = typeof item.full_name === 'string' && item.full_name ? diagnosticLabel(item.full_name) : '(name unavailable)';
+  const id = typeof item.id === 'number' && Number.isSafeInteger(item.id) && item.id > 0 ? ` (ID ${item.id})` : '';
+  return `repository ${name}${id}`;
 }
 
 export function githubObject(value: unknown, field: string): Record<string, unknown> {
@@ -123,8 +132,9 @@ export function summarizeEvent(value: unknown, repositoryUrl: string): EventSumm
   if (item.public !== true) return null;
   const payload = optionalObject(item.payload, 'event payload') ?? {};
   const actor = optionalObject(item.actor, 'event actor');
-  const subject = optionalObject(payload.pull_request ?? payload.issue ?? payload.release ?? payload.forkee, 'event subject');
+  const subject = optionalObject(payload.pull_request ?? payload.issue ?? payload.discussion ?? payload.release ?? payload.forkee, 'event subject');
   const comment = optionalObject(payload.comment, 'event comment');
+  const review = optionalObject(payload.review, 'event review');
   const id = typeof item.id === 'number' ? String(integer(item.id, 'event ID', 1)) : string(item.id, 'event ID');
   return {
     id, type: string(item.type, 'event type'), actor: nullableString(actor?.login, 'event actor login'),
@@ -132,7 +142,7 @@ export function summarizeEvent(value: unknown, repositoryUrl: string): EventSumm
     action: nullableString(payload.action, 'event action'), ref: nullableString(payload.ref, 'event ref'),
     ref_type: nullableString(payload.ref_type, 'event ref_type'), head: nullableString(payload.head, 'event head'),
     commit_count: nullableInteger(payload.size, 'event commit_count'),
-    url: nullableString(comment?.html_url ?? subject?.html_url ?? repositoryUrl, 'event URL'),
+    url: nullableString(comment?.html_url ?? review?.html_url ?? subject?.html_url ?? repositoryUrl, 'event URL'),
     title: nullableString(subject?.title ?? subject?.name, 'event title'),
   };
 }

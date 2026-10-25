@@ -59,20 +59,38 @@ jobs:
             npm run snapshot
           fi
 
+          node --input-type=module <<'NODE'
+          import { appendFile, readFile } from 'node:fs/promises';
+          const { snapshot_date: date } = JSON.parse(await readFile('data/snapshot.json', 'utf8'));
+          if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) throw new Error('Invalid snapshot date');
+          await appendFile(process.env.GITHUB_OUTPUT, `date=${date}\n`);
+          NODE
+
+      - name: Stage a recovery bundle before publishing
+        id: recovery_bundle
+        # A failed rebase can modify the working tree. Keep the captured bytes
+        # separately, but never let this optional backup block normal publication.
+        continue-on-error: true
+        env:
+          SNAPSHOT_DATE: ${{ steps.capture.outputs.date }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          RECOVERY_DIR=$(mktemp -d "$RUNNER_TEMP/project-diary-recovery.XXXXXX")
+          mkdir -p "$RECOVERY_DIR/data/snapshots" "$RECOVERY_DIR/data/diary"
+          cp -- data/snapshot.json "$RECOVERY_DIR/data/snapshot.json"
+          cp -- "data/snapshots/${SNAPSHOT_DATE}.json" "$RECOVERY_DIR/data/snapshots/${SNAPSHOT_DATE}.json"
+          cp -- "data/diary/${SNAPSHOT_DATE}.md" "$RECOVERY_DIR/data/diary/${SNAPSHOT_DATE}.md"
+          printf 'path=%s\n' "$RECOVERY_DIR" >> "$GITHUB_OUTPUT"
+
       - name: Commit and push the snapshot and diary
         id: publish
         env:
           DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          SNAPSHOT_DATE: ${{ steps.capture.outputs.date }}
         shell: bash
         run: |
           set -euo pipefail
-          SNAPSHOT_DATE=$(node --input-type=module <<'NODE'
-          import { readFile } from 'node:fs/promises';
-          const { snapshot_date: date } = JSON.parse(await readFile('data/snapshot.json', 'utf8'));
-          if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) throw new Error('Invalid snapshot date');
-          console.log(date);
-          NODE
-          )
           git add -- data/snapshot.json "data/snapshots/${SNAPSHOT_DATE}.json" "data/diary/${SNAPSHOT_DATE}.md"
           if git diff --cached --quiet; then
             echo "No snapshot or diary changes to commit."
@@ -98,6 +116,20 @@ jobs:
             git fetch origin "$DEFAULT_BRANCH"
             git rebase FETCH_HEAD
           done
+
+      - name: Retain the captured bundle after a publishing failure
+        id: recovery_upload
+        if: failure() && steps.capture.outcome == 'success' && steps.publish.outcome == 'failure' && steps.recovery_bundle.outcome == 'success'
+        continue-on-error: true
+        timeout-minutes: 2
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: github-diary-recovery-${{ steps.capture.outputs.date }}-${{ github.run_id }}-${{ github.run_attempt }}
+          # The isolated staging root contains exactly three files under data/.
+          path: ${{ steps.recovery_bundle.outputs.path }}/
+          retention-days: 7
+          if-no-files-found: error
+          include-hidden-files: false
 
       - name: Link the snapshot and diary
         id: summary
@@ -136,7 +168,10 @@ jobs:
           RUNTIME_OUTCOME: ${{ steps.runtime.outcome }}
           TESTS_OUTCOME: ${{ steps.tests.outcome }}
           CAPTURE_OUTCOME: ${{ steps.capture.outcome }}
+          RECOVERY_BUNDLE_OUTCOME: ${{ steps.recovery_bundle.outcome }}
           PUBLISH_OUTCOME: ${{ steps.publish.outcome }}
+          RECOVERY_UPLOAD_OUTCOME: ${{ steps.recovery_upload.outcome }}
+          RECOVERY_ARTIFACT_URL: ${{ steps.recovery_upload.outputs.artifact-url }}
           SUMMARY_OUTCOME: ${{ steps.summary.outcome }}
         shell: bash
         run: |
@@ -149,12 +184,26 @@ jobs:
             printf '| Node.js setup | %s |\n' "$RUNTIME_OUTCOME"
             printf '| Offline tests | %s |\n' "$TESTS_OUTCOME"
             printf '| Capture / current-day check / repair | %s |\n' "$CAPTURE_OUTCOME"
+            printf '| Recovery bundle preparation | %s |\n' "$RECOVERY_BUNDLE_OUTCOME"
             printf '| Commit and push | %s |\n' "$PUBLISH_OUTCOME"
+            printf '| Recovery artifact upload | %s |\n' "$RECOVERY_UPLOAD_OUTCOME"
             printf '| Success summary | %s |\n' "$SUMMARY_OUTCOME"
             echo
             printf '[Open run logs](%s/%s/actions/runs/%s)\n' "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID"
             echo
             echo 'Check the failed stage above. Publication may have completed before a later summary failure; the publish outcome identifies that case.'
+            echo
+            if [ "$RECOVERY_UPLOAD_OUTCOME" = 'success' ] && [ -n "$RECOVERY_ARTIFACT_URL" ]; then
+              printf '[Download the captured recovery bundle](%s) (7-day retention; GitHub sign-in required).\n' "$RECOVERY_ARTIFACT_URL"
+              echo
+              echo 'The bundle contains data/snapshot.json and the matching dated JSON archive and Markdown diary, copied before publishing. It excludes unrelated history and source files.'
+              echo
+              echo 'Extract it into a separate directory and inspect it before restoring missing data through your normal Git workflow. Preserve existing daily archives and personal notes; do not replace a newer latest snapshot. Fix the publication failure before resuming automated writes.'
+            elif [ "$CAPTURE_OUTCOME" = 'success' ] && [ "$PUBLISH_OUTCOME" = 'failure' ]; then
+              echo 'No recovery artifact is available. Check the recovery preparation and upload outcomes above. This best-effort backup cannot recover data after the runner is discarded if preparation or upload failed.'
+            else
+              echo 'No recovery artifact was created for this failure. Artifacts are retained only when capture succeeds and publication fails.'
+            fi
             echo
             echo 'Scheduled runs check again at 04:17, 10:17, 16:17, and 22:17 UTC. They skip complete days and can retry an incomplete current day. Missing past-day state cannot be reconstructed.'
             echo

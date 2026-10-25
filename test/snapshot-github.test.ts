@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test, { type TestContext } from 'node:test';
 import { assertSnapshot } from '../scripts/lib/snapshot-schema.ts';
+import { summarizeEvent } from '../scripts/lib/github-data.ts';
 import type { SnapshotV1 } from '../scripts/lib/types.ts';
 
 import {
@@ -489,4 +490,91 @@ test('malformed API topics and flags fail instead of being coerced into misleadi
     const { client } = emptyActivityClient([{ ...repository(1), ...overrides }]);
     await assert.rejects(listPublicRepositories(client, OWNER), /GitHub returned an invalid/);
   }
+});
+
+test('metadata validation errors identify the repository and preserve the original field failure', async () => {
+  const { client } = emptyActivityClient([{ ...repository(7), stargazers_count: 'invalid', unrelated: 'do-not-log-this-payload' }]);
+
+  await assert.rejects(listPublicRepositories(client, OWNER), (error: unknown) => {
+    assert.ok(error instanceof Error);
+    assert.match(error.message, /metadata for repository "Luis85\/project-007" \(ID 7\) at inventory item 1/);
+    assert.match(error.message, /counts\.stars/);
+    assert.ok(error.cause instanceof Error);
+    assert.equal(error.cause.message, 'GitHub returned an invalid counts.stars.');
+    assert.equal(error.message.includes('do-not-log-this-payload'), false);
+    assert.equal(error.message.includes('test-token'), false);
+    return true;
+  });
+});
+
+test('untrusted repository names cannot create control characters or unbounded diagnostic output', async () => {
+  const fullName = `Luis85/hostile\n\r\u0000\u001b\u007f\u202e\u2028${'x'.repeat(2_000)}do-not-log-the-tail`;
+  const { client } = emptyActivityClient([{ ...repository(7), full_name: fullName, stargazers_count: -1 }]);
+
+  await assert.rejects(listPublicRepositories(client, OWNER), (error: unknown) => {
+    assert.ok(error instanceof Error);
+    assert.match(error.message, /repository "Luis85\/hostile/);
+    assert.match(error.message, /\(ID 7\)/);
+    assert.equal(/[\p{Cc}\p{Cf}\p{Zl}\p{Zp}]/u.test(error.message), false);
+    assert.ok(error.message.length < 600);
+    assert.equal(error.message.includes('do-not-log-the-tail'), false);
+    return true;
+  });
+});
+
+test('malformed activity responses identify the repository, activity stage, and original failure', async () => {
+  const failures = [
+    { path: '/commits', stage: 'latest commit', data: [{ sha: 'abc', commit: { message: 7 } }], field: 'commit message' },
+    { path: '/releases/latest', stage: 'latest release', data: { id: -1 }, field: 'release ID' },
+    { path: '/events', stage: 'public events', data: [{ id: '1', type: 7, public: true, payload: {} }], field: 'event type' },
+  ];
+  for (const failure of failures) {
+    const { client } = clientFor(url => {
+      if (url.pathname === `/users/${OWNER}/repos`) return json([repository(7)]);
+      if (url.pathname.endsWith(failure.path)) return json(failure.data);
+      if (url.pathname.endsWith('/releases/latest')) return json({ message: 'Not Found' }, 404);
+      return json([]);
+    });
+
+    await assert.rejects(collectSnapshot({ client, owner: OWNER, now: clock() }), (error: unknown) => {
+      assert.ok(error instanceof Error);
+      assert.ok(error.message.includes(`Could not read ${failure.stage} for repository "Luis85/project-007" (ID 7)`));
+      assert.ok(error.cause instanceof Error);
+      assert.equal(error.cause.message, `GitHub returned an invalid ${failure.field}.`);
+      assert.equal(error.message.includes('test-token'), false);
+      return true;
+    });
+  }
+});
+
+test('discussion and review event summaries retain useful titles and the most specific available link', () => {
+  const repositoryUrl = 'https://github.com/Luis85/project';
+  const common = { id: '123', public: true, created_at: '2026-10-25T01:00:00Z', actor: { login: OWNER } };
+  const discussion = required(summarizeEvent({
+    ...common, type: 'DiscussionEvent',
+    payload: { action: 'created', discussion: { title: 'Roadmap', html_url: `${repositoryUrl}/discussions/12` } },
+  }, repositoryUrl));
+  assert.equal(discussion.title, 'Roadmap');
+  assert.equal(discussion.url, `${repositoryUrl}/discussions/12`);
+
+  const pullRequest = { title: 'Improve sync', html_url: `${repositoryUrl}/pull/2` };
+  const review = { html_url: `${repositoryUrl}/pull/2#pullrequestreview-99` };
+  const reviewEvent = required(summarizeEvent({
+    ...common, type: 'PullRequestReviewEvent', payload: { action: 'created', pull_request: pullRequest, review },
+  }, repositoryUrl));
+  assert.equal(reviewEvent.title, 'Improve sync');
+  assert.equal(reviewEvent.url, review.html_url);
+
+  const comment = { html_url: `${repositoryUrl}/pull/2#discussion_r99` };
+  const commentEvent = required(summarizeEvent({
+    ...common, type: 'PullRequestReviewCommentEvent',
+    payload: { action: 'created', pull_request: pullRequest, review, comment },
+  }, repositoryUrl));
+  assert.equal(commentEvent.title, 'Improve sync');
+  assert.equal(commentEvent.url, comment.html_url);
+
+  const fallback = required(summarizeEvent({
+    ...common, type: 'PullRequestReviewEvent', payload: { action: 'created', pull_request: pullRequest, review: {} },
+  }, repositoryUrl));
+  assert.equal(fallback.url, pullRequest.html_url);
 });
