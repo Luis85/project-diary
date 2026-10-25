@@ -1,8 +1,12 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { buildDiary } from '../scripts/lib/diary.mjs';
+import { buildDiary } from '../scripts/lib/diary.ts';
+import type {
+  CommitSummary, ComparisonMetrics, EventSummary, ReleaseSummary,
+  RepositorySnapshot, SnapshotSource, SnapshotV1,
+} from '../scripts/lib/types.ts';
 
-function repository(id = 1, overrides = {}) {
+function repository(id = 1, overrides: Partial<RepositorySnapshot> = {}): RepositorySnapshot {
   const name = `project-${String(id).padStart(3, '0')}`;
   return {
     id, node_id: `R_${id}`, name, full_name: `Luis85/${name}`, owner: 'Luis85',
@@ -17,17 +21,26 @@ function repository(id = 1, overrides = {}) {
   };
 }
 
-function snapshot(date = '2026-10-25', repositories = [repository()], overrides = {}) {
+type SnapshotOverrides = Omit<Partial<SnapshotV1>, 'source'> & { source?: Partial<SnapshotSource> };
+
+function snapshot(
+  date = '2026-10-25', repositories: RepositorySnapshot[] = [repository()], overrides: SnapshotOverrides = {},
+): SnapshotV1 {
+  const { source, ...remainingOverrides } = overrides;
   return {
     schema_version: 1, snapshot_date: date, captured_at: `${date}T04:17:00.000Z`,
     completed_at: `${date}T04:18:00.000Z`, owner: 'Luis85', repository_count: repositories.length,
-    source: { events_per_repository: 10, events_are_complete_history: false },
+    source: {
+      provider: 'github', api_version: '2026-03-10', repository_scope: 'public_owned',
+      include_forks: true, include_archived: true,
+      events_per_repository: 10, events_are_complete_history: false, ...source,
+    },
     repositories,
-    ...overrides,
+    ...remainingOverrides,
   };
 }
 
-function event(id = '1', overrides = {}) {
+function event(id = '1', overrides: Partial<EventSummary> = {}): EventSummary {
   return {
     id, type: 'PushEvent', actor: 'Luis85', created_at: '2026-10-24T12:00:00Z',
     action: null, ref: 'refs/heads/main', ref_type: null, head: 'sha-1',
@@ -36,17 +49,40 @@ function event(id = '1', overrides = {}) {
   };
 }
 
-function activeRepository(id, events, overrides = {}) {
+function activeRepository(id: number, events: EventSummary[], overrides: Partial<RepositorySnapshot> = {}): RepositorySnapshot {
   return repository(id, { activity: { status: 'available', latest_commit: null, latest_release: null, recent_events: events }, ...overrides });
 }
 
-function frontmatter(markdown) {
+function commit(overrides: Partial<CommitSummary> = {}): CommitSummary {
+  return {
+    sha: 'old', url: 'https://github.com/Luis85/project-001/commit/old',
+    message: 'Earlier work', author: 'Luis85',
+    authored_at: '2026-10-23T00:00:00Z', committed_at: '2026-10-23T00:00:00Z',
+    ...overrides,
+  };
+}
+
+function release(overrides: Partial<ReleaseSummary> = {}): ReleaseSummary {
+  return {
+    id: 1, tag_name: 'v0.1', name: null,
+    url: 'https://github.com/Luis85/project-001/releases/tag/v0.1',
+    created_at: '2026-10-23T00:00:00Z', published_at: '2026-10-23T00:00:00Z',
+    ...overrides,
+  };
+}
+
+function frontmatter(markdown: string): Record<string, unknown> {
   const block = markdown.match(/^---\n([\s\S]*?)\n---\n/);
-  assert.ok(block, 'YAML frontmatter must be the first content');
-  return Object.fromEntries(block[1].split('\n').filter(line => !line.startsWith('tags:')).map(line => {
+  const content = block?.[1];
+  assert.ok(content, 'YAML frontmatter must be the first content');
+  const properties: Record<string, unknown> = {};
+  for (const line of content.split('\n').filter(line => !line.startsWith('tags:'))) {
     const separator = line.indexOf(':');
-    return [line.slice(0, separator), JSON.parse(line.slice(separator + 1).trim())];
-  }));
+    assert.ok(separator > 0, 'Expected a named frontmatter property');
+    const value: unknown = JSON.parse(line.slice(separator + 1).trim());
+    properties[line.slice(0, separator)] = value;
+  }
+  return properties;
 }
 
 const comparisons = [
@@ -54,7 +90,7 @@ const comparisons = [
   'repositories_with_metadata_changes', 'repositories_with_new_pushes',
   'repositories_with_changed_default_branch_head', 'repositories_with_changed_latest_release',
   'newly_observed_events', 'stars_delta', 'forks_delta', 'open_issues_and_pull_requests_delta',
-];
+] as const satisfies readonly (keyof ComparisonMetrics)[];
 
 test('first diary creates typed flat frontmatter and explicitly null comparison metrics', () => {
   const current = snapshot('2026-10-25', [repository(1), repository(2, { fork: true, archived: true, website: 'https://example.com' })]);
@@ -110,8 +146,8 @@ test('head, release, push and metadata changes are measured as repository observ
     counts: { stars: 12, forks: 2, open_issues_and_pull_requests: 1 },
     activity: {
       status: 'available',
-      latest_commit: { sha: 'new', message: 'New work\n\nDetails stay in JSON', url: 'https://github.com/Luis85/project-001/commit/new', committed_at: '2026-10-24T16:00:00Z' },
-      latest_release: { id: 4, tag_name: 'v1.0', url: 'https://github.com/Luis85/project-001/releases/tag/v1.0' },
+      latest_commit: commit({ sha: 'new', message: 'New work\n\nDetails stay in JSON', url: 'https://github.com/Luis85/project-001/commit/new', committed_at: '2026-10-24T16:00:00Z' }),
+      latest_release: release({ id: 4, tag_name: 'v1.0', url: 'https://github.com/Luis85/project-001/releases/tag/v1.0' }),
       recent_events: [],
     },
   });
@@ -173,7 +209,7 @@ test('unavailable activity never produces false head or release changes', () => 
     activity: { status: 'unavailable', reason: 'repository_disabled', latest_commit: null, latest_release: null, recent_events: [] },
   })]);
   const previous = snapshot('2026-10-24', [repository(1, {
-    activity: { status: 'available', latest_commit: { sha: 'old' }, latest_release: { id: 1 }, recent_events: [event()] },
+    activity: { status: 'available', latest_commit: commit({ sha: 'old' }), latest_release: release({ id: 1 }), recent_events: [event()] },
   })]);
   const { markdown, metrics } = buildDiary(current, previous);
 

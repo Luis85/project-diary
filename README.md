@@ -3,17 +3,19 @@
 A daily, versioned record of the public GitHub repositories owned by `Luis85`,
 with JSON snapshots and an Obsidian-compatible Markdown diary. Each diary entry
 summarizes the repository inventory and observed changes, with queryable metrics
-in YAML frontmatter. The project uses Node.js 24 and has no external runtime
-dependencies or AI service requirement.
+in YAML frontmatter. The implementation uses strict TypeScript and runs directly
+on Node.js 24.12 or later in the Node 24 line, with no external runtime dependencies
+or AI service requirement.
 
 ## Enable daily snapshots
 
 1. Merge the workflow and collector into the repository's default branch.
 2. Open **Actions → Daily GitHub snapshot → Run workflow**, select the default
    branch, and run it once to create the first snapshot and diary entry.
-3. The workflow then runs daily at **04:17 UTC**: 05:17 in Berlin during winter
-   and 06:17 during summer. GitHub's scheduler may start jobs later than the
-   requested time.
+3. The first daily attempt is **04:17 UTC**: 05:17 in Berlin during winter and
+   06:17 during summer. Further scheduled opportunities at **10:17, 16:17, and
+   22:17 UTC** recover an incomplete current day. GitHub may start jobs later
+   than the requested time.
 
 The workflow uses GitHub's automatically provided `GITHUB_TOKEN`. No personal
 access token or additional secret is needed. It requests `contents: write` only
@@ -21,6 +23,18 @@ for the snapshot job so it can commit the generated files. Actions must be enabl
 and repository policies must permit those writes. If branch rules require every
 change to go through a pull request, the push will fail; adapt publication to that
 policy rather than bypassing it.
+
+Scheduled runs use `--if-needed`: they validate today's archived JSON, require
+its nonempty diary and a matching current latest snapshot, then skip API calls
+and writes when that daily bundle is complete. If the current day's valid archive
+exists but its diary or latest JSON is missing, scheduled recovery can restore
+those derived files from the archive without calling GitHub. A valid newer
+same-day latest snapshot is preserved. A successful day normally needs one
+capture commit. A manual run deliberately refreshes the latest snapshot while
+preserving the first daily archive and diary.
+
+These are recovery opportunities, not a guaranteed delivery time. They cannot
+reconstruct a past day's state if no capture succeeded that day.
 
 ## What gets saved
 
@@ -104,6 +118,10 @@ saved snapshots are validated for unique repository identities, public ownership
 numeric counters, UTC timestamps, and activity structure before diary comparisons.
 Missing counters are not interpreted as zero.
 
+TypeScript checks the implementation and its consumers during development and
+CI. GitHub responses and loaded JSON still enter as `unknown` and pass runtime
+validation before use; static types do not make external data trustworthy.
+
 Disabled repositories remain in the inventory with their metadata. Their activity
 requests are skipped, with `activity.status: "unavailable"` and
 `activity.reason: "repository_disabled"`; the latest commit and release are
@@ -115,6 +133,10 @@ Markdown diary together. A same-day manual rerun refreshes `data/snapshot.json`
 while preserving the archive and existing diary byte for byte, including personal
 notes. If that day's archive exists but its diary is missing, the diary is created
 from the preserved archive, so the note and its source JSON stay aligned.
+Scheduled recovery can likewise restore a missing latest JSON from that archive.
+Existing corrupt JSON, an orphaned diary, or an empty/whitespace-only diary is
+reported rather than overwritten automatically. Such failures occur before API
+collection in scheduled recovery mode.
 
 The diary compares against the nearest earlier daily archive after validating it,
 never against the mutable latest snapshot. A corrupt comparison archive stops the
@@ -139,11 +161,18 @@ isolation.
 
 | Module | Responsibility |
 | --- | --- |
-| `scripts/snapshot-github.mjs` | Collection, normalization, and CLI orchestration. |
-| `scripts/lib/github-client.mjs` | API requests, pagination, timeouts, and retries. |
-| `scripts/lib/snapshot-schema.mjs` | Validation shared by collection and saved history. |
-| `scripts/lib/diary.mjs` | Pure metric comparisons and Markdown rendering. |
-| `scripts/lib/snapshot-store.mjs` | Archived baselines, preservation, locking, and file publication. |
+| `scripts/snapshot-github.ts` | Collection, scheduled recovery decisions, and CLI orchestration. |
+| `scripts/lib/github-client.ts` | API requests, pagination, timeouts, and retries. |
+| `scripts/lib/github-data.ts` | Runtime validation and normalization of raw GitHub responses. |
+| `scripts/lib/snapshot-schema.ts` | Validation shared by collection and saved history. |
+| `scripts/lib/diary.ts` | Pure metric comparisons and Markdown rendering. |
+| `scripts/lib/snapshot-store.ts` | Archived baselines, preservation, locking, and file publication. |
+| `scripts/lib/types.ts` | Exported `SnapshotV1`, repository/activity, and diary metric contracts. |
+| `scripts/lib/errors.ts` | Safe inspection of caught errors without assuming their type. |
+
+The TypeScript migration preserves the existing **`schema_version: 1`** JSON
+layout, frontmatter properties, and file paths. Consumers can continue reading
+the same data; TypeScript consumers can also import the public contracts.
 
 ## Configuration
 
@@ -159,14 +188,39 @@ Set the owner before the first capture. If `data/snapshot.json` already belongs
 to another owner, the collector fails rather than mixing account histories. Keep
 different accounts in separate repositories or output directories.
 
-## Run locally
+## Run locally and develop
 
-With Node.js 24 installed:
+Use **Node.js 24.12 or later within Node 24**. `.node-version` selects the Node 24
+line, and the package engine range documents the supported runtime. Native Node
+execution strips erasable TypeScript syntax; there is no generated `dist/`
+directory or build step for a capture.
+
+Captures and offline tests do not require an npm dependency installation:
 
 ```bash
 npm test
 GITHUB_OWNER=Luis85 npm run snapshot
 ```
+
+Use the same idempotent mode as the scheduled workflow when appropriate:
+
+```bash
+GITHUB_OWNER=Luis85 npm run snapshot -- --if-needed
+```
+
+For development and strict verification, install the pinned compiler and Node
+type definitions from the committed lockfile:
+
+```bash
+npm ci --ignore-scripts --no-audit --no-fund
+npm run check
+```
+
+`npm run check` runs `tsc --noEmit` and the tests. You can run `npm run typecheck`
+or `npm test` separately. The compiler enables `strict`, unchecked-index checks,
+exact optional properties, unknown catch values, and `erasableSyntaxOnly`.
+Node's native execution does not type-check and ignores `tsconfig.json`, so the
+CI check is part of the change-validation process.
 
 Public API reads work without a token, but unauthenticated rate limits are low.
 For an authenticated local run, use an existing GitHub CLI login:
@@ -185,6 +239,30 @@ GITHUB_TOKEN="$(gh auth token)" SNAPSHOT_DATA_DIR=/tmp/project-diary-data npm ru
 Local runs write the JSON files and daily Markdown entry; the workflow handles
 Git commits and pushes. Tests use mocked API responses and temporary directories
 and require no network token.
+
+## Unattended operation and upkeep
+
+| Mechanism | Behavior |
+| --- | --- |
+| Daily capture and recovery slots | Check the current UTC day at 04:17, 10:17, 16:17, and 22:17; skip complete days or repair missing derived files from their valid daily archive before API calls. |
+| Request retries | Retry temporary failures within bounded limits; later scheduled runs provide another opportunity when a run fails. |
+| Runtime independence | Daily collection and tests use Node built-ins and checked-in TypeScript, without fetching compiler packages from npm. |
+| Change verification | Relevant pull requests and pushes to `main` run locked installation, strict type checking, and offline tests. |
+| Periodic verification | The same read-only CI check runs Mondays at 08:37 UTC and can be started manually to detect toolchain drift. |
+| Dependency proposals | Dependabot checks weekly for grouped npm development-dependency and GitHub Actions updates; updates remain reviewable pull requests. |
+| Failure visibility | A failed capture retains its failed Actions status and adds a stage/outcome table with a link to the run logs. |
+
+GitHub Actions use pinned commit references. The runner OS is fixed to
+`ubuntu-24.04`, and Node remains on the supported 24 line while receiving that
+line's updates. Node type-definition major upgrades are excluded from automatic
+Dependabot proposals so runtime and types can be upgraded together deliberately.
+
+The failure summary distinguishes checkout, runtime setup, tests, collection,
+publication, and summary generation. A publishing step can succeed before a later
+summary step fails; check the listed outcome before rerunning manually. Persistent
+validation failures, permission changes, or branch-rule conflicts require a fix;
+recovery scheduling does not bypass those protections. GitHub's own scheduled-run
+and inactivity limits still apply.
 
 ## Interpreting the data
 
@@ -218,6 +296,9 @@ and require no network token.
 
 ## Reference documentation
 
+- [Node.js 24 native TypeScript execution](https://nodejs.org/docs/latest-v24.x/api/typescript.html)
+- [TypeScript erasable syntax checks](https://www.typescriptlang.org/tsconfig/erasableSyntaxOnly.html)
+- [Dependabot schedules and grouped updates](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference)
 - [Obsidian properties and supported types](https://help.obsidian.md/properties)
 - [Optional Dataview table queries](https://blacksmithgu.github.io/obsidian-dataview/queries/query-types/#table)
 - [Repository listing and metadata](https://docs.github.com/en/rest/repos/repos#list-repositories-for-a-user)

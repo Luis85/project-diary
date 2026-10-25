@@ -1,17 +1,59 @@
+import type {
+  AvailableActivity, ComparisonMetrics, DiaryMetrics, DiaryResult,
+  EventSummary, InventoryMetrics, RepositorySnapshot, SnapshotV1,
+} from './types.ts';
+
 const SECTION_LIMIT = 20;
 const DAY_MS = 86_400_000;
-const COMPARISON_METRICS = [
-  'repositories_added', 'repositories_removed', 'repositories_renamed',
-  'repositories_with_metadata_changes', 'repositories_with_new_pushes',
-  'repositories_with_changed_default_branch_head', 'repositories_with_changed_latest_release',
-  'newly_observed_events', 'stars_delta', 'forks_delta', 'open_issues_and_pull_requests_delta',
-];
+const EMPTY_COMPARISON: ComparisonMetrics = {
+  comparison_date: null,
+  comparison_days: null,
+  repositories_added: null,
+  repositories_removed: null,
+  repositories_renamed: null,
+  repositories_with_metadata_changes: null,
+  repositories_with_new_pushes: null,
+  repositories_with_changed_default_branch_head: null,
+  repositories_with_changed_latest_release: null,
+  newly_observed_events: null,
+  stars_delta: null,
+  forks_delta: null,
+  open_issues_and_pull_requests_delta: null,
+};
+const METADATA_FIELDS = [
+  'name', 'full_name', 'about', 'website', 'topics', 'language', 'default_branch',
+  'fork', 'archived', 'disabled', 'license',
+] as const;
+type MetadataField = typeof METADATA_FIELDS[number];
+type MetadataValue = string | boolean | null | readonly (string | null)[];
+type RepositoryMetadata = Record<MetadataField, MetadataValue>;
 
-function compareText(a, b) {
+interface EventSample { repo: RepositorySnapshot; event: EventSummary }
+interface RepositoryChange {
+  repo: RepositorySnapshot;
+  previous: RepositorySnapshot;
+  metadata: MetadataField[];
+  renamed: boolean;
+  pushed: boolean;
+  headChanged: boolean;
+  releaseChanged: boolean;
+  starsDelta: number;
+  forksDelta: number;
+  issuesDelta: number;
+}
+interface Comparison {
+  metrics: ComparisonMetrics;
+  added: RepositorySnapshot[];
+  removed: RepositorySnapshot[];
+  changes: RepositoryChange[];
+  newEvents: EventSample[];
+}
+
+function compareText(a: string, b: string): number {
   return a < b ? -1 : a > b ? 1 : 0;
 }
 
-function singleLine(value, maximum = 180) {
+function singleLine(value: unknown, maximum = 180): string {
   const text = String(value ?? '')
     .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f\u202a-\u202e\u2066-\u2069]/g, '')
     .replace(/\s+/g, ' ').trim();
@@ -20,13 +62,13 @@ function singleLine(value, maximum = 180) {
 }
 
 /** Keep all repository-provided text inline, even inside Markdown tables. */
-function escapeText(value, maximum = 180) {
+function escapeText(value: unknown, maximum = 180): string {
   return singleLine(value, maximum)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     .replace(/[\\`*_{}\[\]()#|!~]/g, '\\$&');
 }
 
-function externalLink(label, target) {
+function externalLink(label: unknown, target: unknown): string {
   const safeLabel = escapeText(label);
   if (typeof target !== 'string' || /[\u0000-\u0020\u007f<>]/.test(target)) return safeLabel;
   try {
@@ -40,19 +82,19 @@ function externalLink(label, target) {
   }
 }
 
-function repoLink(repo) {
+function repoLink(repo: RepositorySnapshot): string {
   return externalLink(repo.full_name, repo.url);
 }
 
-function number(value) {
+function number(value: number): string {
   return String(value);
 }
 
-function delta(value) {
+function delta(value: number | null): string {
   return value === null ? '—' : value > 0 ? `+${value}` : number(value);
 }
 
-function table(headers, rows) {
+function table(headers: readonly string[], rows: readonly (readonly string[])[]): string[] {
   return [
     `| ${headers.join(' | ')} |`,
     `| ${headers.map(() => '---').join(' | ')} |`,
@@ -60,7 +102,7 @@ function table(headers, rows) {
   ];
 }
 
-function boundedTable(headers, items, toRow) {
+function boundedTable<T>(headers: readonly string[], items: readonly T[], toRow: (item: T) => readonly string[]): string[] {
   const lines = table(headers, items.slice(0, SECTION_LIMIT).map(toRow));
   if (items.length > SECTION_LIMIT) {
     lines.push('', `${items.length - SECTION_LIMIT} more entries omitted from this table; totals include all entries. See the snapshot JSON for the complete data.`);
@@ -68,18 +110,18 @@ function boundedTable(headers, items, toRow) {
   return lines;
 }
 
-function available(repo) {
+function available(repo: RepositorySnapshot): repo is RepositorySnapshot & { activity: AvailableActivity } {
   return repo.activity?.status === 'available';
 }
 
-function countTotal(repositories, key) {
+function countTotal(repositories: readonly RepositorySnapshot[], key: keyof RepositorySnapshot['counts']): number {
   const value = repositories.reduce((total, repo) => total + repo.counts[key], 0);
   if (!Number.isSafeInteger(value) || value < 0) throw new Error(`Invalid diary metric: ${key}.`);
   return value;
 }
 
-function eventSamples(repositories) {
-  const unique = new Map();
+function eventSamples(repositories: readonly RepositorySnapshot[]): EventSample[] {
+  const unique = new Map<string, EventSample>();
   for (const repo of repositories) {
     if (!available(repo)) continue;
     for (const event of repo.activity.recent_events) {
@@ -92,7 +134,7 @@ function eventSamples(repositories) {
   ));
 }
 
-function inventoryMetrics(repositories, events) {
+function inventoryMetrics(repositories: readonly RepositorySnapshot[], events: readonly EventSample[]): InventoryMetrics {
   return {
     repository_count: repositories.length,
     original_repository_count: repositories.filter(repo => !repo.fork).length,
@@ -108,7 +150,7 @@ function inventoryMetrics(repositories, events) {
   };
 }
 
-function metadataFields(repo) {
+function metadataFields(repo: RepositorySnapshot): RepositoryMetadata {
   return {
     name: repo.name,
     full_name: repo.full_name,
@@ -124,13 +166,13 @@ function metadataFields(repo) {
   };
 }
 
-function compareRepository(repo, previous) {
+function compareRepository(repo: RepositorySnapshot, previous: RepositorySnapshot): RepositoryChange {
   const before = metadataFields(previous);
   const after = metadataFields(repo);
-  const metadata = Object.keys(after).filter(key => JSON.stringify(before[key]) !== JSON.stringify(after[key]));
+  const metadata = METADATA_FIELDS.filter(key => JSON.stringify(before[key]) !== JSON.stringify(after[key]));
   const activityComparable = available(repo) && available(previous);
-  const pushedAt = Date.parse(repo.pushed_at);
-  const previouslyPushedAt = Date.parse(previous.pushed_at);
+  const pushedAt = Date.parse(repo.pushed_at ?? '');
+  const previouslyPushedAt = Date.parse(previous.pushed_at ?? '');
   return {
     repo,
     previous,
@@ -145,10 +187,13 @@ function compareRepository(repo, previous) {
   };
 }
 
-function comparison(snapshot, previousSnapshot, repositories, events, totals) {
+function comparison(
+  snapshot: SnapshotV1, previousSnapshot: SnapshotV1 | null, repositories: readonly RepositorySnapshot[],
+  events: readonly EventSample[], totals: InventoryMetrics,
+): Comparison {
   if (!previousSnapshot) {
     return {
-      metrics: { comparison_date: null, comparison_days: null, ...Object.fromEntries(COMPARISON_METRICS.map(key => [key, null])) },
+      metrics: { ...EMPTY_COMPARISON },
       added: [], removed: [], changes: [], newEvents: [],
     };
   }
@@ -167,7 +212,11 @@ function comparison(snapshot, previousSnapshot, repositories, events, totals) {
   const previousTotals = inventoryMetrics(previousRepos, previousEvents);
   const added = repositories.filter(repo => !previousById.has(repo.id));
   const removed = previousRepos.filter(repo => !currentById.has(repo.id));
-  const changes = repositories.filter(repo => previousById.has(repo.id)).map(repo => compareRepository(repo, previousById.get(repo.id)));
+  const changes: RepositoryChange[] = [];
+  for (const repo of repositories) {
+    const previous = previousById.get(repo.id);
+    if (previous) changes.push(compareRepository(repo, previous));
+  }
   const newEvents = events.filter(({ event }) => !previousIds.has(String(event.id)));
   return {
     metrics: {
@@ -189,8 +238,8 @@ function comparison(snapshot, previousSnapshot, repositories, events, totals) {
   };
 }
 
-function frontmatter(snapshot, metrics) {
-  const values = {
+function frontmatter(snapshot: SnapshotV1, metrics: DiaryMetrics): string[] {
+  const values: Record<string, string | number | null> = {
     type: 'github-diary', schema_version: 1, date: snapshot.snapshot_date,
     owner: snapshot.owner, captured_at: snapshot.captured_at, completed_at: snapshot.completed_at,
     ...metrics,
@@ -203,7 +252,7 @@ function frontmatter(snapshot, metrics) {
   ];
 }
 
-function updateDescription(change) {
+function updateDescription(change: RepositoryChange): string {
   const reasons = [];
   if (change.renamed) reasons.push(`Renamed from ${escapeText(change.previous.full_name)}`);
   if (change.pushed) reasons.push('Push timestamp advanced');
@@ -221,18 +270,22 @@ function updateDescription(change) {
   return reasons.join('; ');
 }
 
-function eventDescription(event) {
+function eventDescription(event: EventSummary): string {
   const details = [event.type, event.action, event.title || event.ref].filter(Boolean).join(' · ');
   return externalLink(details, event.url);
 }
 
 /** Build a deterministic, Obsidian-compatible note from validated daily captures. */
-export function buildDiary(snapshot, previousSnapshot = null, { previousDiaryExists = false } = {}) {
+export function buildDiary(
+  snapshot: SnapshotV1,
+  previousSnapshot: SnapshotV1 | null = null,
+  { previousDiaryExists = false }: { previousDiaryExists?: boolean } = {},
+): DiaryResult {
   const repositories = [...snapshot.repositories].sort((a, b) => compareText(a.full_name, b.full_name));
   const events = eventSamples(repositories);
   const totals = inventoryMetrics(repositories, events);
   const diff = comparison(snapshot, previousSnapshot, repositories, events, totals);
-  const metrics = { ...totals, ...diff.metrics };
+  const metrics: DiaryMetrics = { ...totals, ...diff.metrics };
   const lines = [
     ...frontmatter(snapshot, metrics), '',
     `# GitHub diary — ${snapshot.snapshot_date}`, '',
@@ -240,7 +293,7 @@ export function buildDiary(snapshot, previousSnapshot = null, { previousDiaryExi
     `[Snapshot JSON](../snapshots/${snapshot.snapshot_date}.json)${previousSnapshot ? ` · [Previous snapshot JSON](../snapshots/${previousSnapshot.snapshot_date}.json)` : ''}${previousSnapshot && previousDiaryExists ? ` · [Previous diary](${previousSnapshot.snapshot_date}.md)` : ''}`, '',
     '## Overview', '',
     ...table(['Metric', 'Current', 'Change'], [
-      ['Public repositories', number(metrics.repository_count), previousSnapshot ? delta(metrics.repositories_added - metrics.repositories_removed) : '—'],
+      ['Public repositories', number(metrics.repository_count), delta(metrics.repositories_added === null || metrics.repositories_removed === null ? null : metrics.repositories_added - metrics.repositories_removed)],
       ['Original repositories / forks', `${metrics.original_repository_count} / ${metrics.fork_repository_count}`, '—'],
       ['Archived / disabled repositories', `${metrics.archived_repository_count} / ${metrics.disabled_repository_count}`, '—'],
       ['Stars', number(metrics.total_stars), delta(metrics.stars_delta)],
@@ -260,7 +313,7 @@ export function buildDiary(snapshot, previousSnapshot = null, { previousDiaryExi
       `${metrics.repositories_added} newly listed; ${metrics.repositories_removed} no longer listed; ${metrics.repositories_renamed} renamed. ${metrics.repositories_with_new_pushes} repositories have an advanced push timestamp; ${metrics.repositories_with_changed_default_branch_head} have a changed default-branch head; ${metrics.repositories_with_changed_latest_release} have a changed latest stable release.`, '',
       'Counter changes are net inventory totals; repositories entering or leaving the inventory affect them. Changed heads and release observations are not counts of commits or releases made during the interval.', '',
     );
-    if (metrics.comparison_days > 1) lines.push('There are gaps between these daily captures. The comparison covers the full interval; missing days are not reconstructed.', '');
+    if (metrics.comparison_days !== null && metrics.comparison_days > 1) lines.push('There are gaps between these daily captures. The comparison covers the full interval; missing days are not reconstructed.', '');
     if (snapshot.source.events_per_repository !== previousSnapshot.source.events_per_repository) {
       lines.push('The event sample limit changed between captures, so newly observed event counts also reflect the changed coverage.', '');
     }
@@ -290,14 +343,16 @@ export function buildDiary(snapshot, previousSnapshot = null, { previousDiaryExi
   lines.push('Event samples are bounded and can arrive late. “Newly observed” does not mean “happened today,” and an empty sample does not prove inactivity.', '');
 
   if (!previousSnapshot) {
-    const commits = repositories.filter(repo => available(repo) && repo.activity.latest_commit)
-      .sort((a, b) => compareText(b.activity.latest_commit.committed_at ?? '', a.activity.latest_commit.committed_at ?? '') || compareText(a.full_name, b.full_name));
+    const commits = repositories.flatMap(repo => {
+      const commit = available(repo) ? repo.activity.latest_commit : null;
+      return commit ? [{ repo, commit }] : [];
+    }).sort((a, b) => compareText(b.commit.committed_at ?? '', a.commit.committed_at ?? '') || compareText(a.repo.full_name, b.repo.full_name));
     if (commits.length) {
-      lines.push('## Latest default-branch commits', '', ...boundedTable(['Repository', 'Commit time (UTC)', 'Latest commit'], commits, repo => [repoLink(repo), escapeText(repo.activity.latest_commit.committed_at) || '—', externalLink(singleLine(repo.activity.latest_commit.message.split(/\r?\n/)[0], 120), repo.activity.latest_commit.url)]), '');
+      lines.push('## Latest default-branch commits', '', ...boundedTable(['Repository', 'Commit time (UTC)', 'Latest commit'], commits, ({ repo, commit }) => [repoLink(repo), escapeText(commit.committed_at) || '—', externalLink(singleLine(commit.message.split(/\r?\n/)[0], 120), commit.url)]), '');
     }
   }
 
-  const languages = new Map();
+  const languages = new Map<string, number>();
   for (const repo of repositories) languages.set(repo.language || 'Not specified', (languages.get(repo.language || 'Not specified') ?? 0) + 1);
   const languageRows = [...languages.entries()].sort((a, b) => b[1] - a[1] || compareText(a[0], b[0]));
   lines.push('## Main languages', '');

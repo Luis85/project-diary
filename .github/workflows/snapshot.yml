@@ -2,8 +2,9 @@ name: Daily GitHub snapshot
 
 on:
   schedule:
-    # 04:17 UTC daily (05:17 Berlin in winter, 06:17 in summer).
-    - cron: '17 4 * * *'
+    # First attempt at 04:17 UTC; later runs recover an incomplete day.
+    # A complete current-day bundle is checked locally and skipped.
+    - cron: '17 4,10,16,22 * * *'
   workflow_dispatch:
 
 permissions:
@@ -17,7 +18,7 @@ jobs:
   snapshot:
     # Manual runs from other branches must not write to the default branch.
     if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     permissions:
       contents: write
@@ -26,26 +27,40 @@ jobs:
       SNAPSHOT_EVENTS_PER_REPO: ${{ vars.SNAPSHOT_EVENTS_PER_REPO || '10' }}
     steps:
       - name: Check out the default branch
+        id: checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ github.event.repository.default_branch }}
           fetch-depth: 0
 
       - name: Set up Node.js
+        id: runtime
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: '24'
+          node-version-file: '.node-version'
           package-manager-cache: false
 
       - name: Test the collector and diary
+        id: tests
+        # Native Node.js TypeScript execution needs no compiler or npm install.
         run: npm test
 
       - name: Collect the snapshot and create the diary
+        id: capture
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: npm run snapshot
+          EVENT_NAME: ${{ github.event_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" = "schedule" ]; then
+            npm run snapshot -- --if-needed
+          else
+            npm run snapshot
+          fi
 
       - name: Commit and push the snapshot and diary
+        id: publish
         env:
           DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         shell: bash
@@ -61,17 +76,19 @@ jobs:
           git add -- data/snapshot.json "data/snapshots/${SNAPSHOT_DATE}.json" "data/diary/${SNAPSHOT_DATE}.md"
           if git diff --cached --quiet; then
             echo "No snapshot or diary changes to commit."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore(data): capture GitHub diary ${SNAPSHOT_DATE}"
+          git commit -m "chore(data): update GitHub diary ${SNAPSHOT_DATE}"
 
           # A developer may push while collection is running. Rebase only;
           # conflicts or branch protection fail the job instead of overwriting work.
           for attempt in 1 2 3; do
             if git push origin "HEAD:refs/heads/${DEFAULT_BRANCH}"; then
+              echo "changed=true" >> "$GITHUB_OUTPUT"
               exit 0
             fi
             if [ "$attempt" -eq 3 ]; then
@@ -83,6 +100,9 @@ jobs:
           done
 
       - name: Link the snapshot and diary
+        id: summary
+        env:
+          PUBLISHED_CHANGES: ${{ steps.publish.outputs.changed }}
         run: |
           node --input-type=module <<'NODE'
           import { execFileSync } from 'node:child_process';
@@ -100,7 +120,43 @@ jobs:
             `- [Daily JSON archive](${base}/snapshots/${snapshot.snapshot_date}.json)`,
             `- [Obsidian diary entry](${base}/diary/${snapshot.snapshot_date}.md)`,
             '',
-            'Same-day reruns refresh the latest JSON. The daily archive and diary preserve the first capture; personal notes stay intact.',
+            process.env.PUBLISHED_CHANGES === 'true'
+              ? 'The snapshot and diary changes were committed successfully.'
+              : 'The daily files were already complete; no new capture was committed.',
+            '',
+            'Scheduled recovery runs skip complete days. Manual reruns can refresh the latest JSON; the daily archive, diary, and personal notes stay intact.',
             '',
           ].join('\n'));
           NODE
+
+      - name: Summarize a failed run
+        if: failure()
+        env:
+          CHECKOUT_OUTCOME: ${{ steps.checkout.outcome }}
+          RUNTIME_OUTCOME: ${{ steps.runtime.outcome }}
+          TESTS_OUTCOME: ${{ steps.tests.outcome }}
+          CAPTURE_OUTCOME: ${{ steps.capture.outcome }}
+          PUBLISH_OUTCOME: ${{ steps.publish.outcome }}
+          SUMMARY_OUTCOME: ${{ steps.summary.outcome }}
+        shell: bash
+        run: |
+          {
+            echo '## Snapshot workflow failed'
+            echo
+            echo '| Stage | Outcome |'
+            echo '| --- | --- |'
+            printf '| Checkout | %s |\n' "$CHECKOUT_OUTCOME"
+            printf '| Node.js setup | %s |\n' "$RUNTIME_OUTCOME"
+            printf '| Offline tests | %s |\n' "$TESTS_OUTCOME"
+            printf '| Capture / current-day check / repair | %s |\n' "$CAPTURE_OUTCOME"
+            printf '| Commit and push | %s |\n' "$PUBLISH_OUTCOME"
+            printf '| Success summary | %s |\n' "$SUMMARY_OUTCOME"
+            echo
+            printf '[Open run logs](%s/%s/actions/runs/%s)\n' "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID"
+            echo
+            echo 'Check the failed stage above. Publication may have completed before a later summary failure; the publish outcome identifies that case.'
+            echo
+            echo 'Scheduled runs check again at 04:17, 10:17, 16:17, and 22:17 UTC. They skip complete days and can retry an incomplete current day. Missing past-day state cannot be reconstructed.'
+            echo
+            echo 'This summary does not change the failed run result. Persistent permission, validation, or branch-rule errors need attention in the run logs.'
+          } >> "$GITHUB_STEP_SUMMARY"

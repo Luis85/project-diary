@@ -2,15 +2,16 @@ import assert from 'node:assert/strict';
 import { mkdtemp, mkdir, readFile, readdir, rm, unlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import test from 'node:test';
-import { assertSnapshot } from '../scripts/lib/snapshot-schema.mjs';
-import { writeSnapshot } from '../scripts/lib/snapshot-store.mjs';
+import test, { type TestContext } from 'node:test';
+import type { SnapshotV1 } from '../scripts/lib/types.ts';
+import { assertSnapshot } from '../scripts/lib/snapshot-schema.ts';
+import { writeSnapshot } from '../scripts/lib/snapshot-store.ts';
 
-function snapshot(date = '2026-10-25', stars = 5, time = '04:17:00.000Z') {
+function snapshot(date = '2026-10-25', stars = 5, time = '04:17:00.000Z'): SnapshotV1 {
   return {
     schema_version: 1, snapshot_date: date, captured_at: `${date}T${time}`, completed_at: `${date}T${time}`,
     owner: 'Luis85', repository_count: 1,
-    source: { provider: 'github', repository_scope: 'public_owned', events_per_repository: 10 },
+    source: { provider: 'github', api_version: '2026-03-10', repository_scope: 'public_owned', include_forks: true, include_archived: true, events_per_repository: 10, events_are_complete_history: false },
     repositories: [{
       id: 1, node_id: 'R_1', name: 'project', full_name: 'Luis85/project', owner: 'Luis85',
       url: 'https://github.com/Luis85/project', about: 'A project', website: null,
@@ -23,18 +24,30 @@ function snapshot(date = '2026-10-25', stars = 5, time = '04:17:00.000Z') {
   };
 }
 
-async function directory(t) {
+function required<T>(value: T | undefined | null): T {
+  assert.ok(value !== undefined && value !== null, 'Expected the fixture/result item to exist');
+  return value;
+}
+
+async function loadSnapshot(path: string): Promise<SnapshotV1> {
+  const value: unknown = JSON.parse(await readFile(path, 'utf8'));
+  assertSnapshot(value);
+  return value;
+}
+
+async function directory(t: TestContext): Promise<string> {
   const path = await mkdtemp(join(tmpdir(), 'project-diary-storage-'));
   t.after(() => rm(path, { recursive: true, force: true }));
   return path;
 }
 
-function properties(markdown) {
+function properties(markdown: string): Record<string, unknown> {
   const block = markdown.match(/^---\n([\s\S]*?)\n---\n/);
-  assert.ok(block);
-  return Object.fromEntries(block[1].split('\n').filter(line => !line.startsWith('tags:')).map(line => {
+  const text = required(block?.[1]);
+  return Object.fromEntries(text.split('\n').filter(line => !line.startsWith('tags:')).map(line => {
     const separator = line.indexOf(':');
-    return [line.slice(0, separator), JSON.parse(line.slice(separator + 1).trim())];
+    const value: unknown = JSON.parse(line.slice(separator + 1).trim());
+    return [line.slice(0, separator), value];
   }));
 }
 
@@ -46,8 +59,8 @@ test('a successful capture creates matching JSON and an Obsidian note with numer
 
   assert.equal(result.historyCreated, true);
   assert.equal(result.diaryCreated, true);
-  assert.deepEqual(JSON.parse(await readFile(result.latestPath, 'utf8')), current);
-  assert.deepEqual(JSON.parse(await readFile(result.historyPath, 'utf8')), current);
+  assert.deepEqual(await loadSnapshot(result.latestPath), current);
+  assert.deepEqual(await loadSnapshot(result.historyPath), current);
   assert.equal(note.date, current.snapshot_date);
   assert.equal(note.captured_at, current.captured_at);
   assert.equal(note.repository_count, 1);
@@ -71,7 +84,7 @@ test('same-day refresh preserves the exact diary bytes including personal notes'
   assert.equal(result.diaryCreated, false);
   assert.equal(await readFile(result.diaryPath, 'utf8'), personalNote);
   assert.equal(await readFile(result.historyPath, 'utf8'), archive);
-  assert.equal(JSON.parse(await readFile(result.latestPath, 'utf8')).repositories[0].counts.stars, 99);
+  assert.equal(required((await loadSnapshot(result.latestPath)).repositories[0]).counts.stars, 99);
 });
 
 test('a missing same-day note is regenerated from the frozen archive rather than refreshed data', async t => {
@@ -109,8 +122,9 @@ test('corrupt historical metrics stop publication before any current-day file is
   const first = await writeSnapshot(snapshot('2026-10-24'), { dataDir });
   const latest = await readFile(first.latestPath, 'utf8');
   const previousNote = await readFile(first.diaryPath, 'utf8');
-  const corrupt = snapshot('2026-10-24');
-  corrupt.repositories[0].counts.stars = 'five';
+  const valid = snapshot('2026-10-24');
+  const repo = required(valid.repositories[0]);
+  const corrupt: unknown = { ...valid, repositories: [{ ...repo, counts: { ...repo.counts, stars: 'five' } }] };
   await writeFile(first.historyPath, JSON.stringify(corrupt));
 
   await assert.rejects(writeSnapshot(snapshot(), { dataDir }), /Invalid saved snapshot/);
@@ -171,23 +185,25 @@ test('a blocked diary destination leaves an existing latest snapshot and archive
 
 test('validation rejects misleading counters, duplicate identities, invalid UTC times and private scope', () => {
   assert.doesNotThrow(() => assertSnapshot(snapshot()));
-  const mutations = [
-    value => { value.repositories[0].counts.stars = undefined; },
-    value => { value.repositories[0].counts.forks = -1; },
-    value => { value.repositories[0].counts.open_issues_and_pull_requests = 1.5; },
-    value => { value.repositories.push(structuredClone(value.repositories[0])); value.repository_count += 1; },
-    value => { value.repositories[0].owner = 'other'; },
-    value => { value.repositories[0].visibility = 'private'; },
-    value => { value.repositories[0].pushed_at = '2026-02-30T00:00:00Z'; },
-    value => { value.completed_at = '2026-10-24T04:17:00.000Z'; },
-    value => { value.captured_at = '2026-10-25T06:17:00+02:00'; },
-    value => { value.repositories[0].activity.status = 'unknown'; },
+  const valid = snapshot();
+  const repo = required(valid.repositories[0]);
+  const replaceRepository = (changes: Record<string, unknown>): unknown => ({
+    ...valid,
+    repositories: [{ ...repo, ...changes }],
+  });
+  const invalidValues: unknown[] = [
+    replaceRepository({ counts: { ...repo.counts, stars: undefined } }),
+    replaceRepository({ counts: { ...repo.counts, forks: -1 } }),
+    replaceRepository({ counts: { ...repo.counts, open_issues_and_pull_requests: 1.5 } }),
+    { ...valid, repositories: [repo, structuredClone(repo)], repository_count: 2 },
+    replaceRepository({ owner: 'other' }),
+    replaceRepository({ visibility: 'private' }),
+    replaceRepository({ pushed_at: '2026-02-30T00:00:00Z' }),
+    { ...valid, completed_at: '2026-10-24T04:17:00.000Z' },
+    { ...valid, captured_at: '2026-10-25T06:17:00+02:00' },
+    replaceRepository({ activity: { ...repo.activity, status: 'unknown' } }),
   ];
-  for (const mutate of mutations) {
-    const value = snapshot();
-    mutate(value);
-    assert.throws(() => assertSnapshot(value));
-  }
+  for (const invalid of invalidValues) assert.throws(() => assertSnapshot(invalid));
 });
 
 test('invalid incoming data and captures older than current latest never replace successful files', async t => {
@@ -195,8 +211,9 @@ test('invalid incoming data and captures older than current latest never replace
   const first = await writeSnapshot(snapshot(), { dataDir });
   const latest = await readFile(first.latestPath, 'utf8');
   const note = await readFile(first.diaryPath, 'utf8');
-  const invalid = snapshot('2026-10-26');
-  invalid.repositories[0].counts.stars = null;
+  const valid = snapshot('2026-10-26');
+  const repo = required(valid.repositories[0]);
+  const invalid: unknown = { ...valid, repositories: [{ ...repo, counts: { ...repo.counts, stars: null } }] };
 
   await assert.rejects(writeSnapshot(invalid, { dataDir }));
   await assert.rejects(writeSnapshot(snapshot('2026-10-24'), { dataDir }), /newer snapshot/);

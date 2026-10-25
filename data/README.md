@@ -6,11 +6,36 @@ The collector writes these files after its first successful run:
 - `snapshots/YYYY-MM-DD.json`: first successful capture for that UTC day.
 - `diary/YYYY-MM-DD.md`: Obsidian-compatible summary of that day's archived capture.
 
-There is no synthetic initial snapshot. Same-day reruns refresh the latest file
+There is no synthetic initial snapshot. Same-day manual reruns refresh the latest file
 and preserve the existing daily archive and Markdown entry, including any personal
 notes. If the archive exists but its diary does not, the diary is generated from
 that archive. Consumers that need one observation per day should read `snapshots/`
 or `diary/`; consumers that need the freshest state should read `snapshot.json`.
+
+Scheduled recovery runs use `--if-needed`. A valid current-day archive, its
+nonempty Markdown entry, and a matching latest snapshot make the day complete;
+the run then skips network calls and writes. If that day's valid archive exists,
+recovery can restore a missing diary or latest JSON from it without network calls;
+a valid newer same-day latest snapshot is preserved. Existing corrupt JSON,
+orphaned notes, or empty diary files fail explicitly and are not overwritten.
+If no archive exists, recovery can attempt a new capture of the current day.
+It cannot backfill an uncaptured historical date.
+
+## Stable contracts and validation
+
+The TypeScript implementation retains **JSON `schema_version: 1`** and the same
+diary frontmatter contract. The public interfaces in
+[`scripts/lib/types.ts`](../scripts/lib/types.ts) include `SnapshotV1`,
+`RepositorySnapshot`, `RepositoryActivity`, and `DiaryMetrics` for typed consumers.
+Unavailable activity is a distinct type with an explicit reason and empty
+observations, so code must handle it before assuming a commit or release exists.
+
+TypeScript annotations are checked at development time, not when Node reads a
+JSON file. Treat parsed JSON as `unknown`, then call `assertSnapshot` from
+[`scripts/lib/snapshot-schema.ts`](../scripts/lib/snapshot-schema.ts) before
+processing it. This validates the supported version, ownership, identities,
+timestamps, counters, and activity structure. Malformed or incompatible history
+fails explicitly rather than silently yielding misleading deltas.
 
 ## Snapshot envelope
 
@@ -180,12 +205,15 @@ diary's capture timestamps always refer to the frozen daily archive.
 
 ## Processing examples
 
-Read the latest repository inventory with Node.js:
+Read the latest repository inventory with native TypeScript on Node 24.12+.
+These examples assume a `.ts` module saved at the repository root:
 
-```javascript
+```typescript
 import { readFile } from 'node:fs/promises';
+import { assertSnapshot } from './scripts/lib/snapshot-schema.ts';
 
-const snapshot = JSON.parse(await readFile('data/snapshot.json', 'utf8'));
+const snapshot: unknown = JSON.parse(await readFile('data/snapshot.json', 'utf8'));
+assertSnapshot(snapshot);
 for (const repo of snapshot.repositories) {
   console.log(repo.full_name, repo.url, repo.website, repo.pushed_at);
 }
@@ -193,11 +221,15 @@ for (const repo of snapshot.repositories) {
 
 Compare star counts between two daily captures without breaking on a rename:
 
-```javascript
+```typescript
 import { readFile } from 'node:fs/promises';
+import { assertSnapshot } from './scripts/lib/snapshot-schema.ts';
+import type { SnapshotV1 } from './scripts/lib/types.ts';
 
-async function load(path) {
-  return JSON.parse(await readFile(path, 'utf8'));
+async function load(path: string): Promise<SnapshotV1> {
+  const value: unknown = JSON.parse(await readFile(path, 'utf8'));
+  assertSnapshot(value);
+  return value;
 }
 
 const before = await load('data/snapshots/2026-10-25.json');

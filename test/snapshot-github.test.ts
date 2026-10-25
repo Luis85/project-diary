@@ -2,7 +2,9 @@ import assert from 'node:assert/strict';
 import { mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import test from 'node:test';
+import test, { type TestContext } from 'node:test';
+import { assertSnapshot } from '../scripts/lib/snapshot-schema.ts';
+import type { SnapshotV1 } from '../scripts/lib/types.ts';
 
 import {
   collectSnapshot,
@@ -10,12 +12,54 @@ import {
   listPublicRepositories,
   runSnapshot,
   writeSnapshot,
-} from '../scripts/snapshot-github.mjs';
+} from '../scripts/snapshot-github.ts';
 
 const OWNER = 'Luis85';
 const CAPTURED_AT = '2026-10-25T04:17:00.000Z';
 
-function repository(id = 1, overrides = {}) {
+interface RepositoryFixture {
+  id: number;
+  node_id: string;
+  name: string;
+  full_name: string;
+  owner: { login: string };
+  private: boolean;
+  visibility: 'public' | 'private';
+  html_url: string;
+  description: string | null;
+  homepage: string | null;
+  topics: string[];
+  language: string;
+  default_branch: string;
+  fork: boolean;
+  archived: boolean;
+  disabled: boolean;
+  created_at: string;
+  updated_at: string;
+  pushed_at: string;
+  stargazers_count: number;
+  forks_count: number;
+  open_issues_count: number;
+  size: number;
+  license: null;
+}
+
+function required<T>(value: T | null | undefined): T {
+  assert.ok(value !== null && value !== undefined, 'Expected the fixture/result item to exist');
+  return value;
+}
+
+function parseJson(text: string): unknown {
+  return JSON.parse(text);
+}
+
+async function loadSnapshot(path: string): Promise<SnapshotV1> {
+  const value = parseJson(await readFile(path, 'utf8'));
+  assertSnapshot(value);
+  return value;
+}
+
+function repository(id = 1, overrides: Partial<RepositoryFixture> = {}): RepositoryFixture {
   const name = `project-${String(id).padStart(3, '0')}`;
   return {
     id,
@@ -46,30 +90,33 @@ function repository(id = 1, overrides = {}) {
   };
 }
 
-function json(data, status = 200, headers = {}) {
+function json(data: unknown, status = 200, headers: Record<string, string> = {}): Response {
   return new Response(JSON.stringify(data), {
     status,
     headers: { 'content-type': 'application/json', ...headers },
   });
 }
 
-function clientFor(handler, options = {}) {
-  const calls = [];
-  const waits = [];
+type ClientOptions = NonNullable<Parameters<typeof createGitHubClient>[0]>;
+type ResponseHandler = (url: URL, init: RequestInit, attempt: number) => Response | Promise<Response>;
+
+function clientFor(handler: ResponseHandler, options: ClientOptions = {}) {
+  const calls: { url: URL; init: RequestInit }[] = [];
+  const waits: number[] = [];
   const client = createGitHubClient({
     token: 'test-token',
     fetchImpl: async (input, init) => {
-      const url = new URL(input instanceof Request ? input.url : String(input));
+      const url = new URL(input);
       calls.push({ url, init });
       return handler(url, init, calls.length);
     },
-    sleep: async (ms) => { waits.push(ms); },
+    sleep: async (ms: number) => { waits.push(ms); },
     ...options,
   });
   return { client, calls, waits };
 }
 
-function emptyActivityClient(repositories, options = {}) {
+function emptyActivityClient(repositories: unknown[], options: ClientOptions = {}) {
   return clientFor((url) => {
     if (url.pathname === `/users/${OWNER}/repos`) return json(repositories);
     if (url.pathname.endsWith('/commits')) {
@@ -87,13 +134,13 @@ function clock(time = CAPTURED_AT) {
   return () => new Date(time);
 }
 
-async function temporaryData(t) {
+async function temporaryData(t: TestContext): Promise<string> {
   const directory = await mkdtemp(join(tmpdir(), 'project-diary-test-'));
   t.after(() => rm(directory, { recursive: true, force: true }));
   return directory;
 }
 
-async function emptySnapshot(time = CAPTURED_AT) {
+async function emptySnapshot(time = CAPTURED_AT): Promise<SnapshotV1> {
   return collectSnapshot({
     client: emptyActivityClient([]).client,
     owner: OWNER,
@@ -116,10 +163,10 @@ test('discovery follows all repository pages beyond 100 and deduplicates stable 
 
   assert.equal(result.length, 101);
   assert.equal(new Set(result.map((repo) => repo.id)).size, 101);
-  assert.equal(result.at(-1).id, 101);
+  assert.equal(required(result.at(-1)).id, 101);
   assert.equal(calls.length, 2);
-  assert.equal(calls[0].url.searchParams.get('per_page'), '100');
-  assert.equal(calls[0].url.searchParams.get('type'), 'owner');
+  assert.equal(required(calls[0]).url.searchParams.get('per_page'), '100');
+  assert.equal(required(calls[0]).url.searchParams.get('type'), 'owner');
 });
 
 test('discovery includes forks and archives but excludes private and other owners', async () => {
@@ -134,8 +181,8 @@ test('discovery includes forks and archives but excludes private and other owner
   const result = await listPublicRepositories(client, OWNER);
 
   assert.deepEqual(result.map((repo) => repo.id), [1, 2]);
-  assert.equal(result[0].fork, true);
-  assert.equal(result[1].archived, true);
+  assert.equal(required(result[0]).fork, true);
+  assert.equal(required(result[1]).archived, true);
 });
 
 test('invalid owner and event-limit configuration fail before making requests', async () => {
@@ -190,7 +237,7 @@ test('snapshot maps About, website, counters and separate commit/release/public 
   });
 
   const snapshot = await collectSnapshot({ client, owner: OWNER, now: clock() });
-  const actual = snapshot.repositories[0];
+  const actual = required(snapshot.repositories[0]);
 
   assert.equal(snapshot.schema_version, 1);
   assert.equal(snapshot.repository_count, 1);
@@ -201,17 +248,17 @@ test('snapshot maps About, website, counters and separate commit/release/public 
   assert.equal(actual.updated_at, repo.updated_at);
   assert.equal(actual.pushed_at, repo.pushed_at);
   assert.deepEqual(actual.counts, { stars: 8, forks: 2, open_issues_and_pull_requests: 3 });
-  assert.equal(actual.activity.latest_commit.sha, commit.sha);
-  assert.equal(actual.activity.latest_commit.message, commit.commit.message);
-  assert.equal(actual.activity.latest_commit.committed_at, commit.commit.committer.date);
-  assert.equal(actual.activity.latest_release.tag_name, release.tag_name);
-  assert.equal(actual.activity.latest_release.published_at, release.published_at);
+  assert.equal(required(actual.activity.latest_commit).sha, commit.sha);
+  assert.equal(required(actual.activity.latest_commit).message, commit.commit.message);
+  assert.equal(required(actual.activity.latest_commit).committed_at, commit.commit.committer.date);
+  assert.equal(required(actual.activity.latest_release).tag_name, release.tag_name);
+  assert.equal(required(actual.activity.latest_release).published_at, release.published_at);
   assert.deepEqual(actual.activity.recent_events.map((event) => event.id), ['1001']);
-  assert.equal(actual.activity.recent_events[0].title, 'Fix import');
-  assert.equal(actual.activity.recent_events[0].action, 'opened');
-  assert.equal(actual.activity.recent_events[0].actor, 'contributor');
-  assert.equal(calls.find(({ url }) => url.pathname.endsWith('/commits')).url.searchParams.get('sha'), 'release/current');
-  assert.equal(calls.find(({ url }) => url.pathname.endsWith('/events')).url.searchParams.get('per_page'), '10');
+  assert.equal(required(actual.activity.recent_events[0]).title, 'Fix import');
+  assert.equal(required(actual.activity.recent_events[0]).action, 'opened');
+  assert.equal(required(actual.activity.recent_events[0]).actor, 'contributor');
+  assert.equal(required(calls.find(({ url }) => url.pathname.endsWith('/commits'))).url.searchParams.get('sha'), 'release/current');
+  assert.equal(required(calls.find(({ url }) => url.pathname.endsWith('/events'))).url.searchParams.get('per_page'), '10');
   assert.equal(JSON.stringify(snapshot).includes('not-needed@example.com'), false);
 });
 
@@ -219,7 +266,7 @@ test('empty repositories, absent releases and missing About/site remain explicit
   const { client } = emptyActivityClient([repository(1, { description: null, homepage: null })]);
 
   const snapshot = await collectSnapshot({ client, owner: OWNER, now: clock() });
-  const repo = snapshot.repositories[0];
+  const repo = required(snapshot.repositories[0]);
 
   assert.equal(repo.about, null);
   assert.equal(repo.website, null);
@@ -243,10 +290,11 @@ test('disabled repositories stay in the inventory with explicitly unavailable ac
   const snapshot = await collectSnapshot({ client, owner: OWNER, now: clock() });
 
   assert.equal(snapshot.repository_count, 1);
-  assert.equal(snapshot.repositories[0].activity.status, 'unavailable');
-  assert.equal(snapshot.repositories[0].activity.reason, 'repository_disabled');
-  assert.equal(snapshot.repositories[0].activity.latest_commit, null);
-  assert.deepEqual(snapshot.repositories[0].activity.recent_events, []);
+  const activity = required(snapshot.repositories[0]).activity;
+  assert.ok(activity.status === 'unavailable');
+  assert.equal(activity.reason, 'repository_disabled');
+  assert.equal(activity.latest_commit, null);
+  assert.deepEqual(activity.recent_events, []);
   assert.equal(calls.length, 1);
 });
 
@@ -256,7 +304,7 @@ test('zero event limit disables event requests without losing other metadata', a
   const snapshot = await collectSnapshot({ client, owner: OWNER, eventsPerRepo: 0, now: clock() });
 
   assert.equal(snapshot.repository_count, 1);
-  assert.deepEqual(snapshot.repositories[0].activity.recent_events, []);
+  assert.deepEqual(required(snapshot.repositories[0]).activity.recent_events, []);
   assert.equal(calls.some(({ url }) => url.pathname.endsWith('/events')), false);
 });
 
@@ -266,7 +314,7 @@ test('capture date uses the start in UTC even when collection finishes after mid
   const snapshot = await collectSnapshot({
     client: emptyActivityClient([]).client,
     owner: OWNER,
-    now: () => timestamps.shift(),
+    now: () => required(timestamps.shift()),
   });
 
   assert.equal(snapshot.snapshot_date, '2026-10-24');
@@ -287,13 +335,13 @@ test('same-day reruns preserve the first archive, update latest, and create a ne
   assert.equal(firstResult.historyCreated, true);
   assert.equal(secondResult.historyCreated, false);
   assert.equal(await readFile(firstResult.historyPath, 'utf8'), archiveBefore);
-  assert.deepEqual(JSON.parse(await readFile(secondResult.latestPath, 'utf8')), second);
+  assert.deepEqual(await loadSnapshot(secondResult.latestPath), second);
 
   const thirdResult = await writeSnapshot(third, { dataDir });
   assert.equal(thirdResult.historyCreated, true);
   assert.deepEqual((await readdir(join(dataDir, 'snapshots'))).sort(), ['2026-10-25.json', '2026-10-26.json']);
   assert.deepEqual((await readdir(dataDir)).sort(), ['diary', 'snapshot.json', 'snapshots']);
-  assert.deepEqual(JSON.parse(await readFile(thirdResult.latestPath, 'utf8')), third);
+  assert.deepEqual(await loadSnapshot(thirdResult.latestPath), third);
 });
 
 test('invalid existing archives stop a write before replacing the previous latest snapshot', async (t) => {
@@ -356,10 +404,10 @@ test('HTTP client retries timeout and transient service failure with bounded bac
   assert.equal(calls.length, 3);
   assert.equal(waits.length, 2);
   assert.ok(waits.every((ms) => ms > 0 && ms <= 60_000));
-  const headers = new Headers(calls[0].init.headers);
+  const headers = new Headers(required(calls[0]).init.headers);
   assert.equal(headers.get('authorization'), 'Bearer test-token');
   assert.equal(headers.get('x-github-api-version'), '2026-03-10');
-  assert.ok(calls[0].init.signal instanceof AbortSignal);
+  assert.ok(required(calls[0]).init.signal instanceof AbortSignal);
 });
 
 test('rate-limit retry honors Retry-After while ordinary forbidden/not-found responses fail immediately', async () => {
@@ -371,7 +419,7 @@ test('rate-limit retry honors Retry-After while ordinary forbidden/not-found res
     ));
     await client.get('/repos/Luis85/project-diary/events');
     assert.equal(calls.length, 2);
-    assert.ok(waits[0] >= 2_000 && waits[0] <= 60_000);
+    assert.ok(required(waits[0]) >= 2_000 && required(waits[0]) <= 60_000);
   }
 
   for (const status of [403, 404]) {
@@ -399,7 +447,7 @@ test('pagination refuses an external next URL before forwarding credentials', as
   await assert.rejects(client.paginate('/users/Luis85/repos'));
 
   assert.equal(calls.length, 1);
-  assert.equal(calls[0].url.origin, 'https://api.github.com');
+  assert.equal(required(calls[0]).url.origin, 'https://api.github.com');
 });
 
 test('pagination accepts relation parameters after other parameters and unquoted relations', async () => {
@@ -431,14 +479,14 @@ test('malformed, ambiguous, or repeated pagination links cannot silently publish
 
 test('missing or invalid API counters fail collection rather than being recorded as zero', async () => {
   for (const value of [undefined, null, -1, '5']) {
-    const { client } = emptyActivityClient([repository(1, { stargazers_count: value })]);
+    const { client } = emptyActivityClient([{ ...repository(1), stargazers_count: value }]);
     await assert.rejects(collectSnapshot({ client, owner: OWNER, now: clock() }), /counts.stars/);
   }
 });
 
 test('malformed API topics and flags fail instead of being coerced into misleading metadata', async () => {
   for (const overrides of [{ topics: 'typescript' }, { disabled: 'false' }, { archived: null }, { fork: 0 }]) {
-    const { client } = emptyActivityClient([repository(1, overrides)]);
+    const { client } = emptyActivityClient([{ ...repository(1), ...overrides }]);
     await assert.rejects(listPublicRepositories(client, OWNER), /GitHub returned an invalid/);
   }
 });

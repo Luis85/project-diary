@@ -1,10 +1,20 @@
 import { setTimeout as delay } from 'node:timers/promises';
+import type { FetchLike, GitHubClient, GitHubResponse } from './types.ts';
+
+export interface GitHubClientOptions {
+  token?: string;
+  fetchImpl?: FetchLike;
+  sleep?: (milliseconds: number) => Promise<void>;
+  now?: () => number;
+  maxAttempts?: number;
+  timeoutMs?: number;
+}
 
 export const API_VERSION = '2026-03-10';
 const API_ORIGIN = 'https://api.github.com';
 const MAX_RETRY_WAIT_MS = 60_000;
 
-function apiUrl(path) {
+function apiUrl(path: string): URL {
   const url = new URL(path, API_ORIGIN);
   // Pagination URLs are server input. Never forward the token to another host.
   if (url.origin !== API_ORIGIN || url.username || url.password || url.hash) {
@@ -13,9 +23,9 @@ function apiUrl(path) {
   return url;
 }
 
-function nextPage(linkHeader) {
+function nextPage(linkHeader: string | null | undefined): string | null {
   if (linkHeader === null || linkHeader === undefined || linkHeader.trim() === '') return null;
-  const parts = [];
+  const parts: string[] = [];
   let start = 0;
   let inUrl = false;
   let quoted = false;
@@ -35,23 +45,25 @@ function nextPage(linkHeader) {
   if (quoted || inUrl || escaped) throw new Error('Malformed GitHub pagination Link header.');
   parts.push(linkHeader.slice(start));
 
-  let next = null;
+  let next: string | null = null;
   for (const part of parts) {
     const match = part.match(/^\s*<([^<>]+)>(.*)$/s);
-    if (!match) throw new Error('Malformed GitHub pagination Link header.');
+    if (!match || match[1] === undefined || match[2] === undefined) throw new Error('Malformed GitHub pagination Link header.');
     const parameters = match[2].trimEnd();
     const pattern = /;\s*([a-z][a-z\d_-]*)\s*=\s*(?:"((?:[^"\\]|\\.)*)"|([^;\s]+))\s*/giy;
     let offset = 0;
-    let relation;
+    let relation: string | undefined;
     while (offset < parameters.length) {
       while (/\s/.test(parameters[offset] ?? '') && offset < parameters.length) offset += 1;
       pattern.lastIndex = offset;
       const parameter = pattern.exec(parameters);
-      if (!parameter) throw new Error('Malformed GitHub pagination Link parameters.');
+      if (!parameter || parameter[1] === undefined) throw new Error('Malformed GitHub pagination Link parameters.');
       offset = pattern.lastIndex;
       if (parameter[1].toLowerCase() === 'rel') {
         if (relation !== undefined) throw new Error('Duplicate GitHub pagination relation.');
-        relation = (parameter[2] ?? parameter[3]).replace(/\\(.)/g, '$1');
+        const value = parameter[2] ?? parameter[3];
+        if (value === undefined) throw new Error('Missing GitHub pagination relation.');
+        relation = value.replace(/\\(.)/g, '$1');
       }
     }
     if (!relation) throw new Error('GitHub pagination link is missing its relation.');
@@ -63,7 +75,7 @@ function nextPage(linkHeader) {
   return next;
 }
 
-function retryWait(response, attempt, now, isRateLimit) {
+function retryWait(response: Response, attempt: number, now: () => number, isRateLimit: boolean): number {
   const retryAfter = response.headers.get('retry-after');
   if (retryAfter !== null) {
     const seconds = Number(retryAfter);
@@ -85,23 +97,24 @@ export function createGitHubClient({
   now = Date.now,
   maxAttempts = 3,
   timeoutMs = 30_000,
-} = {}) {
+} : GitHubClientOptions = {}): GitHubClient {
   if (!Number.isInteger(maxAttempts) || maxAttempts < 1 || maxAttempts > 5) {
     throw new Error('maxAttempts must be an integer from 1 to 5.');
   }
-  const headers = {
+  if (!Number.isSafeInteger(timeoutMs) || timeoutMs < 1) throw new Error('timeoutMs must be a positive integer.');
+  const headers: Record<string, string> = {
     Accept: 'application/vnd.github+json',
     'X-GitHub-Api-Version': API_VERSION,
     'User-Agent': 'project-diary-snapshot',
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
   };
 
-  async function get(path, { allowedStatuses = [] } = {}) {
+  async function get(path: string, { allowedStatuses = [] }: { allowedStatuses?: readonly number[] } = {}): Promise<GitHubResponse> {
     const url = apiUrl(path);
     const label = `${url.pathname}${url.search}`;
     for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
-      let response;
-      let body;
+      let response: Response;
+      let body: string;
       try {
         response = await fetchImpl(url.href, {
           headers,
@@ -117,7 +130,7 @@ export function createGitHubClient({
         continue;
       }
 
-      let data;
+      let data: unknown;
       try {
         data = body ? JSON.parse(body) : null;
       } catch {
@@ -132,7 +145,7 @@ export function createGitHubClient({
       const isRateLimit = response.status === 429 || (response.status === 403 && (
         response.headers.has('retry-after') ||
         response.headers.get('x-ratelimit-remaining') === '0' ||
-        /rate limit|secondary rate|abuse/i.test(data?.message ?? '')
+        /rate limit|secondary rate|abuse/i.test(typeof data === 'object' && data !== null && 'message' in data && typeof data.message === 'string' ? data.message : '')
       ));
       const retryable = isRateLimit || response.status >= 500;
       const error = new Error(`GitHub HTTP ${response.status}: ${label}${isRateLimit ? ' (rate limit)' : ''}.`);
@@ -146,10 +159,10 @@ export function createGitHubClient({
     throw new Error('GitHub request exhausted its retry budget.');
   }
 
-  async function paginate(path) {
-    const result = [];
-    const visited = new Set();
-    let next = path;
+  async function paginate(path: string): Promise<unknown[]> {
+    const result: unknown[] = [];
+    const visited = new Set<string>();
+    let next: string | null = path;
     while (next) {
       const url = apiUrl(next).href;
       if (visited.has(url)) throw new Error('GitHub returned a repeated pagination URL.');

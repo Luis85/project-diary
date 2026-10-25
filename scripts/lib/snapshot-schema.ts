@@ -1,49 +1,54 @@
+import type { SnapshotV1 } from './types.ts';
+
 /** Validation shared by collection, historical comparisons, and persistence. */
-export function assertOwner(owner) {
+export function assertOwner(owner: unknown): asserts owner is string {
   if (typeof owner !== 'string' || !/^[a-z\d](?:[a-z\d-]{0,37}[a-z\d])?$/i.test(owner)) {
     throw new Error('GITHUB_OWNER must be a GitHub username (1–39 letters, digits, or hyphens).');
   }
 }
 
-export function assertEventLimit(value) {
-  if (!Number.isInteger(value) || value < 0 || value > 100) {
+export function assertEventLimit(value: unknown): asserts value is number {
+  if (typeof value !== 'number' || !Number.isInteger(value) || value < 0 || value > 100) {
     throw new Error('SNAPSHOT_EVENTS_PER_REPO must be an integer from 0 to 100.');
   }
 }
 
-function fail(field) {
+function fail(field: string): never {
   throw new Error(`Invalid snapshot field: ${field}.`);
 }
 
-function text(value, field, nullable = false) {
+function text(value: unknown, field: string, nullable = false): asserts value is string | null {
   if (nullable && value === null) return;
   if (typeof value !== 'string') fail(field);
 }
 
-function counter(value, field) {
-  if (!Number.isSafeInteger(value) || value < 0) fail(field);
+function counter(value: unknown, field: string): asserts value is number {
+  if (typeof value !== 'number' || !Number.isSafeInteger(value) || value < 0) fail(field);
 }
 
-function object(value, field) {
+function object(value: unknown, field: string): asserts value is Record<string, unknown> {
   if (!value || typeof value !== 'object' || Array.isArray(value)) fail(field);
 }
 
-export function assertDate(date, field = 'snapshot_date') {
+export function assertDate(date: unknown, field = 'snapshot_date'): asserts date is string {
   if (typeof date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(date)) fail(field);
   const parsed = new Date(`${date}T00:00:00.000Z`);
   if (!Number.isFinite(parsed.getTime()) || parsed.toISOString().slice(0, 10) !== date) fail(field);
 }
 
-function timestamp(value, field, nullable = false) {
+function timestamp(value: unknown, field: string, nullable?: false): asserts value is string;
+function timestamp(value: unknown, field: string, nullable: true): asserts value is string | null;
+function timestamp(value: unknown, field: string, nullable = false): asserts value is string | null {
   if (nullable && value === null) return;
   if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?Z$/.test(value)) fail(field);
   const parsed = new Date(value);
   if (!Number.isFinite(parsed.getTime()) || parsed.toISOString().slice(0, 19) !== value.slice(0, 19)) fail(field);
 }
 
-function activity(value, repo, maxEvents, field) {
+function activity(value: unknown, repo: Record<string, unknown>, maxEvents: number, field: string): void {
   object(value, field);
-  if (!['available', 'unavailable'].includes(value.status)) fail(`${field}.status`);
+  if (value.status !== 'available' && value.status !== 'unavailable') fail(`${field}.status`);
+  if (repo.disabled === true && value.status !== 'unavailable') fail(`${field}.disabled repository`);
   if (!Array.isArray(value.recent_events) || value.recent_events.length > maxEvents) fail(`${field}.recent_events`);
   if (value.status === 'unavailable' && (
     !repo.disabled || value.reason !== 'repository_disabled' || value.latest_commit !== null ||
@@ -63,7 +68,7 @@ function activity(value, repo, maxEvents, field) {
   if (value.latest_release !== null) {
     const release = value.latest_release;
     object(release, `${field}.latest_release`);
-    if (!Number.isSafeInteger(release.id) || release.id < 1) fail(`${field}.latest_release.id`);
+    if (typeof release.id !== 'number' || !Number.isSafeInteger(release.id) || release.id < 1) fail(`${field}.latest_release.id`);
     if (typeof release.tag_name !== 'string' || !release.tag_name) fail(`${field}.latest_release.tag_name`);
     text(release.name, `${field}.latest_release.name`, true);
     text(release.url, `${field}.latest_release.url`, true);
@@ -84,7 +89,7 @@ function activity(value, repo, maxEvents, field) {
 }
 
 /** Reject malformed or incompatible history before deriving metrics or changing files. */
-export function assertSnapshot(snapshot) {
+export function assertSnapshot(snapshot: unknown): asserts snapshot is SnapshotV1 {
   object(snapshot, 'snapshot');
   if (snapshot.schema_version !== 1) fail('schema_version');
   assertOwner(snapshot.owner);
@@ -97,18 +102,21 @@ export function assertSnapshot(snapshot) {
   if (!Array.isArray(snapshot.repositories) || snapshot.repository_count !== snapshot.repositories.length) fail('repositories');
   object(snapshot.source, 'source');
   if (snapshot.source.provider !== 'github' || snapshot.source.repository_scope !== 'public_owned') fail('source scope');
+  assertDate(snapshot.source.api_version, 'source.api_version');
+  if (snapshot.source.include_forks !== true || snapshot.source.include_archived !== true ||
+      snapshot.source.events_are_complete_history !== false) fail('source options');
   assertEventLimit(snapshot.source.events_per_repository);
 
-  const ids = new Set();
-  const names = new Set();
+  const ids = new Set<number>();
+  const names = new Set<string>();
   for (const repo of snapshot.repositories) {
     object(repo, 'repositories[]');
     const field = `repositories[${repo.id ?? '?'}]`;
-    if (!Number.isSafeInteger(repo.id) || repo.id < 1 || ids.has(repo.id)) fail(`${field}.id`);
+    if (typeof repo.id !== 'number' || !Number.isSafeInteger(repo.id) || repo.id < 1 || ids.has(repo.id)) fail(`${field}.id`);
     ids.add(repo.id);
     assertOwner(repo.owner);
     if (repo.owner.toLowerCase() !== snapshot.owner.toLowerCase() || repo.visibility !== 'public') fail(`${field}.scope`);
-    if (typeof repo.name !== 'string' || !repo.name || repo.name.includes('/') ||
+    if (typeof repo.name !== 'string' || !repo.name || repo.name.includes('/') || typeof repo.full_name !== 'string' ||
         repo.full_name !== `${repo.owner}/${repo.name}` || names.has(repo.full_name.toLowerCase())) fail(`${field}.name`);
     names.add(repo.full_name.toLowerCase());
     if (typeof repo.url !== 'string' || !repo.url) fail(`${field}.url`);

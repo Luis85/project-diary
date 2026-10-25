@@ -1,23 +1,31 @@
-name: Test project diary
+name: Check project diary
 
 on:
   pull_request:
     paths:
-      - '.github/workflows/**'
+      - '.github/**'
+      - '.node-version'
       - 'scripts/**'
       - 'test/**'
       - 'tests/**'
       - 'package.json'
       - 'package-lock.json'
+      - 'tsconfig.json'
   push:
     branches: [main]
     paths:
-      - '.github/workflows/**'
+      - '.github/**'
+      - '.node-version'
       - 'scripts/**'
       - 'test/**'
       - 'tests/**'
       - 'package.json'
       - 'package-lock.json'
+      - 'tsconfig.json'
+  schedule:
+    # Detect toolchain drift even when source files have not changed.
+    - cron: '37 8 * * 1'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -28,8 +36,8 @@ concurrency:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -39,8 +47,12 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: '24'
-          package-manager-cache: false
+          node-version-file: '.node-version'
+          cache: npm
+          cache-dependency-path: 'package-lock.json'
 
-      - name: Run offline tests
-        run: npm test
+      - name: Install locked development dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Type-check and run offline tests
+        run: npm run check
