@@ -1,0 +1,3391 @@
+{
+  "schema_version": 1,
+  "snapshot_date": "2026-10-25",
+  "captured_at": "2026-10-25T18:25:23.899Z",
+  "completed_at": "2026-10-25T18:25:57.724Z",
+  "owner": "Luis85",
+  "source": {
+    "provider": "github",
+    "api_version": "2026-03-10",
+    "repository_scope": "public_owned",
+    "include_forks": true,
+    "include_archived": true,
+    "events_per_repository": 10,
+    "events_are_complete_history": false
+  },
+  "repository_count": 40,
+  "repositories": [
+    {
+      "id": 1043167225,
+      "node_id": "R_kgDOPi13-Q",
+      "name": "Obsidian-Plugin-Development-Starter-Kit",
+      "full_name": "Luis85/Obsidian-Plugin-Development-Starter-Kit",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/Obsidian-Plugin-Development-Starter-Kit",
+      "about": "One Issue at a time.",
+      "website": null,
+      "topics": [],
+      "language": null,
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2025-08-23T09:26:30Z",
+      "updated_at": "2026-04-19T16:33:17Z",
+      "pushed_at": "2026-04-19T16:23:16Z",
+      "size_kb": 32,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 27
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "d8894b0f659a328f37102b38e01a9e4ba4f58e46",
+          "url": "https://github.com/Luis85/Obsidian-Plugin-Development-Starter-Kit/commit/d8894b0f659a328f37102b38e01a9e4ba4f58e46",
+          "message": "Merge pull request #19 from Luis85/15-solutionstatement",
+          "author": "Luis85",
+          "authored_at": "2026-04-19T16:23:16Z",
+          "committed_at": "2026-04-19T16:23:16Z"
+        },
+        "latest_release": null,
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1408825030,
+      "node_id": "R_kgDOU_j2xg",
+      "name": "agent-cli",
+      "full_name": "Luis85/agent-cli",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/agent-cli",
+      "about": null,
+      "website": null,
+      "topics": [],
+      "language": "TypeScript",
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-10-07T13:24:21Z",
+      "updated_at": "2026-10-18T12:51:03Z",
+      "pushed_at": "2026-10-18T12:50:58Z",
+      "size_kb": 14969,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 0
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "df0057585981efe3ee31694e0fafe1a11115e9bc",
+          "url": "https://github.com/Luis85/agent-cli/commit/df0057585981efe3ee31694e0fafe1a11115e9bc",
+          "message": "Make The Forge easier and safer for AI agents: review-driven hardening and polish (#31)\n\nReview-driven improvement pass over src/the-forge: safer invocation and mutations, bounded reads, plugin security and contracts, structured warnings, plugin-owned error codes, metadata-driven localization, declared positional arguments with exact schema bounds, portable path checks, agent-oriented docs and skills, and CI fixes for Windows and Chromium.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Fksxza9YJ8STigBYraWCuu",
+          "author": "Luis85",
+          "authored_at": "2026-10-18T12:50:55Z",
+          "committed_at": "2026-10-18T12:50:55Z"
+        },
+        "latest_release": {
+          "id": 410840630,
+          "tag_name": "v0.1.0",
+          "name": "The Forge 0.1.0",
+          "url": "https://github.com/Luis85/agent-cli/releases/tag/v0.1.0",
+          "created_at": "2026-10-12T16:59:11Z",
+          "published_at": "2026-10-12T17:14:24Z"
+        },
+        "recent_events": [
+          {
+            "id": "24616068890",
+            "type": "DeleteEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-18T12:50:59Z",
+            "action": null,
+            "ref": "claude/fervent-davinci-we8qnn",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/agent-cli",
+            "title": null
+          },
+          {
+            "id": "24607396228",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-18T08:48:47Z",
+            "action": null,
+            "ref": "refs/heads/claude/fervent-davinci-we8qnn",
+            "ref_type": null,
+            "head": "6113f645376717d7acf564cd3052543fc26d9f3d",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/agent-cli",
+            "title": null
+          },
+          {
+            "id": "24585547433",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-18T08:36:22Z",
+            "action": null,
+            "ref": "refs/heads/claude/fervent-davinci-we8qnn",
+            "ref_type": null,
+            "head": "06eaa8fa8473892389a357c3fe566a7a95795e78",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/agent-cli",
+            "title": null
+          },
+          {
+            "id": "24545569142",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-17T22:07:59Z",
+            "action": null,
+            "ref": "refs/heads/claude/fervent-davinci-we8qnn",
+            "ref_type": null,
+            "head": "5c22dafea8c4e51e337fdb518a960ee64fdae5a7",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/agent-cli",
+            "title": null
+          },
+          {
+            "id": "24495564427",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-18T12:50:57Z",
+            "action": null,
+            "ref": "refs/heads/main",
+            "ref_type": null,
+            "head": "df0057585981efe3ee31694e0fafe1a11115e9bc",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/agent-cli",
+            "title": null
+          },
+          {
+            "id": "24480243988",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-18T08:58:36Z",
+            "action": null,
+            "ref": "refs/heads/claude/fervent-davinci-we8qnn",
+            "ref_type": null,
+            "head": "5aa2d8f8d072a7c1a4c867f7cdbb2bd1537f6926",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/agent-cli",
+            "title": null
+          },
+          {
+            "id": "24465365032",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-18T11:10:09Z",
+            "action": null,
+            "ref": "refs/heads/claude/fervent-davinci-we8qnn",
+            "ref_type": null,
+            "head": "c7d0d32434b13f94448dffffb42ff80ef8540260",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/agent-cli",
+            "title": null
+          },
+          {
+            "id": "24452878278",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-17T23:18:37Z",
+            "action": null,
+            "ref": "refs/heads/claude/fervent-davinci-we8qnn",
+            "ref_type": null,
+            "head": "17c2905cbcb49118a4eafc544eb2afb4133406e9",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/agent-cli",
+            "title": null
+          },
+          {
+            "id": "24447018615",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-17T22:41:16Z",
+            "action": null,
+            "ref": "refs/heads/claude/fervent-davinci-we8qnn",
+            "ref_type": null,
+            "head": "de2b8cfca00f1b47ccc56a0636c9de392488f57d",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/agent-cli",
+            "title": null
+          },
+          {
+            "id": "24443679659",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-17T21:48:18Z",
+            "action": null,
+            "ref": "refs/heads/claude/fervent-davinci-we8qnn",
+            "ref_type": null,
+            "head": "9614afb874c48ad2660a578ee3f7297e49181a50",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/agent-cli",
+            "title": null
+          }
+        ]
+      }
+    },
+    {
+      "id": 1221931328,
+      "node_id": "R_kgDOSNUxQA",
+      "name": "agentic-workflow",
+      "full_name": "Luis85/agentic-workflow",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/agentic-workflow",
+      "about": "The Specorator Workflow bundled in a Claude Plugin - spec-driven, agentic development workflow. Specs first, code second.",
+      "website": "https://luis85.github.io/agentic-workflow/",
+      "topics": [
+        "agentic-development",
+        "ai-workflow",
+        "claude-ai",
+        "claude-plugin",
+        "spec-driven-development",
+        "workflow-template"
+      ],
+      "language": "HTML",
+      "default_branch": "develop",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-04-26T21:29:00Z",
+      "updated_at": "2026-05-17T13:50:47Z",
+      "pushed_at": "2026-08-10T06:36:35Z",
+      "size_kb": 15911,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 46
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "dd9fcab438a42381dc947ded452ff7880c34df46",
+          "url": "https://github.com/Luis85/agentic-workflow/commit/dd9fcab438a42381dc947ded452ff7880c34df46",
+          "message": "feat(experiments): rule engine POC for OODA Decide quadrant (#525)\n\n* feat(experiments): rule engine POC for OODA Decide quadrant\n\nTerminal-only TypeScript POC of the \"LLM extracts, rules decide\" pattern\nfrom the AI fact-checking community: the LLM is constrained to producing\nstructured flags from raw signals, and a deterministic rule engine maps\nthose flags to a verdict tier with a fully replayable audit trail.\n\nLives under experiments/rule-engine-poc/ as a sandbox (not formal Stage\n1-7) and demonstrates the pattern against the repo's own quality\nframework. Each rule encodes a Definition of Done item from\ndocs/quality-framework.md.\n\nWhat's included:\n- src/ - hand-rolled engine (~250 LOC): types, hash, engine, loader,\n  cli, html-report. Pure functions; severity-first verdict; canonical\n  JSON + SHA-256 provenance hashes for replay.\n- rules/quality-gates.yaml - DoD-as-rules example set.\n- fixtures/*.json - 5 mock Orient-quadrant extractions covering ready,\n  blocked, and needs-attention verdicts.\n- test/ - 24 passing tests (vitest), including dedicated reproducibility\n  suite (strategist-recommended North Star: byte-identical replay).\n- HTML reporter - self-contained, inline CSS, no JS, no external assets.\n- docs/ - architecture, DSL reference, audit trail + EU AI Act mapping,\n  extension guide, OODA integration.\n- research/ - five-angle research wave (technical landscape, regulatory\n  auditability, positioning/JTBD, design alternatives, risks/critique).\n\n* fix(rule-engine-poc): tighten loader validation (Codex P1 + P2)\n\n- Validate that then.verdict is one of the four known tiers; previously\n  a typo like 'blokced' would load successfully and silently degrade\n  the rule into a no-op via tally[<unknown-key>] (#525 P1).\n- Validate that when.all / when.any / when.not are arrays at load time;\n  previously 'any: true' would load and crash at evaluation with\n  TypeError on .map (#525 P2).\n- Export VERDICTS as a runtime constant from types.ts so the schema\n  check has one source of truth alongside the type.\n- Three new loader tests cover the two failure modes plus a typo case.\n\n* fix(rule-engine-poc): exists-AND and empty-group hardening (Codex P1+P2)\n\n- engine: 'exists' now participates in the AND-chain instead of\n  short-circuiting, so 'exists: true' combined with 'eq'/'ne'/'gt'/'lt'/\n  'in'/'regex' correctly requires every operator to match (#525 P2).\n  'exists: false' still tolerates flag absence without surfacing the\n  'flag missing' reason; this is the only short-circuit retained.\n- loader: empty 'when.all' / 'when.any' / 'when.not' arrays are now\n  rejected at load time. Previously 'any: []' was vacuously satisfied\n  by the length>0 guard in evaluateWhen, allowing a typo to fire a\n  blocking rule unintentionally (#525 P1).\n- ENGINE_VERSION bumped 0.1.0 -> 0.2.0 because the exists+value-op\n  interaction is a semantic change. Per docs/extending.md, a version\n  bump is the auditor's signal that prior verdicts may not replay.\n- Six new tests: empty when.any / when.all rejection, four exists-AND\n  cases including exists:false standalone.\n\n* fix(rule-engine-poc): condition-level validation (Codex P1+P2 round 3)\n\n- loader: each condition must declare at least one supported operator.\n  Previously a typo like { flag: 'x', eqq: true } would load and then\n  always-match at runtime, silently flipping verdicts (#525 round 3 P2).\n- loader: 'exists: false' combined with value operators is rejected at\n  load time. The combination has no meaningful semantics — an absent\n  flag has no value for eq/ne/gt/lt/in/regex to apply to (#525 round 3 P1).\n- loader: condition objects without a 'flag' string are rejected.\n- engine: code comment clarified to reflect the now-enforced invariant\n  that exists:false is only valid alone.\n- Three new loader tests cover the three rejection paths.\n\n* fix(rule-engine-poc): loader hardening (Codex round 4)\n\n- Reject 'then.weight' values that are <=0, infinite, or NaN. A\n  'blocked' rule with weight 0 would contribute nothing to the tally\n  and silently bypass the gate (#525 round 4 P1).\n- Reject non-array 'in' operators at load time. Previously a typo like\n  'in: foo' would load and crash at evaluation when .some() is called\n  on a non-array (#525 round 4 P2).\n- Validate regex patterns at load time. Previously a malformed regex\n  like 'regex: \"[\"' would load and abort the entire decision run with\n  a SyntaxError when new RegExp() throws during evaluation (#525 round\n  4 P2).\n- Updated existing 'missing then.weight' test to match the new\n  'invalid then.weight' error message.\n- Four new loader tests cover the three rejection paths plus a\n  negative-weight case.\n\n* feat(rule-engine-poc): plan/report workflow with config-driven targets\n\nEnd-to-end flow now drives the POC: user adds content to the project,\nruns npm run plan to generate AI extraction prompts, pastes a prompt\ninto Claude/ChatGPT, saves the JSON to extractions/, runs npm run\nreport to render HTML and open it in the browser.\n\nArchitecture:\n- rule-engine.config.json declares targets, each with id + label +\n  paths (files or directories, walked deterministically).\n- rules/flag-schema.yaml documents every flag the rule set may\n  reference (type + description + example); the contract between AI\n  extractor and engine.\n- src/plan.ts walks target paths, collects file contents with 8 KB\n  truncation per file, bundles role + schema + rules + source into\n  a single prompt per target.\n- src/report.ts loads extractions per target, runs the engine, renders\n  the existing HTML reporter, best-effort opens the first report in\n  the OS default browser. Exit 0/1/2 = ok/blocked/missing.\n- Prompt-builder follows analyst research (research/10): XML-tag\n  structure with markdown redundancy, explicit forbidden-fields list\n  (verdict, assessment, conclusion, summary, recommendation,\n  rationale, analysis), open <output> tag as a forcing function.\n- Original single-shot src/cli.ts preserved as a fixture-testing\n  escape hatch.\n\n20 new tests cover the new modules (config, flag-schema, context,\nprompt-builder). Suite total: 60 tests, all passing.\n\nResearch wave 2 (5 background agents) wrote 5 new artifacts under\nresearch/ covering independent review, workflow failure modes,\nworkflow architecture, UX friction, and extraction prompt patterns.\n\nPOC stays sandbox-scoped under experiments/rule-engine-poc/. No wiring\ninto specs/, /spec:status, plugins/, or the main repo.\n\n* fix(rule-engine-poc): honest browser-open + stricter operator types (Codex round 5)\n\n- open-browser: openInBrowser is now async and waits briefly for the\n  spawn or error event before resolving. Previously it returned true\n  immediately, so report.ts printed \"opened in browser\" even when\n  xdg-open was missing in a headless container — misleading users\n  during the primary plan->report flow (#525 round 5 P2).\n- report.ts: awaits openInBrowser and prints the correct status line.\n  Verified in this sandbox: now prints \"could not spawn a browser;\n  open manually: file://...\" when no browser is installed.\n- loader: 'exists' operator must be a boolean. Previously a typo like\n  'exists: \"false\"' would load and then silently never match because\n  evaluateCondition compares boolean to string (#525 round 5 P2).\n- loader: 'gt' and 'lt' operators must be numbers at load time, for\n  consistency with the other type checks (engine already failed\n  matching at runtime, but failing at load is preferred).\n- Two new loader tests cover the exists-boolean and gt-number paths.\n\n* fix(rule-engine-poc): three platform/format hardening fixes (Codex round 6)\n\n- open-browser: spawn cmd /c start \"\" on Windows. 'start' is a cmd.exe\n  built-in, not a standalone exe, so spawn('start', ...) raised ENOENT\n  and browser open always failed for Windows users (#525 round 6 P2).\n- report: validate the parsed extraction is a plain object before\n  passing to evaluate. Previously valid JSON like null / [] / \"text\"\n  would crash inside hasOwnProperty.call on null instead of producing\n  a controlled error (#525 round 6 P2).\n- prompt-builder: pick a fence length longer than any backtick run in\n  the source content. Many repo markdown files contain ``` blocks\n  which would prematurely close the prompt's outer fence and corrupt\n  the AI extraction prompt (#525 round 6 P2).\n- New pickFence helper is exported and unit-tested; prompt-builder\n  test asserts a 5-tick fence is emitted for content with a 4-tick\n  run.\n\n* feat(rule-engine-poc): validate gate between plan and report\n\nCloses the schema-miss laundering failure mode flagged by the\ncritic (research/07) and analyst (research/10): bad LLM output now\nfails loudly instead of becoming a reproducible-looking verdict.\n\nWhat's new:\n- src/validate.ts: validateExtraction(flags, schema, options) returns\n  errors + warnings. Checks: forbidden fields (verdict, assessment,\n  conclusion, summary, recommendation, rationale, analysis), unknown\n  fields (warning), type mismatches (boolean/number/string/string[]),\n  non-finite numbers, disallowed_values violations, prompt-hash\n  mismatch (when expectedPromptHash provided — wired up in the next\n  commit).\n- src/validate-cli.ts: 'npm run validate' surfaces issues per target,\n  exits 0 (clean) / 1 (errors) / 2 (missing/unparseable extraction).\n- src/report.ts: validates each extraction before evaluating. Refuses\n  to render when validation fails. --skip-validate flag for escape.\n- prompt-builder imports FORBIDDEN_FIELDS from validate.ts so the\n  forbidden list lives in exactly one place.\n- 12 new validate tests; suite total 77 passing.\n\nVerified end-to-end: a polluted extraction with verdict+type-mismatch\n+unknown-flag is caught by both validate and report.\n\n* feat(rule-engine-poc): prompt-extraction binding (stale-extraction guard)\n\nCloses the stale-extraction failure mode flagged by the critic\n(research/07): users edit source files between plan and report and\nthe old JSON still renders a confident verdict. The report now\nrefuses extractions produced against a different prompt.\n\nWhat's new:\n- src/prompt-hash.ts: computePromptHash hashes the LOAD-BEARING\n  inputs (target id, per-file sha, rule hashes, schema content),\n  not the rendered prompt text. Cosmetic edits to the prompt\n  template don't invalidate extractions; real source changes do.\n- src/plan.ts: emits sidecar prompts/<id>.hash.txt and embeds the\n  hash into the prompt as (a) a top-of-file HTML comment, (b) an\n  explicit rule asking the LLM to copy it into __prompt_hash, and\n  (c) the response template's first key.\n- src/validate.ts: enforces expectedPromptHash when provided.\n  Surfaces missing-prompt-hash and stale-extraction error codes\n  with re-run instructions.\n- src/report.ts + src/validate-cli.ts: read the sidecar hash if it\n  exists; absence falls back to the pre-binding behaviour for\n  backwards-compat with fixtures.\n- 6 new prompt-hash tests; suite total 83 passing.\n\nEnd-to-end verified in this sandbox:\n  matching hash    -> exit 0 (ready-to-progress)\n  stale hash       -> exit 2 with explicit error\n  missing field    -> exit 2 with explicit error\n\n* fix(rule-engine-poc): polish bundle (Codex round 7 + reviewer S2/S3)\n\nCloses a cluster of small findings from Codex round 7 (cli, context)\nand reviewer S2/S3 (engine, loader audit-trail honesty):\n\n- cli.ts: validate JSON root is a plain object before evaluate. Same\n  guard as report.ts; previously valid-JSON-but-not-object input would\n  crash inside hasOwnProperty.call (#525 round 7 P2).\n- context.ts: use lstat instead of stat and skip symlinks entirely.\n  Previously a symlink cycle (a/sub/loop -> a/) would recurse until\n  stack overflow during plan (#525 round 7 P2).\n- engine.ts evaluateCondition: gt/lt against a non-number and regex\n  against a non-string now set an explicit reason ('expected number\n  for gt, got string') so the audit trail explains *why* the\n  condition didn't match. Reviewer S2 — previously these set\n  matched=false with no reason.\n- engine.ts evaluateWhen: when.not against a missing flag no longer\n  silently fires. The inner condition's 'flag missing in extraction'\n  reason is preserved through the not clause; the rule fails to\n  match rather than inverting absence into success. Reviewer S2.\n- loader.ts: duplicate rule ids in a single rule file are rejected\n  at load time. Previously a second rule with the same id loaded\n  silently and the engine evaluated it independently. Reviewer S3.\n- Five new tests: gt-non-number reason, regex-non-string reason,\n  not-missing flag, duplicate ids, symlink cycle handling.\n\nSuite: 88/88 passing.\n\n* docs(rule-engine-poc): research wave 3 strategist re-evaluation (research/13)\n\n* fix(rule-engine-poc): recompute prompt hash on report (research/14)\n\nCloses the 'paste the sidecar to bypass staleness' cheat the critic\nflagged as the highest-leverage fix in the post-validate workflow.\n\nPreviously: report.ts and validate-cli.ts read prompts/<id>.hash.txt\n(plain text) and trusted its value. An operator under deadline\npressure could open the sidecar, copy the hash into the extraction's\n__prompt_hash field, and silently re-render a stale verdict.\n\nNow: report and validate-cli recompute the hash from current source\nfiles + rules + schema (same code path as plan.ts). The sidecar still\ngets written for diagnostic / debugging purposes, but it is never the\nauthority for whether an extraction is stale. A real change to any\nsource file invalidates the extraction automatically.\n\nSmoke-tested in this sandbox:\n- Source unchanged, paste-the-sidecar cheat -> exit 0 (correct;\n  extraction is still valid against current source).\n- Source mutated, same paste-the-sidecar cheat -> stale-extraction\n  error with both the pasted hash and the recomputed hash printed.\n\n* docs(rule-engine-poc): research wave 3 — critic, sre, user-researcher\n\n- research/14 (critic): three new failure modes the validate gate\n  opened; ranked --skip-validate, sidecar-paste cheat, and\n  reproducibility theatre. Highest-leverage fix already landed in\n  the previous commit.\n- research/15 (sre): CI integration sketch with concrete cost math\n  (~$0.56/target, $1,700/month at 20 PRs/day on Opus 4.7) and a\n  Day-1/30/90 operational milestones path.\n- research/16 (user-researcher): 5-segment JTBD switch interview\n  plan with sequencing (mine demand signal first, S1 indie devs\n  next, fail fast before S2-S5), full sample script, RAT integration.\n\n* docs(rule-engine-poc): research wave 3 reviewer re-review + typo fixes\n\n- research/12 (reviewer): independent re-review at HEAD. Verdict\n  pass-with-findings. S2-1 (docs drift: workflow.md still lists\n  validate gate as 'not yet here' despite shipping), S2-2 (sidecar\n  deletion bypasses prompt-hash binding entirely), S2-3 (--skip-\n  validate is undocumented), and an S3 cluster on test count drift,\n  HTML provenance, and type-mismatch error messages.\n- Fix two typos caught by CI spell check (typos v1.46.0):\n  research/16 'pre-empted' -> 'confirmed' (reads more clearly anyway),\n  research/12 'ci_passsing' -> 'ci_passingx' (illustrative typo\n  recast to avoid typos-tool false positive).\n\n* docs(rule-engine-poc): consolidated architecture doc with mermaid diagrams\n\nReplaces the engine-internals-focused architecture.md with a\ncomprehensive system view covering:\n- System overview (component flowchart)\n- User flow (sequence diagram across plan/AI/validate/report)\n- Data flow (annotated with data shapes at each seam)\n- Engine internals (evaluate algorithm + per-condition + severity picker)\n- Validate gate + prompt-hash binding (sequence)\n- OODA mapping (Observe/Orient/Decide/Act with stochasticity boundary)\n- Module dependency graph (16 src/ modules)\n- Why these shapes (design choices + research refs)\n\nSeven Mermaid diagrams. docs/README.md now points to architecture.md\nas the start-here entry.\n\n* fix(rule-engine-poc): slug + UTF-8 truncation hardening (Codex round 8)\n\n- config.ts: target ids must match /^[A-Za-z0-9][A-Za-z0-9_-]*$/.\n  Previously a target id like '../escape' or 'foo/bar' was accepted and\n  later interpolated into prompts/<id>.md, extractions/<id>.json,\n  reports/<id>.html — at best ENOENT, at worst write outside the\n  workspace (#525 round 8 P2).\n- context.ts: extract truncateToBytes() that walks back to a UTF-8\n  codepoint boundary. Previously slice(0, maxBytes) counted UTF-16\n  code units, so CJK / emoji-heavy markdown could emit prompt blocks\n  4x the advertised 8 KB cap (#525 round 8 P2).\n- 7 new tests cover the three slug rejection paths and the multibyte\n  truncation invariant.\n\nSuite: 95/95 passing.\n\n* feat(rule-engine-poc): RALPH-loop polish (agents A+B+C)\n\nThree implementer subagents ran in parallel; each verified with\nnpm test + tsc + typos before reporting. 98/98 tests passing.\n\nAgent A — Safety: sidecar refusal + --skip-validate warning\n- report.ts + validate-cli.ts: prompt-hash binding now triggers on\n  prompts/<id>.md (the prompt file) existing, NOT on the sidecar\n  prompts/<id>.hash.txt. Deleting the sidecar can no longer bypass\n  the staleness check (reviewer research/12 S2-2).\n- report.ts: --skip-validate now prints a loud stderr warning per\n  target ('validation gate disabled. This is for debugging only.')\n  closing reviewer S2-3 silent-flag finding.\n\nAgent B — validate.ts polish\n- Type-mismatch errors now include the observed value via\n  formatObserved() with an 80-char cap and ellipsis (reviewer S3).\n  Example: \"Flag 'X' expected 'boolean', got string (\\\"yes\\\").\"\n- null flag values now warn with code 'null-value-omit-instead'\n  rather than being silently accepted as 'unknown'. Engine semantics\n  unchanged (null still treated as missing); validate just surfaces\n  the discrepancy with the prompt's 'omit unknowns' instruction.\n\nAgent C — HTML report v2\n- RenderContext gains an optional promptHash field. When set, the\n  Provenance section shows the 12-char prefix; when the extraction's\n  __prompt_hash matches, a 'verified' badge appears.\n- Audit-trail rows with reason='flag missing in extraction' now use\n  a distinct cond--missing CSS class (yellow/warning palette) to\n  differentiate from cond--miss (red/error). UX research/09 finding.\n\n* docs(rule-engine-poc): RALPH-loop polish (agents A test + D docs)\n\nAgent A — integration tests (was missed from 4e54c0e):\n- test/report-flow.test.ts: 8 spawnSync integration tests covering\n  prompt-extraction binding (sidecar deletion, missing __prompt_hash,\n  stale hash, fixture flow with no prompt file, parity for both CLIs)\n  and --skip-validate stderr warning. Brings suite to 106 tests.\n\nAgent D — docs drift sync:\n- docs/workflow.md: rewrote \"What's not yet here\" (validate gate and\n  stale-extraction detection BOTH shipped — now lists API extractor,\n  rule governance, fairness audit, drift dashboards). Added the\n  __prompt_hash paragraph in \"Paste into an AI tool\" + a new\n  \"--skip-validate flag\" subsection (debugging-only, never-in-CI).\n- README.md: test count 60 -> 100+, file map updated to include\n  prompt-hash / validate / validate-cli modules, research table\n  extended from 10 to 16 artifacts.\n- docs/README.md: \"five briefs\" -> \"16 research artifacts\" with the\n  expanded angle list.\n\nSuite: 106/106 passing.\n\n* fix(rule-engine-poc): fail closed when prompt hash unrecomputable (Codex round 9 P1)\n\nWhen the prompt file exists but collectFiles() throws (target paths\ndeleted / renamed / unreadable), the previous behaviour was to set\nexpectedPromptHash = undefined and continue — silently disabling the\nstale-extraction check. A renamed source folder could then let report\nrender an old extraction as if it were current.\n\nNow both report.ts and validate-cli.ts fail closed: print an explicit\nerror and skip the target with exit code 2. The integrity invariant\n('an extraction is checked against the current source') is preserved.\n\nBackwards-compat preserved for the fixture / single-shot flow: when\nprompts/<id>.md doesn't exist, no hash check is attempted, and the\ncatch path above doesn't fire.\n\nSuite: 106/106 still passing (no test exercised the silent-downgrade\npath).\n\n* fix(rule-engine-poc): case-insensitive target ids + prompt-hash-first (Codex round 10)\n\n- config.ts: target-id duplicate check now case-insensitive. Target\n  ids are interpolated into <id>.md / <id>.json / <id>.html\n  filenames, and default macOS / Windows filesystems are\n  case-insensitive — so 'Alpha' and 'alpha' would collide on disk\n  without a config error and one target's artifacts would overwrite\n  another's silently (#525 round 10 P2).\n- prompt-builder.ts: __prompt_hash is now actually the FIRST key in\n  the response template, not just claimed-first-then-appended-last.\n  Object.fromEntries used to insert the schema keys before the\n  promptHash assignment; JS object key order follows insertion for\n  string keys, so the hash was rendered last. Now we build the\n  object with the hash first, then loop the schema (#525 round 10 P3).\n- Two new tests cover both behaviours.\n\nNote: src/cli-shared.ts and src/validate-cli.ts are dirty in the\nworktree from an in-flight CLI scaffolding refactor; those changes\nwill land separately when the agent reports back.\n\n* refactor(rule-engine-poc): extract cli-shared seam (architecture pass 2)\n\nThree CLIs (plan, validate, report) previously duplicated argv\nparsing, config + rules + schema loading, target filtering, extraction\nIO, prompt-hash recompute, and exit-code handling. The duplication\nwas the documented cause of two repeated bugs: Codex caught the same\nJSON-root-validation defect in report.ts (round 6) and cli.ts (round\n7), and the fail-closed fix for unrecomputable prompt hashes (round 9\nP1) had to be applied to both report.ts and validate-cli.ts.\n\nWhat changed:\n- src/cli-shared.ts (new, 270 LOC): exports takeOpt / takeFlag /\n  parseStandardArgs, loadCliBaseContext, selectTargets, plus a\n  discriminated-union loadExtractionForTarget that returns\n  { kind: 'ok' | 'missing' | 'invalid-json' | 'non-object' |\n  'hash-unrecomputable' } and a logExtractionError formatter that\n  preserves the existing stderr text byte-for-byte (test/report-flow\n  asserts those strings).\n- src/plan.ts: 90 LOC -> 79 LOC. Uses parseStandardArgs +\n  loadCliBaseContext + selectTargets. Schema coverage diff stays here.\n- src/report.ts: 210 LOC -> 120 LOC. Per-target handler is now\n  evaluate -> validate -> render HTML; the defensive-IO scaffolding\n  is gone. --skip-validate and --no-open remain command-specific.\n- src/validate-cli.ts: 110 LOC -> 62 LOC. Per-target handler is now\n  just validateExtraction + log results + Summary line.\n- test/cli-shared.test.ts (new): 14 unit tests for takeOpt/takeFlag\n  argv mutation, parseStandardArgs, selectTargets filtering, and\n  loadExtractionForTarget across all five discriminated-union cases.\n- src/cli.ts, src/engine.ts, src/loader.ts, src/validate.ts, and the\n  prompt + html-report layers are untouched.\n\nVerified: 123/123 tests passing, tsc clean, typos clean. All eight\nreport-flow integration tests still pass — message text and exit\ncodes preserved.\n\n* docs(rule-engine-poc): commit sample HTML reports for research wave 4\n\nThree rendered reports (ready, blocked, needs-attention) for the agents to inspect when reviewing report readability.\n\n* chore(typos): exclude generated rule-engine sample HTML reports\n\nThe sample reports under\nexperiments/rule-engine-poc/research/sample-reports/ embed 12-char\nrule content-hash prefixes that randomly trip typos rules (e.g.,\n'afe...' -> 'safe'). Excluding the folder is consistent with the\nexisting pattern that allow-lists specific commit-SHA fragments.\n\nAlso commits research/17 (ux-designer pass on the rendered HTML\nreports) — top finding is that the audit trail buries the matched\nrules among ~21 'did not match' siblings; recommended a 'What fired'\nsection + collapse-by-default for skipped rules.\n\n* docs(rule-engine-poc): research wave 4 stakeholder pass (research/18)\n\nProduct-strategist pass on the HTML report as a downstream-shared\nartifact. Three findings:\n- The report is one artifact serving six first-fields (PR reviewer,\n  PM, EM, QA, compliance, auditor). Recommend one HTML with\n  re-stacked sections rather than reader-specific exports — keep\n  the 'one artifact, many destinations' moat.\n- Highest-leverage change: expand action slugs ('kick-ci',\n  'request-reviewer') to human sentences via an actions[].human\n  field on the rule schema. Promote the 'verified' prompt-hash\n  badge next to the verdict.\n- Introduce label_set config (default 'dev'; 'pm', 'qa',\n  'compliance' as presentational overrides) so headline labels\n  match the reader's vocabulary.\n\n* docs(rule-engine-poc): research wave 4 brand review (research/19)\n\nBrand-reviewer pass on the rendered HTML report. Verdict:\npass-with-findings; not S1-blocking while the POC stays under\nexperiments/, but would block on the promotion-to-skill step\nflagged in research/13.\n\nFindings:\n- On-temperament (no emoji / gradients / icons; ASCII [+]/[-]/[?]\n  markers are correctly monospace-as-iconography; restrained density).\n- Off-token: 18 distinct literal hex values, literal -apple-system /\n  SFMono-Regular font stacks, page background near-white instead of\n  Specorator cream var(--paper).\n- Voice close but section headers are bare labels rather than\n  sentence-case-with-period declaratives; 'Suggested actions' is\n  passive against Specorator's imperative voice.\n- Open decision: Specorator has no red token. blocked tier currently\n  uses literal #fdecea / #d8281b / #7a160d. ADR-shaped choice before\n  graduation: extend colors_and_type.css, repurpose --soft-orange and\n  rename the tier 'at-risk', or stay literal until packaged.\n\n* docs(rule-engine-poc): research wave 4 misread-risk critique (research/21)\n\nCritic pass on the rendered HTML report as a communication artifact.\nThree findings:\n\n- Visual hierarchy contradicts semantic model: severity-first is\n  invisible in the weighted-tally widget (reads as a horse race),\n  alphabetically-sorted action list silently asserts a priority the\n  engine refuses to give, cond--missing vs cond--miss are visually\n  distinguished but never named (colour-blind readers lose the signal).\n- 'verified' badge is a trust-calibration trap — green pill reads as\n  'extraction verified' to an auditor when it only means 'bound to\n  current inputs'. Compounded by --skip-validate runs producing HTML\n  indistinguishable from validated ones (research/14 risk 1 leaks\n  into the report layer).\n- Most dangerous skim path: blocker-by-absence. A high-priority\n  blocker rule whose input flag is missing from the extraction simply\n  doesn't fire; neither verdict tile nor any header-level summary\n  tells the reader 'N higher-priority rules were un-evaluable'.\n- 3 RATs proposed (verdict-tile-alone, action-list-as-priority,\n  'verified' interpretation). Default no-go if any fail.\n\n* docs(rule-engine-poc): research wave 4 auditor-readability (research/20)\n\nAnalyst pass on the HTML report from a regulator's reading perspective + 2026 benchmark against LangSmith / Inspect / W&B Weave / sklearn / model-card conventions. Closes the open item from research/02 (human-readable rationale presentation).\n\n* feat(rule-engine-poc): action glossary scaffold (agent A partial)\n\nNew sidecar mapping action slugs to imperative human sentences so\nthe HTML report can render readable guidance instead of bare slugs.\n\n- rules/action-glossary.yaml: 28 entries covering every action used\n  in rules/quality-gates.yaml, with optional urgency + category\n  metadata. Imperative voice per Specorator brand.\n- src/action-glossary.ts: loader + diff-coverage helper, mirroring\n  src/flag-schema.ts conventions.\n\nWiring into config.ts and the HTML renderer happens in subsequent\ncommits when Agents A2/B finish their slices. 123/123 tests still\npassing — no behaviour change yet.\n\n* feat(rule-engine-poc): wire action glossary into config + docs (agent A complete)\n\nAgent A's RALPH loop completed. Action glossary is now reachable via\nthe config (still optional — no behaviour change for callers that\ndon't set actionGlossary):\n\n- src/config.ts: optional 'actionGlossary' string field on RawConfig\n  resolved to 'actionGlossaryPath' on ResolvedConfig, same pattern as\n  flagSchema.\n- rule-engine.config.json: points at rules/action-glossary.yaml.\n- test/action-glossary.test.ts: 12 tests covering loader validation,\n  diff-coverage, real-file coverage of rules/quality-gates.yaml, and\n  sentence-shape invariants.\n\nAlso picks up Agent C's in-flight architecture.md updates: system\noverview + data flow diagrams now show the glossary node (read only\nby the renderer) and the new HTML report sections (system-identity\nheader, what fired, reproduce block, audit trail with non-matched\ncollapsed). The renderer itself (Agent B) is still in flight.\n\nSuite: 135/135 passing (123 baseline + 12 new). 21 unique action\nslugs in rules/quality-gates.yaml — all mapped in the glossary.\n\n* docs(rule-engine-poc): agent C docs sync — audit trail + workflow + extending\n\n- audit-trail.md: Mapping to EU AI Act table updated to credit the\n  HTML report (what-fired with human sentences, system-identity\n  header, tier glossary, reproduce block) as the Art. 13\n  human-readable rationale surface. Closes research/02 open item\n  about explainability presentation.\n- workflow.md: still in flight by agent C — current commit picks\n  up partial edits.\n- extending.md: new 'Authoring action human sentences' section\n  documents rules/action-glossary.yaml as a render-only sidecar\n  (engine never reads it; editing sentences cannot change a verdict).\n\n* chore(rule-engine-poc): snapshot in-flight agent B + C work\n\nAgent B (HTML report rebuild) and Agent C (README sync) are still\nrunning their RALPH loops. This commit snapshots the current\non-disk state so the working tree stays clean between iterations:\n\n- src/html-report.ts: partial changes from agent B (rebuild for\n  research wave 4 findings). 135/135 tests still passing — the\n  partial state is internally consistent even if not yet feature\n  complete.\n- src/report.ts: corresponding plumbing changes from agent B.\n- README.md: agent C in-flight test-count + file-map sync.\n\nWill be superseded by the next commit when both agents report\nfinal.\n\n* docs(rule-engine-poc): agent C audit-trail.md second-pass refinement\n\n* feat(rule-engine-poc): HTML report v3 — wave 4 implementer pass (agent B complete)\n\nAgent B's RALPH loop completed. Twelve convergent findings from\nresearch wave 4 now realised in the renderer:\n\n1. 'What fired' section above the full audit trail (UX/17 + critic/21 +\n   auditor/20). Verdict-card stats line now reads 'N rule(s) fired ·\n   M action(s) to take'.\n2. Non-matched rules collapsed via <details class='rule-collapsed'>;\n   matched rules stay inline (UX/17).\n3. Blocker-by-absence banner adjacent to the verdict card when any\n   rule's condition reports 'flag missing in extraction' (critic/21 +\n   UX/17). Yellow palette, names the missing flags.\n4. Suggested actions now sorted by priority-of-cause (walk\n   evaluations in priority-desc order, dedup preserving first-seen)\n   instead of alphabetic. result.actions unchanged for machine\n   consumers (UX/17).\n5. Action human-sentence rendering via rules/action-glossary.yaml;\n   falls back to bare slug when entry missing (stakeholder/18).\n6. Provenance section: preamble explaining the hashes + 'How to\n   reproduce' block + 12-char hash truncation (UX/17 + auditor/20 +\n   stakeholder/18).\n7. System-identity header above the verdict card: engine version +\n   prominent timestamp moved out of the footer (auditor/20).\n8. Verdict-tier glossary + [+]/[-]/[?] glyph legend in a collapsed\n   <details class='legend'> block (auditor/20 + UX/17).\n9. cond--miss now has a faint red row-wash matching cond--missing's\n   amber, so the visual distinction isn't glyph-color-only (UX/17).\n10. @media (max-width: 540px) single-column fallback (UX/17).\n11. Trust calibration: --skip-validate banner shown prominently when\n    validationStatus='skipped'; verified-badge tooltip explains it\n    only means 'extraction is bound to current inputs', not 'flags\n    are correct' (stakeholder/18 + critic/21).\n12. Section headers in sentence-case with periods, imperative voice:\n    'Take these actions.' not 'Suggested actions' (brand/19).\n\n28 new tests in test/html-report.test.ts; suite total 163/163.\nThree sample reports regenerated under research/sample-reports/ so\nreviewers see the new shape.\n\n* fix(rule-engine-poc): browser exit-code + takeOpt missing-value (Codex round 11)\n\n- open-browser.ts: success now requires the opener process to exit\n  with code 0 (or null, signal-terminated) — not just spawn. On Linux\n  headless / CI, xdg-open spawns successfully and then immediately\n  exits non-zero because no browser handler is registered; previously\n  report.ts printed 'opened in browser' even though the file was\n  never opened. Safety-net timeout bumped to 1s for opener daemons\n  that never deliver an exit event (#525 round 11 P2).\n- cli-shared.ts: takeOpt now throws 'Missing value for option <flag>'\n  when the flag is the last argv entry or is followed by another\n  flag. Previously 'npm run report -- --target' would silently fall\n  back to 'all targets' and 'npm run report -- --target --quiet'\n  would interpret '--quiet' as the target id (#525 round 11 P2).\n- Two new takeOpt tests cover the missing-value rejection path.\n\nSuite: 165/165 passing.\n\n* fix(rule-engine-poc): missing-flag banner + shell-quoted reproduce (Codex round 12)\n\n- html-report.ts missingFlagNames: only count rules whose final\n  outcome was determined by the missing flag (matched === false).\n  Previously a 'when.any' rule with one matched branch + one missing\n  branch counted as un-evaluable in the banner, even though it\n  contributed to the verdict (#525 round 12 P2).\n- html-report.ts reproCmd: paths are now single-quoted via a small\n  shellQuote helper that escapes embedded ' as the standard\n  '\\\\'' four-char sequence. Paths with spaces (e.g.,\n  'My Projects/rules.yaml') no longer break the copy-pasted\n  reproduce command (#525 round 12 P2).\n- Two new html-report tests: when.any-with-missing-branch is NOT\n  counted in the banner, and reproCmd contains HTML-escaped quoted\n  paths.\n\nSuite: 167/167 passing.\n\n* fix(rule-engine-poc): single-shot CLI rejects missing --html value (Codex round 13)\n\nsrc/cli.ts has its own takeOption() (the single-shot fixture flow\ndoesn't use src/cli-shared.ts). Same bug as round 11 P2 in cli-shared:\nwhen --html had no value the helper returned undefined and the CLI\nsilently proceeded with no HTML output, breaking automation that\nrelies on the artifact being written.\n\nNow fail fast with a clear stderr message and exit code 2 when the\noption is the last argv entry or is followed by another flag.\n\nSuite: 167/167 still passing (no test exercised the silent-skip path).\n\n* fix(rule-engine-poc): string-only actions + finite gt/lt (Codex round 14)\n\n- loader.ts: every entry of 'then.actions' must be a non-empty string\n  slug. Previously numbers / objects / empty strings passed load-time\n  validation and flowed into the HTML reporter as unrecognised tokens\n  that couldn't map to a glossary entry, breaking the remediation\n  guidance the verdict is meant to provide (#525 round 14 P2).\n- loader.ts: 'gt' and 'lt' now reject NaN and Infinity at load time.\n  Both are technically 'number' but silently corrupt comparisons at\n  runtime (NaN comparisons always false), so a typo could make a\n  gating rule unexpectedly never fire (#525 round 14 P2).\n- Four new loader tests cover non-string action elements,\n  empty-string action elements, NaN gt, and Infinity lt.\n\nSuite: 171/171 passing (167 + 4).\n\n* docs(rule-engine-poc): compliance map for adopters\n\nNew docs/compliance.md walks the standards/regulations an adopter is\nmost likely to be asked about in 2026 and catalogues what the POC\ncontributes vs what stays the adopter's job. Synthesises the two\nprior research passes (research/02 regulatory + research/20 auditor\nreadability) into reference material for scoping conversations.\n\nCovered:\n- EU AI Act Art. 11-14 + Art. 72 with a per-article table.\n- ISO/IEC 42001 AIMS clauses 6-10.\n- ISO/IEC 23894 AI risk management.\n- NIST AI RMF Govern / Map / Measure / Manage.\n- GDPR Art. 22 (when it applies vs when it doesn't).\n- OECD AI Principles (1-paragraph summary).\n\nPlus:\n- 'What the POC ticks natively' — per-artifact provenance.\n- 'What is NOT in this POC' — honest gap analysis.\n- Maturity checklist before production with rough effort estimates.\n\nLeads with a disclaimer that this is engineering reference material,\nnot legal advice or certification. docs/README.md updated to index\nthe new doc.\n\n---------\n\nCo-authored-by: Claude <noreply@anthropic.com>",
+          "author": "Luis85",
+          "authored_at": "2026-05-17T13:50:42Z",
+          "committed_at": "2026-05-17T13:50:42Z"
+        },
+        "latest_release": {
+          "id": 320199798,
+          "tag_name": "v0.8.0",
+          "name": "v0.8.0",
+          "url": "https://github.com/Luis85/agentic-workflow/releases/tag/v0.8.0",
+          "created_at": "2026-05-10T22:17:07Z",
+          "published_at": "2026-05-10T22:18:08Z"
+        },
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1214362243,
+      "node_id": "R_kgDOSGGygw",
+      "name": "agentonomous",
+      "full_name": "Luis85/agentonomous",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/agentonomous",
+      "about": "Autonomous agent library for TypeScript simulations.",
+      "website": "https://luis85.github.io/agentonomous/",
+      "topics": [
+        "autonomous-agents",
+        "simulation"
+      ],
+      "language": "TypeScript",
+      "default_branch": "develop",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-04-18T13:23:08Z",
+      "updated_at": "2026-06-17T05:04:02Z",
+      "pushed_at": "2026-06-17T05:03:59Z",
+      "size_kb": 2165,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 1
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "a56d18bf705d6da0d6bd1334d9f522bbc7018dbe",
+          "url": "https://github.com/Luis85/agentonomous/commit/a56d18bf705d6da0d6bd1334d9f522bbc7018dbe",
+          "message": "docs(reviews): daily review 2026-06-17 (#280)\n\nAutomated daily review. Findings tracked in #279. Doc-only change, skip\nchangeset.\n\n---\n_Generated by [Claude\nCode](https://claude.ai/code/session_01HmGPuT9itk9poqZxnTLA4M)_\n\nCo-authored-by: Claude <noreply@anthropic.com>",
+          "author": "Luis85",
+          "authored_at": "2026-06-17T05:03:57Z",
+          "committed_at": "2026-06-17T05:03:57Z"
+        },
+        "latest_release": null,
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1317636124,
+      "node_id": "R_kgDOTomIHA",
+      "name": "backlog-view",
+      "full_name": "Luis85/backlog-view",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/backlog-view",
+      "about": "An Obsidian bases view plugin to convert a list of items into a tree which is sortable.",
+      "website": null,
+      "topics": [],
+      "language": "TypeScript",
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-07-30T19:56:01Z",
+      "updated_at": "2026-10-18T19:32:02Z",
+      "pushed_at": "2026-10-25T14:23:40Z",
+      "size_kb": 20055,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 4,
+        "forks": 0,
+        "open_issues_and_pull_requests": 2
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "89c4685a07edee0cc3be8d7f432ddf5dc217bdda",
+          "url": "https://github.com/Luis85/backlog-view/commit/89c4685a07edee0cc3be8d7f432ddf5dc217bdda",
+          "message": "Merge pull request #287 from Luis85/claude/project-thread-sfdgak\n\nchore(release): 0.14.0",
+          "author": "Luis85",
+          "authored_at": "2026-10-18T19:31:57Z",
+          "committed_at": "2026-10-18T19:31:57Z"
+        },
+        "latest_release": {
+          "id": 416660398,
+          "tag_name": "0.14.0",
+          "name": "0.14.0",
+          "url": "https://github.com/Luis85/backlog-view/releases/tag/0.14.0",
+          "created_at": "2026-10-18T19:31:57Z",
+          "published_at": "2026-10-18T19:37:40Z"
+        },
+        "recent_events": [
+          {
+            "id": "18161337988",
+            "type": "PullRequestEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-25T14:23:42Z",
+            "action": "labeled",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/backlog-view",
+            "title": null
+          },
+          {
+            "id": "18161337814",
+            "type": "PullRequestEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-25T14:23:42Z",
+            "action": "labeled",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/backlog-view",
+            "title": null
+          },
+          {
+            "id": "18161336800",
+            "type": "PullRequestEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-25T14:23:42Z",
+            "action": "opened",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/backlog-view",
+            "title": null
+          },
+          {
+            "id": "24662634700",
+            "type": "DeleteEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-18T19:32:00Z",
+            "action": null,
+            "ref": "claude/project-thread-sfdgak",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/backlog-view",
+            "title": null
+          },
+          {
+            "id": "24648504817",
+            "type": "DeleteEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-18T16:51:09Z",
+            "action": null,
+            "ref": "claude/bold-gates-5qtwdt",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/backlog-view",
+            "title": null
+          },
+          {
+            "id": "24639761421",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-18T15:15:55Z",
+            "action": null,
+            "ref": "refs/heads/claude/bold-gates-5qtwdt",
+            "ref_type": null,
+            "head": "f08a5a80fe7edcef8a06e6d356486d59b452ad94",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/backlog-view",
+            "title": null
+          },
+          {
+            "id": "24636140676",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-18T18:53:47Z",
+            "action": null,
+            "ref": "refs/heads/claude/close-iteration-v9wwcn",
+            "ref_type": null,
+            "head": "d55c494be30b6c27c66d5f8f59d6eabd00db397e",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/backlog-view",
+            "title": null
+          },
+          {
+            "id": "24624914387",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-18T14:32:36Z",
+            "action": null,
+            "ref": "refs/heads/claude/bold-gates-5qtwdt",
+            "ref_type": null,
+            "head": "0dfd555cb2da554ed8409e962e387b743230663e",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/backlog-view",
+            "title": null
+          },
+          {
+            "id": "24616326426",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-18T12:53:59Z",
+            "action": null,
+            "ref": "refs/heads/main",
+            "ref_type": null,
+            "head": "47f67f5de4ecd0a22086ce8b27d5bd16beb7810d",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/backlog-view",
+            "title": null
+          },
+          {
+            "id": "24607071138",
+            "type": "DeleteEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-18T13:37:01Z",
+            "action": null,
+            "ref": "dependabot/npm_and_yarn/atlaskit/pragmatic-drag-and-drop-4.0.0",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/backlog-view",
+            "title": null
+          }
+        ]
+      }
+    },
+    {
+      "id": 1433005660,
+      "node_id": "R_kgDOVWnuXA",
+      "name": "bevy-experiments",
+      "full_name": "Luis85/bevy-experiments",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/bevy-experiments",
+      "about": "My smol bevy playground",
+      "website": null,
+      "topics": [],
+      "language": null,
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-10-25T09:00:16Z",
+      "updated_at": "2026-10-25T09:00:21Z",
+      "pushed_at": "2026-10-25T09:00:18Z",
+      "size_kb": 1,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 0
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "7caef60feff7aacc7c900c64df62f38438ff8f4a",
+          "url": "https://github.com/Luis85/bevy-experiments/commit/7caef60feff7aacc7c900c64df62f38438ff8f4a",
+          "message": "Initial commit",
+          "author": "Luis85",
+          "authored_at": "2026-10-25T09:00:17Z",
+          "committed_at": "2026-10-25T09:00:17Z"
+        },
+        "latest_release": null,
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1249435901,
+      "node_id": "R_kgDOSnjg_Q",
+      "name": "claudian",
+      "full_name": "Luis85/claudian",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/claudian",
+      "about": "An Obsidian plugin that embeds Claude Code/Codex as an AI collaborator in your vault",
+      "website": null,
+      "topics": [],
+      "language": "TypeScript",
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": true,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-05-25T17:41:43Z",
+      "updated_at": "2026-06-25T18:47:22Z",
+      "pushed_at": "2026-06-25T20:27:09Z",
+      "size_kb": 21751,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 0
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "1ede447b724d078ed036526a2c148b17845279d1",
+          "url": "https://github.com/Luis85/claudian/commit/1ede447b724d078ed036526a2c148b17845279d1",
+          "message": "docs(freeze): mark claudian-cursor fork as superseded by Specorator",
+          "author": "Symprowire",
+          "authored_at": "2026-06-25T18:47:15Z",
+          "committed_at": "2026-06-25T18:47:15Z"
+        },
+        "latest_release": {
+          "id": 344910308,
+          "tag_name": "claudian-cursor-final",
+          "name": "claudian-cursor-final",
+          "url": "https://github.com/Luis85/claudian/releases/tag/claudian-cursor-final",
+          "created_at": "2026-06-24T16:34:42Z",
+          "published_at": "2026-06-25T18:37:59Z"
+        },
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1374265422,
+      "node_id": "R_kgDOUemgTg",
+      "name": "codebase-inspector",
+      "full_name": "Luis85/codebase-inspector",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/codebase-inspector",
+      "about": null,
+      "website": null,
+      "topics": [],
+      "language": "TypeScript",
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-09-17T10:26:01Z",
+      "updated_at": "2026-10-12T15:22:05Z",
+      "pushed_at": "2026-10-12T15:21:12Z",
+      "size_kb": 51628,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 0
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "b66eded8804c697f6ed32009a5a5421dc513ebb0",
+          "url": "https://github.com/Luis85/codebase-inspector/commit/b66eded8804c697f6ed32009a5a5421dc513ebb0",
+          "message": "Merge pull request #1 from Luis85/feat/wp-01-codebase-city",
+          "author": "Luis85",
+          "authored_at": "2026-10-12T15:20:54Z",
+          "committed_at": "2026-10-12T15:20:54Z"
+        },
+        "latest_release": null,
+        "recent_events": [
+          {
+            "id": "23925047752",
+            "type": "DeleteEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-12T15:21:12Z",
+            "action": null,
+            "ref": "feat/wp-01-codebase-city",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/codebase-inspector",
+            "title": null
+          },
+          {
+            "id": "23865931736",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-12T15:20:59Z",
+            "action": null,
+            "ref": "refs/heads/main",
+            "ref_type": null,
+            "head": "b66eded8804c697f6ed32009a5a5421dc513ebb0",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/codebase-inspector",
+            "title": null
+          },
+          {
+            "id": "23098325246",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-05T20:53:40Z",
+            "action": null,
+            "ref": "refs/heads/feat/wp-01-codebase-city",
+            "ref_type": null,
+            "head": "4e7982261e8a237854bb7ec48b0173b7d86eb981",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/codebase-inspector",
+            "title": null
+          },
+          {
+            "id": "23024221248",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-03T15:31:50Z",
+            "action": null,
+            "ref": "refs/heads/feat/wp-01-codebase-city",
+            "ref_type": null,
+            "head": "59649b8e24cecf6ef8fb54bdbee75153bd271818",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/codebase-inspector",
+            "title": null
+          },
+          {
+            "id": "22993502597",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-04T19:32:07Z",
+            "action": null,
+            "ref": "refs/heads/feat/wp-01-codebase-city",
+            "ref_type": null,
+            "head": "003568a0b08a15503a6e5e5fbda331cc8e9e04a6",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/codebase-inspector",
+            "title": null
+          },
+          {
+            "id": "22991994188",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-04T19:08:34Z",
+            "action": null,
+            "ref": "refs/heads/feat/wp-01-codebase-city",
+            "ref_type": null,
+            "head": "b53d37dd47b4d939d422256bfe8073acd6661870",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/codebase-inspector",
+            "title": null
+          },
+          {
+            "id": "22957746175",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-04T10:05:42Z",
+            "action": null,
+            "ref": "refs/heads/feat/wp-01-codebase-city",
+            "ref_type": null,
+            "head": "3df98ea06c6e3ae9169ce5eb4b74b3a8f2a288b6",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/codebase-inspector",
+            "title": null
+          },
+          {
+            "id": "22324014296",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-09-27T19:38:17Z",
+            "action": null,
+            "ref": "refs/heads/feat/wp-01-codebase-city",
+            "ref_type": null,
+            "head": "1baa572d57de2d4d3806b4d0f57d1f5a7877dfc6",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/codebase-inspector",
+            "title": null
+          },
+          {
+            "id": "22323980187",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-09-27T19:37:40Z",
+            "action": null,
+            "ref": "refs/heads/feat/wp-01-codebase-city",
+            "ref_type": null,
+            "head": "da42e9fa06f1c0a8095e6abd7edd330f9ad03773",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/codebase-inspector",
+            "title": null
+          },
+          {
+            "id": "22305954356",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-09-27T14:22:38Z",
+            "action": null,
+            "ref": "refs/heads/feat/wp-01-codebase-city",
+            "ref_type": null,
+            "head": "9b219df5e7ca78b8442043f9d3ae316a2b467964",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/codebase-inspector",
+            "title": null
+          }
+        ]
+      }
+    },
+    {
+      "id": 1431305786,
+      "node_id": "R_kgDOVU_-Og",
+      "name": "coforge",
+      "full_name": "Luis85/coforge",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/coforge",
+      "about": null,
+      "website": null,
+      "topics": [],
+      "language": "JavaScript",
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-10-23T16:45:56Z",
+      "updated_at": "2026-10-24T08:11:38Z",
+      "pushed_at": "2026-10-24T08:13:46Z",
+      "size_kb": 8921,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 6
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "2b3dd3ef22f6e815acfca8610a6a417ae906279f",
+          "url": "https://github.com/Luis85/coforge/commit/2b3dd3ef22f6e815acfca8610a6a417ae906279f",
+          "message": "CoForge Obsidian plugin with viewer website and input hardening (#1)\n\n* Scaffold CoForge plugin from obsidian-plugin-shell blank starter\n\nGenerated with: node bin/app new <dir> --starter blank --id coforge --name CoForge --author \"Luis Mendez\"\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* Port CoForge domain, workflow engine and vault storage; add studio shell\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* Port CoForge studio views to Vue and wire the plugin\n\nBoard, chat, idea drawer, workflow, community and settings views; Obsidian\nsettings tab for Claude Code and Twitch; browser click-dummy with a demo studio;\nported behavioural tests; Node built-ins external in the release build.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* Describe CoForge in the plugin manifest\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* Add a read-only viewer website deployed to GitHub Pages\n\nCoForge writes a script-free board, leaderboards and badges page plus\nboard.json into a vault folder (only screened ideas, display names, scores,\nplans and badges) and installs a Pages workflow that deploys it from main.\nAuto-publish is opt-in; CoForge never commits or pushes.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* Sanitize chat input and model input; escape Markdown in idea notes\n\nNormalize (NFKC) and strip invisible, bidirectional, tag, variation-selector,\nprivate-use and control characters from chat text, viewer names and form input\nat intake, and again for every model request. Escape idea titles and\ndescriptions in note bodies so chat cannot embed images, HTML, links or inline\nqueries; read them back unescaped.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* Harden untrusted content from intake to model dispatch\n\n- Defang note properties (Templater, wikilinks, placeholders, inline queries)\n  and bound/sanitize every value read back from idea notes\n- Fingerprint trusted idea content; ideas changed or added outside CoForge\n  return to the inbox for re-screening, and stale run results are discarded\n- Bound chat intake per viewer and per minute, require real words, detect\n  near-duplicates and keep viewers from posing as the bot or streamer\n- Extend injection heuristics; sanitize model output, review notes, RICE\n  rationale and project settings\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Luis Mendez <luis.mendez@generic.de>\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>",
+          "author": "Luis85",
+          "authored_at": "2026-10-24T08:11:24Z",
+          "committed_at": "2026-10-24T08:11:24Z"
+        },
+        "latest_release": null,
+        "recent_events": [
+          {
+            "id": "25113563157",
+            "type": "CreateEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-24T08:13:03Z",
+            "action": null,
+            "ref": "dependabot/npm_and_yarn/lint-0f8a9253d5",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/coforge",
+            "title": null
+          },
+          {
+            "id": "25047019452",
+            "type": "CreateEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-24T08:13:47Z",
+            "action": null,
+            "ref": "dependabot/npm_and_yarn/happy-dom-21.0.3",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/coforge",
+            "title": null
+          },
+          {
+            "id": "25046998634",
+            "type": "CreateEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-24T08:13:21Z",
+            "action": null,
+            "ref": "dependabot/npm_and_yarn/fallow-3.34.1",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/coforge",
+            "title": null
+          },
+          {
+            "id": "25044918520",
+            "type": "CreateEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-24T08:12:46Z",
+            "action": null,
+            "ref": "dependabot/npm_and_yarn/vite-e6386c2419",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/coforge",
+            "title": null
+          },
+          {
+            "id": "25032749555",
+            "type": "CreateEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-24T08:13:04Z",
+            "action": null,
+            "ref": "dependabot/github_actions/synchronized-workflows-d5b8684899",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/coforge",
+            "title": null
+          },
+          {
+            "id": "25028205960",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-24T08:11:25Z",
+            "action": null,
+            "ref": "refs/heads/main",
+            "ref_type": null,
+            "head": "2b3dd3ef22f6e815acfca8610a6a417ae906279f",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/coforge",
+            "title": null
+          },
+          {
+            "id": "18093281565",
+            "type": "PullRequestEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-24T08:13:48Z",
+            "action": "labeled",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/coforge",
+            "title": null
+          },
+          {
+            "id": "18093281302",
+            "type": "PullRequestEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-24T08:13:48Z",
+            "action": "labeled",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/coforge",
+            "title": null
+          },
+          {
+            "id": "18093279987",
+            "type": "PullRequestEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-24T08:13:47Z",
+            "action": "opened",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/coforge",
+            "title": null
+          },
+          {
+            "id": "18093270870",
+            "type": "PullRequestEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-24T08:13:34Z",
+            "action": "labeled",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/coforge",
+            "title": null
+          }
+        ]
+      }
+    },
+    {
+      "id": 1030945638,
+      "node_id": "R_kgDOPXL7Zg",
+      "name": "convert-to-docx",
+      "full_name": "Luis85/convert-to-docx",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/convert-to-docx",
+      "about": "An Obsidian Plugin to convert files to Docx",
+      "website": null,
+      "topics": [],
+      "language": "TypeScript",
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2025-08-02T17:08:56Z",
+      "updated_at": "2025-08-23T16:25:45Z",
+      "pushed_at": "2025-08-23T16:25:42Z",
+      "size_kb": 93,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 0
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "55d855d6caec98990b8fc0886ecdb3106a8404a7",
+          "url": "https://github.com/Luis85/convert-to-docx/commit/55d855d6caec98990b8fc0886ecdb3106a8404a7",
+          "message": "add softbreak and hardbreak",
+          "author": "LuisMendezGeneric",
+          "authored_at": "2025-08-23T16:25:37Z",
+          "committed_at": "2025-08-23T16:25:37Z"
+        },
+        "latest_release": null,
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1385586673,
+      "node_id": "R_kgDOUpZf8Q",
+      "name": "describe",
+      "full_name": "Luis85/describe",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/describe",
+      "about": "An Obsidian plugin to describe things",
+      "website": null,
+      "topics": [],
+      "language": "TypeScript",
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-09-24T13:40:08Z",
+      "updated_at": "2026-09-24T20:04:26Z",
+      "pushed_at": "2026-10-22T00:24:28Z",
+      "size_kb": 785,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 5
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "d00b2b5c1ea7fe2c404e1c0fb9e02afb5c542f33",
+          "url": "https://github.com/Luis85/describe/commit/d00b2b5c1ea7fe2c404e1c0fb9e02afb5c542f33",
+          "message": "Merge pull request #16 from Luis85/chore/post-vitest-dependencies",
+          "author": "Luis85",
+          "authored_at": "2026-09-24T20:04:17Z",
+          "committed_at": "2026-09-24T20:04:17Z"
+        },
+        "latest_release": null,
+        "recent_events": [
+          {
+            "id": "17870665027",
+            "type": "PullRequestEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-22T00:24:32Z",
+            "action": "labeled",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/describe",
+            "title": null
+          },
+          {
+            "id": "17870664658",
+            "type": "PullRequestEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-22T00:24:32Z",
+            "action": "labeled",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/describe",
+            "title": null
+          },
+          {
+            "id": "17870662808",
+            "type": "PullRequestEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-22T00:24:31Z",
+            "action": "opened",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/describe",
+            "title": null
+          },
+          {
+            "id": "17870654264",
+            "type": "PullRequestEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-22T00:23:22Z",
+            "action": "closed",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/describe",
+            "title": null
+          },
+          {
+            "id": "17870653003",
+            "type": "IssueCommentEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-22T00:24:21Z",
+            "action": "created",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/describe/pull/21#issuecomment-6329615753",
+            "title": "build(deps-dev): bump wdio-obsidian-service from 3.2.1 to 3.3.0 in the native-testing group"
+          },
+          {
+            "id": "24169805656",
+            "type": "CreateEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-15T00:25:34Z",
+            "action": null,
+            "ref": "dependabot/npm_and_yarn/development-tooling-52df317042",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/describe",
+            "title": null
+          },
+          {
+            "id": "24169744929",
+            "type": "CreateEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-15T00:24:23Z",
+            "action": null,
+            "ref": "dependabot/github_actions/actions-compatible-c673fd7efc",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/describe",
+            "title": null
+          },
+          {
+            "id": "24047369608",
+            "type": "CreateEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-15T00:24:42Z",
+            "action": null,
+            "ref": "dependabot/npm_and_yarn/webdriverio-10.0.2",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/describe",
+            "title": null
+          },
+          {
+            "id": "24047351779",
+            "type": "CreateEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-15T00:24:30Z",
+            "action": null,
+            "ref": "dependabot/npm_and_yarn/native-testing-9f6abd43b1",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/describe",
+            "title": null
+          },
+          {
+            "id": "24047267826",
+            "type": "DeleteEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-15T00:25:06Z",
+            "action": null,
+            "ref": "dependabot/npm_and_yarn/development-tooling-6a384f2c3c",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/describe",
+            "title": null
+          }
+        ]
+      }
+    },
+    {
+      "id": 638531493,
+      "node_id": "R_kgDOJg83pQ",
+      "name": "flowti",
+      "full_name": "Luis85/flowti",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/flowti",
+      "about": "The Flowti Business Development Environment",
+      "website": null,
+      "topics": [],
+      "language": "TypeScript",
+      "default_branch": "master",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2023-05-09T14:51:02Z",
+      "updated_at": "2026-05-08T18:58:56Z",
+      "pushed_at": "2026-05-08T18:58:58Z",
+      "size_kb": 116648,
+      "license": null,
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 0
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "02992bfcc73ba2130f0cba7c24d599ad671d66b6",
+          "url": "https://github.com/Luis85/flowti/commit/02992bfcc73ba2130f0cba7c24d599ad671d66b6",
+          "message": "Merge pull request #19 from Luis85/claude/product-landing-page-Hx66U\n\nfeat: add static product landing page for GitHub Pages",
+          "author": "Luis85",
+          "authored_at": "2026-05-08T18:58:50Z",
+          "committed_at": "2026-05-08T18:58:50Z"
+        },
+        "latest_release": null,
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1304215276,
+      "node_id": "R_kgDOTby-7A",
+      "name": "flowti-ecos",
+      "full_name": "Luis85/flowti-ecos",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/flowti-ecos",
+      "about": null,
+      "website": null,
+      "topics": [],
+      "language": null,
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-07-17T17:04:22Z",
+      "updated_at": "2026-07-17T17:04:50Z",
+      "pushed_at": "2026-07-17T17:04:23Z",
+      "size_kb": 1,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 0
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "0c7cf1edc6aee460c79496c65f3882080339ec6f",
+          "url": "https://github.com/Luis85/flowti-ecos/commit/0c7cf1edc6aee460c79496c65f3882080339ec6f",
+          "message": "Initial commit",
+          "author": "Luis85",
+          "authored_at": "2026-07-17T17:04:23Z",
+          "committed_at": "2026-07-17T17:04:23Z"
+        },
+        "latest_release": null,
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1289260112,
+      "node_id": "R_kgDOTNiMUA",
+      "name": "foreign-folder-watcher",
+      "full_name": "Luis85/foreign-folder-watcher",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/foreign-folder-watcher",
+      "about": null,
+      "website": null,
+      "topics": [],
+      "language": "TypeScript",
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-07-04T14:20:13Z",
+      "updated_at": "2026-07-04T14:27:21Z",
+      "pushed_at": "2026-07-04T14:27:17Z",
+      "size_kb": 290,
+      "license": {
+        "key": "0bsd",
+        "name": "BSD Zero Clause License",
+        "spdx_id": "0BSD",
+        "url": "https://api.github.com/licenses/0bsd"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 0
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "825aefaf2823d18928a658b21b2af6f25f809988",
+          "url": "https://github.com/Luis85/foreign-folder-watcher/commit/825aefaf2823d18928a658b21b2af6f25f809988",
+          "message": "init",
+          "author": "Symprowire",
+          "authored_at": "2026-07-04T14:26:52Z",
+          "committed_at": "2026-07-04T14:26:52Z"
+        },
+        "latest_release": null,
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1383237633,
+      "node_id": "R_kgDOUnKIAQ",
+      "name": "motorsport-manager",
+      "full_name": "Luis85/motorsport-manager",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/motorsport-manager",
+      "about": null,
+      "website": null,
+      "topics": [],
+      "language": "TypeScript",
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-09-23T10:40:19Z",
+      "updated_at": "2026-10-11T11:39:50Z",
+      "pushed_at": "2026-10-11T17:14:23Z",
+      "size_kb": 1256560,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 1
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "3f56925b3532f015d9a29f19a998a05286b76f13",
+          "url": "https://github.com/Luis85/motorsport-manager/commit/3f56925b3532f015d9a29f19a998a05286b76f13",
+          "message": "Merge pull request #47 from Luis85/claude/model-forge\n\nExtract Model Forge, lossless Littlewild assets, procedural generation and a game-prototype skill",
+          "author": "Luis85",
+          "authored_at": "2026-10-11T11:39:36Z",
+          "committed_at": "2026-10-11T11:39:36Z"
+        },
+        "latest_release": null,
+        "recent_events": [
+          {
+            "id": "23846718001",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-11T16:19:11Z",
+            "action": null,
+            "ref": "refs/heads/codex/armored-platoon",
+            "ref_type": null,
+            "head": "dbbd80b18698198d0c966a9c53446d3f93509fba",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/motorsport-manager",
+            "title": null
+          },
+          {
+            "id": "23845624691",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-11T17:14:24Z",
+            "action": null,
+            "ref": "refs/heads/codex/armored-platoon",
+            "ref_type": null,
+            "head": "7bd4b90f08b8e3d0d2c9189c9a47ec5384bb5886",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/motorsport-manager",
+            "title": null
+          },
+          {
+            "id": "23829727499",
+            "type": "DeleteEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-11T11:39:42Z",
+            "action": null,
+            "ref": "claude/model-forge",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/motorsport-manager",
+            "title": null
+          },
+          {
+            "id": "23829723218",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-11T11:39:37Z",
+            "action": null,
+            "ref": "refs/heads/main",
+            "ref_type": null,
+            "head": "3f56925b3532f015d9a29f19a998a05286b76f13",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/motorsport-manager",
+            "title": null
+          },
+          {
+            "id": "23824382723",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-11T09:58:40Z",
+            "action": null,
+            "ref": "refs/heads/main",
+            "ref_type": null,
+            "head": "90b11788fcb4e8050abdc2926c37406f8091f9a4",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/motorsport-manager",
+            "title": null
+          },
+          {
+            "id": "23822896564",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-11T10:32:22Z",
+            "action": null,
+            "ref": "refs/heads/main",
+            "ref_type": null,
+            "head": "cf0f484922992b6a11bc791977a6f44b7a711ff7",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/motorsport-manager",
+            "title": null
+          },
+          {
+            "id": "23818616395",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-11T09:05:59Z",
+            "action": null,
+            "ref": "refs/heads/claude/process-studio",
+            "ref_type": null,
+            "head": "3992dbcb4bee9665640f6d81f10b22142a6997c5",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/motorsport-manager",
+            "title": null
+          },
+          {
+            "id": "23812968932",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-11T15:11:48Z",
+            "action": null,
+            "ref": "refs/heads/codex/armored-platoon",
+            "ref_type": null,
+            "head": "3ce1c8dfde1e479b9927e4447bcbb6e28e898ba9",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/motorsport-manager",
+            "title": null
+          },
+          {
+            "id": "23785293615",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-10T21:47:42Z",
+            "action": null,
+            "ref": "refs/heads/feature/process-studio-followups",
+            "ref_type": null,
+            "head": "289acc67f8c8f932006692bed0180c9b6c12d5d3",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/motorsport-manager",
+            "title": null
+          },
+          {
+            "id": "23781965292",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-11T07:15:47Z",
+            "action": null,
+            "ref": "refs/heads/codex/armored-platoon",
+            "ref_type": null,
+            "head": "bbf8475e80d59754bef4df4448492979f492624c",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/motorsport-manager",
+            "title": null
+          }
+        ]
+      }
+    },
+    {
+      "id": 960545013,
+      "node_id": "R_kgDOOUDA9Q",
+      "name": "numbercruncher",
+      "full_name": "Luis85/numbercruncher",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/numbercruncher",
+      "about": "The Numbercrunchers pure Obsidian plugin",
+      "website": null,
+      "topics": [
+        "obsidian-plugin",
+        "product-design",
+        "product-development",
+        "product-discovery",
+        "product-management",
+        "project-management",
+        "quality-management"
+      ],
+      "language": "JavaScript",
+      "default_branch": "master",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2025-04-04T16:08:27Z",
+      "updated_at": "2025-04-19T15:01:17Z",
+      "pushed_at": "2025-04-19T15:01:14Z",
+      "size_kb": 3371,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 0
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "f95bb8a6fb9d86c3734e5473c27d46b7568b2f3c",
+          "url": "https://github.com/Luis85/numbercruncher/commit/f95bb8a6fb9d86c3734e5473c27d46b7568b2f3c",
+          "message": "add categorization to generated docs from a canvas",
+          "author": "LuisMendezGeneric",
+          "authored_at": "2025-04-19T15:01:07Z",
+          "committed_at": "2025-04-19T15:01:07Z"
+        },
+        "latest_release": null,
+        "recent_events": []
+      }
+    },
+    {
+      "id": 961397379,
+      "node_id": "R_kgDOOU3Cgw",
+      "name": "numbercruncher-base",
+      "full_name": "Luis85/numbercruncher-base",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/numbercruncher-base",
+      "about": "A ready to go Numbercruncher place for Obsidian. Ideate, Design, Validate, Develop, Evaluate, and Document in one place as one team.",
+      "website": null,
+      "topics": [
+        "product-design",
+        "product-management",
+        "project-management",
+        "requirements-engineering"
+      ],
+      "language": null,
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2025-04-06T12:43:31Z",
+      "updated_at": "2025-04-15T08:03:34Z",
+      "pushed_at": "2025-04-15T08:03:31Z",
+      "size_kb": 1496,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 0
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "d53447b08ef3760a747e5772423aa7b3bf13605c",
+          "url": "https://github.com/Luis85/numbercruncher-base/commit/d53447b08ef3760a747e5772423aa7b3bf13605c",
+          "message": "update to latest",
+          "author": "LuisMendezGeneric",
+          "authored_at": "2025-04-15T08:03:26Z",
+          "committed_at": "2025-04-15T08:03:26Z"
+        },
+        "latest_release": null,
+        "recent_events": []
+      }
+    },
+    {
+      "id": 961870598,
+      "node_id": "R_kgDOOVT7Bg",
+      "name": "numbercruncher-source",
+      "full_name": "Luis85/numbercruncher-source",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/numbercruncher-source",
+      "about": "The Numbercrunchers source code",
+      "website": null,
+      "topics": [],
+      "language": "Vue",
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2025-04-07T09:44:40Z",
+      "updated_at": "2025-05-31T08:16:11Z",
+      "pushed_at": "2025-05-31T08:16:08Z",
+      "size_kb": 247,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 0
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "9a73613ae59f2ddba1768d8c551c63f94029d14f",
+          "url": "https://github.com/Luis85/numbercruncher-source/commit/9a73613ae59f2ddba1768d8c551c63f94029d14f",
+          "message": "add dynamic layout",
+          "author": "LuisMendezGeneric",
+          "authored_at": "2025-05-31T08:15:58Z",
+          "committed_at": "2025-05-31T08:15:58Z"
+        },
+        "latest_release": null,
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1135150928,
+      "node_id": "R_kgDOQ6kHUA",
+      "name": "obsidian-file-watcher",
+      "full_name": "Luis85/obsidian-file-watcher",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/obsidian-file-watcher",
+      "about": "A simple Obsidian plugin to watch folders outside of the Vault and sync into it",
+      "website": null,
+      "topics": [],
+      "language": "TypeScript",
+      "default_branch": "master",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-01-15T17:55:00Z",
+      "updated_at": "2026-01-15T17:55:09Z",
+      "pushed_at": "2026-01-15T17:55:03Z",
+      "size_kb": 47,
+      "license": {
+        "key": "0bsd",
+        "name": "BSD Zero Clause License",
+        "spdx_id": "0BSD",
+        "url": "https://api.github.com/licenses/0bsd"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 0
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "250cb9e6f4a2a60573e4300da4322e99cc5cde34",
+          "url": "https://github.com/Luis85/obsidian-file-watcher/commit/250cb9e6f4a2a60573e4300da4322e99cc5cde34",
+          "message": "Initial commit",
+          "author": "Luis85",
+          "authored_at": "2026-01-15T17:55:02Z",
+          "committed_at": "2026-01-15T17:55:02Z"
+        },
+        "latest_release": null,
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1358835979,
+      "node_id": "R_kgDOUP4xCw",
+      "name": "obsidian-git-graph",
+      "full_name": "Luis85/obsidian-git-graph",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/obsidian-git-graph",
+      "about": null,
+      "website": null,
+      "topics": [],
+      "language": "TypeScript",
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-09-06T05:59:43Z",
+      "updated_at": "2026-10-10T18:44:48Z",
+      "pushed_at": "2026-10-10T18:51:11Z",
+      "size_kb": 806,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 0
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "766693ee94f5607d1ca6545794a5e087efda2d20",
+          "url": "https://github.com/Luis85/obsidian-git-graph/commit/766693ee94f5607d1ca6545794a5e087efda2d20",
+          "message": "Git Graph 0.4.0: file diff and commit stepping in file history (#6)\n\n* feat: file history shows the file's diff per commit and steps between commits\n\nIn file mode, an expanded commit now shows the active file's diff in that\ncommit (under the path it had then, renames followed) instead of the plain\nfile list, which stays behind an \"All files\" disclosure. Newer/Older buttons\nand the arrow keys on a focused row move the expansion to the neighbouring\ncommit, paging in more history as needed and keeping the row in place.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* fix(view): keep file-history steps from being dropped, landing late or flooding git\n\n- loadMore hands repeat callers the page already in flight, and the stepper\n  waits for an in-flight load or page before resolving the row past the end,\n  so a step there is no longer silently dropped while the list's own\n  next-page request runs.\n- A step resolves whether the expansion moved and is dropped when the\n  expansion changed (click, collapse, scope change), a newer step was taken,\n  or the store was disposed while it waited for its page.\n- Details and diff results are matched to their expansion by a token bumped\n  on every expand and collapse instead of by hash, so re-expanding the same\n  commit (e.g. under another history path) cannot show a late result.\n- An expansion reached by stepping shows its row at once but asks git for\n  details and diff only after STEP_SETTLE_MS (100 ms); a later step, click,\n  collapse or dispose cancels the pending fetch. Clicks stay immediate.\n- historyPath is no longer part of ExpansionState; the expansion reads it\n  through a dependency. The fallback-file comment notes that a commit without\n  a recorded file is asked under historyPath even for fallback-path history.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* chore: point the store.ts size override at where expansion now lives\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* fix(git): file diffs for copies, merges, type changes and huge patches\n\n- Copies: diff-tree now runs with --find-copies-harder (implies -C), so a\n  copy pairs with its source even when the commit left the source alone,\n  and parseFileDiff reads only the sections whose `diff --git` header\n  writes the requested path, so the source's own edit is never shown in\n  its place. core.quotePath=false keeps non-ASCII names verbatim in that\n  header; names git still quotes are matched C-quoted.\n- Merges: `-m --first-parent` makes diff-tree diff against every parent.\n  commitDetails and fileDiff now compare explicitly with the first parent\n  (from rev-list --parents), or use --root for a root commit; no\n  --diff-merges (git 2.31) needed.\n- Type changes: every section of the path is read, hunk state reset at\n  each header, so a symlink-to-file change shows both halves.\n- diff.relative: the follow log runs with -c diff.relative=false, so the\n  per-commit paths stay repository-relative for the :(top) pathspecs.\n- parseFollowLog (moved to parse.ts) consumes every name-status entry of\n  a commit, treats only tokens with a field separator as commit records,\n  and attaches the entry for the followed path, tracking renames.\n- fileDiff reads at most 2 MiB of patch (runGitCapped) and reports more\n  as truncated instead of buffering up to 64 MiB or failing.\n- GitReader.fileDiff takes Pick<ChangedFile, 'path' | 'oldPath'>.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* fix(view): file-mode diff as a sibling of the details, sticky steps, a11y\n\nThe followed file's diff now renders after the commit header instead of in\nits slot, so it shows before the details load and stays if they fail; the\ncommit's files follow it under \"All files\", which shows \"Loading files…\"\nuntil they arrive and keeps its open state across steps. The diff is headed\nby the file's status and path (with the earlier path of a rename or copy),\nis a focusable region for sideways scrolling, and spans its widest line.\n\nThe Newer/Older bar is sticky, and list items are placed with `top` rather\nthan a transform, which sticky positioning cannot see. The step buttons name\ntheir target, a polite live region announces where a step landed, and only\nthe expanded row in file mode steps on ArrowUp/ArrowDown: any other row\nmoves focus to its neighbour. Focus after a step no longer scrolls.\n\nGraphRoot derives file mode from the store's history path, so the diff never\nwaits on a file that is not coming. The harness theme gains the button and\nicon variables the step bar needs to look like Obsidian's.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* docs: describe the polished file-history stepping and the merge file-list fix\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* 0.4.0\n\n* docs: date the 0.4.0 changelog entry\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* test: retry temp-dir removal so a git process exiting on Windows cannot fail cleanup\n\nCI on windows-latest hit EBUSY removing a temp vault while the plugin's\nfloating initRepo() still had a git process running in it.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Luis Mendez <luis.mendez@generic.de>\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>",
+          "author": "Luis85",
+          "authored_at": "2026-10-10T18:44:43Z",
+          "committed_at": "2026-10-10T18:44:43Z"
+        },
+        "latest_release": {
+          "id": 409139284,
+          "tag_name": "0.4.0",
+          "name": "0.4.0",
+          "url": "https://github.com/Luis85/obsidian-git-graph/releases/tag/0.4.0",
+          "created_at": "2026-10-10T18:44:43Z",
+          "published_at": "2026-10-10T18:51:11Z"
+        },
+        "recent_events": [
+          {
+            "id": "23769638164",
+            "type": "CreateEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-10T18:00:07Z",
+            "action": null,
+            "ref": "claude/file-mode-commit-switching-bb8c2f",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-git-graph",
+            "title": null
+          },
+          {
+            "id": "16909614711",
+            "type": "ReleaseEvent",
+            "actor": "github-actions[bot]",
+            "created_at": "2026-10-10T18:51:11Z",
+            "action": "published",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-git-graph/releases/tag/0.4.0",
+            "title": "0.4.0"
+          },
+          {
+            "id": "23613824454",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-10T18:44:44Z",
+            "action": null,
+            "ref": "refs/heads/main",
+            "ref_type": null,
+            "head": "766693ee94f5607d1ca6545794a5e087efda2d20",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-git-graph",
+            "title": null
+          },
+          {
+            "id": "16909377392",
+            "type": "PullRequestEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-10T18:44:43Z",
+            "action": "merged",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-git-graph",
+            "title": null
+          },
+          {
+            "id": "23611032214",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-10T18:07:45Z",
+            "action": null,
+            "ref": "refs/heads/claude/file-mode-commit-switching-bb8c2f",
+            "ref_type": null,
+            "head": "9b254610f54e30052a3921cd6b1b7c0b69c8a9cc",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-git-graph",
+            "title": null
+          },
+          {
+            "id": "16907717813",
+            "type": "PullRequestEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-10T18:00:19Z",
+            "action": "opened",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-git-graph",
+            "title": null
+          }
+        ]
+      }
+    },
+    {
+      "id": 1247560317,
+      "node_id": "R_kgDOSlxCfQ",
+      "name": "obsidian-jira-weaver",
+      "full_name": "Luis85/obsidian-jira-weaver",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/obsidian-jira-weaver",
+      "about": "Sync Jira issues into your Obsidian Vault",
+      "website": null,
+      "topics": [],
+      "language": null,
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": true,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-05-23T13:32:37Z",
+      "updated_at": "2026-05-23T13:32:37Z",
+      "pushed_at": "2026-05-23T13:33:00Z",
+      "size_kb": 285,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 0
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "f24d98468f222a29fea17789d003f7bf11415b21",
+          "url": "https://github.com/Luis85/obsidian-jira-weaver/commit/f24d98468f222a29fea17789d003f7bf11415b21",
+          "message": "docs: remove all HTML comment patterns from README\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>",
+          "author": "hyukjin78",
+          "authored_at": "2026-05-15T12:18:24Z",
+          "committed_at": "2026-05-15T12:18:24Z"
+        },
+        "latest_release": null,
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1381192934,
+      "node_id": "R_kgDOUlNU5g",
+      "name": "obsidian-plugin-shell",
+      "full_name": "Luis85/obsidian-plugin-shell",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/obsidian-plugin-shell",
+      "about": null,
+      "website": null,
+      "topics": [],
+      "language": "JavaScript",
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-09-22T09:23:54Z",
+      "updated_at": "2026-10-25T17:11:20Z",
+      "pushed_at": "2026-10-25T17:34:03Z",
+      "size_kb": 28496,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 2
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "90a15a92bf5d6db1ecf668bdee153fe2db1df7fe",
+          "url": "https://github.com/Luis85/obsidian-plugin-shell/commit/90a15a92bf5d6db1ecf668bdee153fe2db1df7fe",
+          "message": "Merge pull request #225 from Luis85/increment/changelog-publish-entry\n\nKick-off: Move the Publish token fix back to Unreleased",
+          "author": "Luis85",
+          "authored_at": "2026-10-25T17:11:14Z",
+          "committed_at": "2026-10-25T17:11:14Z"
+        },
+        "latest_release": {
+          "id": 423457804,
+          "tag_name": "0.5.0",
+          "name": "0.5.0",
+          "url": "https://github.com/Luis85/obsidian-plugin-shell/releases/tag/0.5.0",
+          "created_at": "2026-10-24T21:46:18Z",
+          "published_at": "2026-10-25T14:36:19Z"
+        },
+        "recent_events": [
+          {
+            "id": "25149948025",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-25T17:11:16Z",
+            "action": null,
+            "ref": "refs/heads/main",
+            "ref_type": null,
+            "head": "90a15a92bf5d6db1ecf668bdee153fe2db1df7fe",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-plugin-shell",
+            "title": null
+          },
+          {
+            "id": "25148286223",
+            "type": "CreateEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-25T17:34:04Z",
+            "action": null,
+            "ref": "pr/publish-stale-hold/publish-stale-hold-1",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-plugin-shell",
+            "title": null
+          },
+          {
+            "id": "18169850929",
+            "type": "PullRequestEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-25T17:34:19Z",
+            "action": "opened",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-plugin-shell",
+            "title": null
+          },
+          {
+            "id": "18169183807",
+            "type": "PullRequestEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-25T17:19:31Z",
+            "action": "opened",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-plugin-shell",
+            "title": null
+          },
+          {
+            "id": "25146635277",
+            "type": "DeleteEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-25T17:11:17Z",
+            "action": null,
+            "ref": "increment/changelog-publish-entry",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-plugin-shell",
+            "title": null
+          },
+          {
+            "id": "18168808474",
+            "type": "PullRequestEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-25T17:11:15Z",
+            "action": "merged",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-plugin-shell",
+            "title": null
+          },
+          {
+            "id": "25145655909",
+            "type": "CreateEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-24T16:39:29Z",
+            "action": null,
+            "ref": "increment/dependency-advisories",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-plugin-shell",
+            "title": null
+          },
+          {
+            "id": "25144093921",
+            "type": "DeleteEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-24T16:16:41Z",
+            "action": null,
+            "ref": "claude/beautiful-pascal-kiaddg",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-plugin-shell",
+            "title": null
+          },
+          {
+            "id": "25143354137",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-24T16:06:32Z",
+            "action": null,
+            "ref": "refs/heads/claude/vibrant-pascal-ynbuf1",
+            "ref_type": null,
+            "head": "56b2b99c355dd7aecd676e978f2527cd6727aab1",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-plugin-shell",
+            "title": null
+          },
+          {
+            "id": "25142405270",
+            "type": "CreateEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-24T15:43:04Z",
+            "action": null,
+            "ref": "claude/vibrant-pascal-ynbuf1",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-plugin-shell",
+            "title": null
+          }
+        ]
+      }
+    },
+    {
+      "id": 1249540346,
+      "node_id": "R_kgDOSnp4-g",
+      "name": "obsidian-releases",
+      "full_name": "Luis85/obsidian-releases",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/obsidian-releases",
+      "about": "Community plugins list, theme list, and releases of Obsidian.",
+      "website": "https://obsidian.md/",
+      "topics": [],
+      "language": null,
+      "default_branch": "master",
+      "visibility": "public",
+      "fork": true,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-05-25T20:11:01Z",
+      "updated_at": "2026-05-25T20:11:01Z",
+      "pushed_at": "2026-05-25T20:12:02Z",
+      "size_kb": 71953,
+      "license": null,
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 0
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "29a4354a05cd70201c683a228ed088519257ff68",
+          "url": "https://github.com/Luis85/obsidian-releases/commit/29a4354a05cd70201c683a228ed088519257ff68",
+          "message": "chore: Mirror community plugins and themes",
+          "author": "Obsidian Bot",
+          "authored_at": "2026-05-25T19:55:02Z",
+          "committed_at": "2026-05-25T19:55:02Z"
+        },
+        "latest_release": null,
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1214449463,
+      "node_id": "R_kgDOSGMHNw",
+      "name": "obsidian-storybook-connector",
+      "full_name": "Luis85/obsidian-storybook-connector",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/obsidian-storybook-connector",
+      "about": null,
+      "website": null,
+      "topics": [],
+      "language": null,
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-04-18T15:39:33Z",
+      "updated_at": "2026-04-18T15:39:37Z",
+      "pushed_at": "2026-04-18T15:39:33Z",
+      "size_kb": 1,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 0
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "4ab5148499953d7e1a0531f8aa39dc27442fad13",
+          "url": "https://github.com/Luis85/obsidian-storybook-connector/commit/4ab5148499953d7e1a0531f8aa39dc27442fad13",
+          "message": "Initial commit",
+          "author": "Luis85",
+          "authored_at": "2026-04-18T15:39:33Z",
+          "committed_at": "2026-04-18T15:39:33Z"
+        },
+        "latest_release": null,
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1275912715,
+      "node_id": "R_kgDOTAziCw",
+      "name": "operon",
+      "full_name": "Luis85/operon",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/operon",
+      "about": "Task management system for humans and agents in Obsidian.",
+      "website": null,
+      "topics": [],
+      "language": null,
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": true,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-06-21T09:51:52Z",
+      "updated_at": "2026-06-21T09:51:52Z",
+      "pushed_at": "2026-06-21T10:57:26Z",
+      "size_kb": 15271,
+      "license": {
+        "key": "gpl-3.0",
+        "name": "GNU General Public License v3.0",
+        "spdx_id": "GPL-3.0",
+        "url": "https://api.github.com/licenses/gpl-3.0"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 0
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "169e15d3be230e5b6dd2f5f4f0f6d7ea5dbbf4d2",
+          "url": "https://github.com/Luis85/operon/commit/169e15d3be230e5b6dd2f5f4f0f6d7ea5dbbf4d2",
+          "message": "Release 1.6.0",
+          "author": "hasanyilmaz",
+          "authored_at": "2026-06-19T13:29:21Z",
+          "committed_at": "2026-06-19T13:29:21Z"
+        },
+        "latest_release": null,
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1277245431,
+      "node_id": "R_kgDOTCE39w",
+      "name": "playground",
+      "full_name": "Luis85/playground",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/playground",
+      "about": null,
+      "website": null,
+      "topics": [],
+      "language": "TypeScript",
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-06-22T18:04:51Z",
+      "updated_at": "2026-06-23T16:50:12Z",
+      "pushed_at": "2026-06-23T16:50:07Z",
+      "size_kb": 541,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 0
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "73082a99ce613168daea02db2f8016485799dbde",
+          "url": "https://github.com/Luis85/playground/commit/73082a99ce613168daea02db2f8016485799dbde",
+          "message": "Merge pull request #2 from Luis85/claude/radzen-local-mcp-wypnsa",
+          "author": "Luis85",
+          "authored_at": "2026-06-23T16:50:05Z",
+          "committed_at": "2026-06-23T16:50:05Z"
+        },
+        "latest_release": null,
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1288385316,
+      "node_id": "R_kgDOTMszJA",
+      "name": "playground-obsisim",
+      "full_name": "Luis85/playground-obsisim",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/playground-obsisim",
+      "about": null,
+      "website": null,
+      "topics": [],
+      "language": "TypeScript",
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-07-03T14:48:18Z",
+      "updated_at": "2026-08-22T07:55:40Z",
+      "pushed_at": "2026-08-22T07:55:29Z",
+      "size_kb": 6570,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 0
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "2ab71616f3bd0bc944e9ba4bc304b9f76ab69754",
+          "url": "https://github.com/Luis85/playground-obsisim/commit/2ab71616f3bd0bc944e9ba4bc304b9f76ab69754",
+          "message": "Merge pull request #16 from Luis85/claude/next-increment-ux-ui-4c6638",
+          "author": "Luis85",
+          "authored_at": "2026-08-22T07:55:27Z",
+          "committed_at": "2026-08-22T07:55:27Z"
+        },
+        "latest_release": null,
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1415820511,
+      "node_id": "R_kgDOVGO03w",
+      "name": "production-line",
+      "full_name": "Luis85/production-line",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/production-line",
+      "about": "An agent driven software-production-line in a client-server architecture.",
+      "website": "https://luis85.github.io/production-line/",
+      "topics": [],
+      "language": "HTML",
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-10-12T15:56:48Z",
+      "updated_at": "2026-10-25T16:38:11Z",
+      "pushed_at": "2026-10-25T17:56:35Z",
+      "size_kb": 66800,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 1
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "edfceeba6cf0aeab596e80f801de19aeb687e434",
+          "url": "https://github.com/Luis85/production-line/commit/edfceeba6cf0aeab596e80f801de19aeb687e434",
+          "message": "Merge pull request #53 from Luis85/docs/domain-model\n\ndocs(werk): domain model, process landscape and backlog",
+          "author": "Luis85",
+          "authored_at": "2026-10-25T16:38:04Z",
+          "committed_at": "2026-10-25T16:38:04Z"
+        },
+        "latest_release": {
+          "id": 422308912,
+          "tag_name": "v0.15.0",
+          "name": "Werk 0.15.0",
+          "url": "https://github.com/Luis85/production-line/releases/tag/v0.15.0",
+          "created_at": "2026-10-23T20:44:17Z",
+          "published_at": "2026-10-23T21:05:03Z"
+        },
+        "recent_events": [
+          {
+            "id": "25144117898",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-25T16:38:06Z",
+            "action": null,
+            "ref": "refs/heads/main",
+            "ref_type": null,
+            "head": "edfceeba6cf0aeab596e80f801de19aeb687e434",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/production-line",
+            "title": null
+          },
+          {
+            "id": "18167333810",
+            "type": "PullRequestEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-25T16:38:05Z",
+            "action": "merged",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/production-line",
+            "title": null
+          },
+          {
+            "id": "25140382228",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-25T15:43:08Z",
+            "action": null,
+            "ref": "refs/heads/feat/worker-e2e-release",
+            "ref_type": null,
+            "head": "16ae9add85ea02b1e639a1bbeb2b79e9f79d5cf8",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/production-line",
+            "title": null
+          },
+          {
+            "id": "25138653968",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-25T15:24:12Z",
+            "action": null,
+            "ref": "refs/heads/feat/worker-e2e-release",
+            "ref_type": null,
+            "head": "8cd7543e28673905cc04db54d483e8dbd1082e1c",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/production-line",
+            "title": null
+          },
+          {
+            "id": "25137588307",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-25T15:09:54Z",
+            "action": null,
+            "ref": "refs/heads/feat/worker-e2e-release",
+            "ref_type": null,
+            "head": "e75261c54fc6939e181636b0f59f3bddb8a98035",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/production-line",
+            "title": null
+          },
+          {
+            "id": "18161671468",
+            "type": "PullRequestEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-25T14:31:25Z",
+            "action": "opened",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/production-line",
+            "title": null
+          },
+          {
+            "id": "25134774619",
+            "type": "CreateEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-25T14:31:02Z",
+            "action": null,
+            "ref": "feat/worker-e2e-release",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/production-line",
+            "title": null
+          },
+          {
+            "id": "18158652292",
+            "type": "PullRequestEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-25T13:22:24Z",
+            "action": "opened",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/production-line",
+            "title": null
+          },
+          {
+            "id": "25063066228",
+            "type": "CreateEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-24T16:43:34Z",
+            "action": null,
+            "ref": "fix/worker-015-install-friction",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/production-line",
+            "title": null
+          },
+          {
+            "id": "25055807337",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-24T17:11:30Z",
+            "action": null,
+            "ref": "refs/heads/fix/worker-015-install-friction",
+            "ref_type": null,
+            "head": "ea387433cdf2f580c48f5e75575f7b1f950fdeb7",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/production-line",
+            "title": null
+          }
+        ]
+      }
+    },
+    {
+      "id": 1433307425,
+      "node_id": "R_kgDOVW6JIQ",
+      "name": "project-diary",
+      "full_name": "Luis85/project-diary",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/project-diary",
+      "about": null,
+      "website": null,
+      "topics": [],
+      "language": "TypeScript",
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-10-25T14:52:04Z",
+      "updated_at": "2026-10-25T17:56:34Z",
+      "pushed_at": "2026-10-25T17:56:29Z",
+      "size_kb": 63,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 0
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "f06a318b1c4d1584301bebbb2d1bb9aad988a416",
+          "url": "https://github.com/Luis85/project-diary/commit/f06a318b1c4d1584301bebbb2d1bb9aad988a416",
+          "message": "Merge pull request #1 from Luis85/feat/daily-github-snapshots\n\nAdd daily GitHub snapshots and Obsidian diary with strict TypeScript",
+          "author": "Luis85",
+          "authored_at": "2026-10-25T17:56:28Z",
+          "committed_at": "2026-10-25T17:56:28Z"
+        },
+        "latest_release": null,
+        "recent_events": [
+          {
+            "id": "18170853900",
+            "type": "PullRequestEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-25T17:56:29Z",
+            "action": "merged",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/project-diary",
+            "title": null
+          },
+          {
+            "id": "25147705746",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-25T17:26:56Z",
+            "action": null,
+            "ref": "refs/heads/feat/daily-github-snapshots",
+            "ref_type": null,
+            "head": "da783cc94047d52762844a9985c92c8413205f36",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/project-diary",
+            "title": null
+          },
+          {
+            "id": "18163752622",
+            "type": "PullRequestEvent",
+            "actor": "Luis85",
+            "created_at": "2026-10-25T15:18:22Z",
+            "action": "opened",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/project-diary",
+            "title": null
+          }
+        ]
+      }
+    },
+    {
+      "id": 1342962847,
+      "node_id": "R_kgDOUAv8nw",
+      "name": "renovation-planner",
+      "full_name": "Luis85/renovation-planner",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/renovation-planner",
+      "about": null,
+      "website": null,
+      "topics": [],
+      "language": "TypeScript",
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-08-22T16:06:25Z",
+      "updated_at": "2026-10-05T19:17:13Z",
+      "pushed_at": "2026-10-11T04:34:46Z",
+      "size_kb": 198747,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 6
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "64a1438194a41c79453d11e62c8e3faa408e1048",
+          "url": "https://github.com/Luis85/renovation-planner/commit/64a1438194a41c79453d11e62c8e3faa408e1048",
+          "message": "Merge pull request #246 from Luis85/dependabot/npm_and_yarn/vitejs/plugin-vue-6.0.9\n\nbuild(deps-dev): Bump @vitejs/plugin-vue from 6.0.8 to 6.0.9",
+          "author": "Luis85",
+          "authored_at": "2026-10-05T19:17:06Z",
+          "committed_at": "2026-10-05T19:17:06Z"
+        },
+        "latest_release": null,
+        "recent_events": [
+          {
+            "id": "23808002779",
+            "type": "CreateEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-11T04:34:27Z",
+            "action": null,
+            "ref": "dependabot/npm_and_yarn/vue/test-utils-2.5.1",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/renovation-planner",
+            "title": null
+          },
+          {
+            "id": "23773008606",
+            "type": "CreateEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-11T04:34:47Z",
+            "action": null,
+            "ref": "dependabot/npm_and_yarn/types/node-22.20.5",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/renovation-planner",
+            "title": null
+          },
+          {
+            "id": "23686462510",
+            "type": "CreateEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-11T04:34:41Z",
+            "action": null,
+            "ref": "dependabot/npm_and_yarn/vite-8.3.3",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/renovation-planner",
+            "title": null
+          },
+          {
+            "id": "16927893709",
+            "type": "IssueCommentEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-11T04:35:27Z",
+            "action": "created",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/renovation-planner/pull/244#issuecomment-6105482099",
+            "title": "build(deps-dev): Bump @typescript-eslint/parser from 8.68.0 to 8.71.0"
+          },
+          {
+            "id": "16927886888",
+            "type": "IssueCommentEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-11T04:35:10Z",
+            "action": "created",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/renovation-planner/pull/245#issuecomment-6105480185",
+            "title": "build(deps): Bump konva from 10.3.2 to 10.7.0"
+          },
+          {
+            "id": "16927876592",
+            "type": "PullRequestEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-11T04:34:47Z",
+            "action": "labeled",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/renovation-planner",
+            "title": null
+          },
+          {
+            "id": "16927875878",
+            "type": "PullRequestEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-11T04:34:47Z",
+            "action": "labeled",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/renovation-planner",
+            "title": null
+          },
+          {
+            "id": "16927875603",
+            "type": "PullRequestEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-11T04:34:47Z",
+            "action": "opened",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/renovation-planner",
+            "title": null
+          },
+          {
+            "id": "16927873679",
+            "type": "PullRequestEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-11T04:34:41Z",
+            "action": "labeled",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/renovation-planner",
+            "title": null
+          },
+          {
+            "id": "16927873505",
+            "type": "PullRequestEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-11T04:34:41Z",
+            "action": "labeled",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/renovation-planner",
+            "title": null
+          }
+        ]
+      }
+    },
+    {
+      "id": 1226358160,
+      "node_id": "R_kgDOSRi9kA",
+      "name": "specorator",
+      "full_name": "Luis85/specorator",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/specorator",
+      "about": "Spec-driven agent workspace for Obsidian — plan in Markdown, run provider-native agents, review with evidence.",
+      "website": "https://github.com/Luis85/specorator#readme",
+      "topics": [
+        "agent",
+        "claude-code",
+        "codex",
+        "cursor",
+        "obsidian-plugin",
+        "opencode",
+        "spec-driven"
+      ],
+      "language": "TypeScript",
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-05-01T09:41:33Z",
+      "updated_at": "2026-09-10T21:20:29Z",
+      "pushed_at": "2026-07-28T08:54:28Z",
+      "size_kb": 26567,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 1,
+        "forks": 0,
+        "open_issues_and_pull_requests": 3
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "ad444e6b87194fd0b72e8474d59215959aa3418f",
+          "url": "https://github.com/Luis85/specorator/commit/ad444e6b87194fd0b72e8474d59215959aa3418f",
+          "message": "Merge pull request #517 from Luis85/claude/agents-teamchat-ux-ui-14v28k\n\nfeat(team-chat): UX/UI pass — roster rail, transcript identity, top bar, motion &amp; density",
+          "author": "Luis85",
+          "authored_at": "2026-07-28T08:54:26Z",
+          "committed_at": "2026-07-28T08:54:26Z"
+        },
+        "latest_release": {
+          "id": 359461204,
+          "tag_name": "1.3.0",
+          "name": "1.3.0",
+          "url": "https://github.com/Luis85/specorator/releases/tag/1.3.0",
+          "created_at": "2026-07-24T17:54:14Z",
+          "published_at": "2026-07-24T17:55:45Z"
+        },
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1248505409,
+      "node_id": "R_kgDOSmquQQ",
+      "name": "specorator-astro",
+      "full_name": "Luis85/specorator-astro",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/specorator-astro",
+      "about": null,
+      "website": null,
+      "topics": [],
+      "language": "TypeScript",
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-05-24T18:20:40Z",
+      "updated_at": "2026-05-25T10:42:35Z",
+      "pushed_at": "2026-07-19T23:42:31Z",
+      "size_kb": 1282,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 14
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "c194d204e60e9c5ed46bf3bddb18a35e22a8e4e5",
+          "url": "https://github.com/Luis85/specorator-astro/commit/c194d204e60e9c5ed46bf3bddb18a35e22a8e4e5",
+          "message": "Merge pull request #9 from Luis85/release-please--branches--main--components--specorator-astro-viewer",
+          "author": "Luis85",
+          "authored_at": "2026-05-25T10:42:30Z",
+          "committed_at": "2026-05-25T10:42:30Z"
+        },
+        "latest_release": {
+          "id": 328805002,
+          "tag_name": "0.1.0",
+          "name": "v0.1.0",
+          "url": "https://github.com/Luis85/specorator-astro/releases/tag/0.1.0",
+          "created_at": "2026-05-25T10:42:30Z",
+          "published_at": "2026-05-25T10:42:40Z"
+        },
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1248942819,
+      "node_id": "R_kgDOSnFa4w",
+      "name": "specorator-builder",
+      "full_name": "Luis85/specorator-builder",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/specorator-builder",
+      "about": null,
+      "website": null,
+      "topics": [],
+      "language": "TypeScript",
+      "default_branch": "claude/specorator-builder-plugin-VXW2L",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-05-25T07:39:49Z",
+      "updated_at": "2026-05-25T10:01:35Z",
+      "pushed_at": "2026-05-25T11:41:51Z",
+      "size_kb": 135,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 1
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "dd0e18cfbc9c81fc784300f4f98125e42caf3b25",
+          "url": "https://github.com/Luis85/specorator-builder/commit/dd0e18cfbc9c81fc784300f4f98125e42caf3b25",
+          "message": "Add opt-in MCP server and Claude assets installer\n\n- MCP: pure tool layer (list/create projects, get/set project data, build,\n  list components) + JSON-RPC dispatcher, both unit-tested; minimal\n  Streamable-HTTP server (stateless JSON-RPC on POST /mcp, 127.0.0.1, optional\n  bearer, EADDRINUSE fallback) with no heavy SDK dependency. Behind a one-time\n  consent gate; start/stop commands; stopped on unload. set_project_data\n  triggers reload-from-disk in open builder leaves (ADR-0009).\n- Claude assets: pure generator for .claude/ skills/subagents/commands plus\n  .mcp.json merge/remove helpers (managed-marker, non-destructive), idempotent\n  installer adapter, single default-off settings toggle (ADR-0015).\n- Settings: preview/MCP ports, Claude assets toggle. 15 new unit tests (51 total).\n\nhttps://claude.ai/code/session_01GwsdCH7Ro9zaS865UqxfDM",
+          "author": "claude",
+          "authored_at": "2026-05-25T10:01:29Z",
+          "committed_at": "2026-05-25T10:01:29Z"
+        },
+        "latest_release": {
+          "id": 328797926,
+          "tag_name": "0.1.0",
+          "name": "0.1.0",
+          "url": "https://github.com/Luis85/specorator-builder/releases/tag/0.1.0",
+          "created_at": "2026-05-25T10:28:43Z",
+          "published_at": "2026-05-25T10:29:04Z"
+        },
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1229043764,
+      "node_id": "R_kgDOSUG4NA",
+      "name": "specorator-ecosystem",
+      "full_name": "Luis85/specorator-ecosystem",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/specorator-ecosystem",
+      "about": "Turn ideas into clear project plans and shipped outcomes — AI-guided, step-by-step, no coding required",
+      "website": "https://luis85.github.io/specorator-ecosystem/",
+      "topics": [
+        "ai-agents",
+        "obsidian",
+        "obsidian-plugin",
+        "productivity",
+        "project-management"
+      ],
+      "language": "Astro",
+      "default_branch": "develop",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-05-04T16:35:15Z",
+      "updated_at": "2026-05-09T20:51:13Z",
+      "pushed_at": "2026-05-09T20:56:58Z",
+      "size_kb": 5699,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 8
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "b339cff093051eac1f82dc66c770e9293fe989ad",
+          "url": "https://github.com/Luis85/specorator-ecosystem/commit/b339cff093051eac1f82dc66c770e9293fe989ad",
+          "message": "Merge pull request #66 from Luis85/claude/review-claude-plugin-release-WguhG\n\nchore: reflect agentic-workflow Claude Code plugin release in hub data",
+          "author": "Luis85",
+          "authored_at": "2026-05-09T20:51:09Z",
+          "committed_at": "2026-05-09T20:51:09Z"
+        },
+        "latest_release": null,
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1304362542,
+      "node_id": "R_kgDOTb7-Lg",
+      "name": "specorator-marketplace",
+      "full_name": "Luis85/specorator-marketplace",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/specorator-marketplace",
+      "about": null,
+      "website": null,
+      "topics": [],
+      "language": "JavaScript",
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-07-17T20:22:07Z",
+      "updated_at": "2026-07-26T06:48:31Z",
+      "pushed_at": "2026-07-26T06:48:14Z",
+      "size_kb": 489,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 1,
+        "open_issues_and_pull_requests": 0
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "c2c459f112bd7f329bad70bef035e8e808533091",
+          "url": "https://github.com/Luis85/specorator-marketplace/commit/c2c459f112bd7f329bad70bef035e8e808533091",
+          "message": "Merge pull request #6 from Luis85/claude/project-manager-frontmatter-review-vyqsjh\n\nFix YAML-invalid skill frontmatter, and gate the catalog on a real YAML parser",
+          "author": "Luis85",
+          "authored_at": "2026-07-26T06:48:12Z",
+          "committed_at": "2026-07-26T06:48:12Z"
+        },
+        "latest_release": null,
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1248253385,
+      "node_id": "R_kgDOSmbVyQ",
+      "name": "specorator-obsidian-mcp",
+      "full_name": "Luis85/specorator-obsidian-mcp",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/specorator-obsidian-mcp",
+      "about": "MCP server inside Obsidian — exposes your vault to Claude, Cursor, and Claude Desktop over a secure local connection",
+      "website": null,
+      "topics": [],
+      "language": "TypeScript",
+      "default_branch": "develop",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-05-24T11:54:33Z",
+      "updated_at": "2026-05-26T20:02:52Z",
+      "pushed_at": "2026-05-26T20:02:33Z",
+      "size_kb": 625,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 0
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "e48a69c96e544c8677746b7431e50edd01c74c3d",
+          "url": "https://github.com/Luis85/specorator-obsidian-mcp/commit/e48a69c96e544c8677746b7431e50edd01c74c3d",
+          "message": "chore: release 0.3.0\n\nCo-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>",
+          "author": "Symprowire",
+          "authored_at": "2026-05-26T20:02:11Z",
+          "committed_at": "2026-05-26T20:02:11Z"
+        },
+        "latest_release": {
+          "id": 329666644,
+          "tag_name": "0.3.0",
+          "name": "0.3.0",
+          "url": "https://github.com/Luis85/specorator-obsidian-mcp/releases/tag/0.3.0",
+          "created_at": "2026-05-26T20:02:11Z",
+          "published_at": "2026-05-26T20:02:55Z"
+        },
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1259573496,
+      "node_id": "R_kgDOSxOQ-A",
+      "name": "specorator-rag",
+      "full_name": "Luis85/specorator-rag",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/specorator-rag",
+      "about": null,
+      "website": null,
+      "topics": [],
+      "language": null,
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-06-04T16:34:43Z",
+      "updated_at": "2026-06-04T16:34:47Z",
+      "pushed_at": "2026-06-04T16:34:44Z",
+      "size_kb": 1,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 0
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "4a92b5992304dd4a90b83a7ced616f32159ecc95",
+          "url": "https://github.com/Luis85/specorator-rag/commit/4a92b5992304dd4a90b83a7ced616f32159ecc95",
+          "message": "Initial commit",
+          "author": "Luis85",
+          "authored_at": "2026-06-04T16:34:43Z",
+          "committed_at": "2026-06-04T16:34:43Z"
+        },
+        "latest_release": null,
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1228060860,
+      "node_id": "R_kgDOSTK4vA",
+      "name": "specorator-runtime",
+      "full_name": "Luis85/specorator-runtime",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/specorator-runtime",
+      "about": "The Specorator Runtime - Harness and Orchestration of Issue driven Agents",
+      "website": "https://luis85.github.io/specorator-runtime/",
+      "topics": [
+        "ai-harness",
+        "ai-orchestration",
+        "ai-orchestration-engine",
+        "ai-runtime"
+      ],
+      "language": "Astro",
+      "default_branch": "develop",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-05-03T14:42:45Z",
+      "updated_at": "2026-05-10T12:16:22Z",
+      "pushed_at": "2026-05-10T12:16:19Z",
+      "size_kb": 72,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 54
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "8b34aeb14039b5c71dbfec35edafcf5d5ca7d857",
+          "url": "https://github.com/Luis85/specorator-runtime/commit/8b34aeb14039b5c71dbfec35edafcf5d5ca7d857",
+          "message": "Merge pull request #59 from Luis85/sync-product-page-to-develop\n\nSync Astro product page to develop",
+          "author": "Luis85",
+          "authored_at": "2026-05-10T12:16:18Z",
+          "committed_at": "2026-05-10T12:16:18Z"
+        },
+        "latest_release": null,
+        "recent_events": []
+      }
+    },
+    {
+      "id": 1249035049,
+      "node_id": "R_kgDOSnLDKQ",
+      "name": "specorator-testrunner",
+      "full_name": "Luis85/specorator-testrunner",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/specorator-testrunner",
+      "about": null,
+      "website": null,
+      "topics": [],
+      "language": "TypeScript",
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-05-25T09:32:51Z",
+      "updated_at": "2026-07-16T18:14:21Z",
+      "pushed_at": "2026-10-15T15:23:43Z",
+      "size_kb": 5021,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 9
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "4b9e57b25f2068a7315ae8db8a093470592d1b8f",
+          "url": "https://github.com/Luis85/specorator-testrunner/commit/4b9e57b25f2068a7315ae8db8a093470592d1b8f",
+          "message": "Merge pull request #100 from Luis85/dependabot/github_actions/actions/setup-node-7\n\nbuild(deps): Bump actions/setup-node from 6 to 7",
+          "author": "Luis85",
+          "authored_at": "2026-07-16T18:13:51Z",
+          "committed_at": "2026-07-16T18:13:51Z"
+        },
+        "latest_release": {
+          "id": 338903949,
+          "tag_name": "1.0.1",
+          "name": "1.0.1",
+          "url": "https://github.com/Luis85/specorator-testrunner/releases/tag/1.0.1",
+          "created_at": "2026-06-13T05:08:25Z",
+          "published_at": "2026-06-13T05:09:18Z"
+        },
+        "recent_events": [
+          {
+            "id": "24267468733",
+            "type": "CreateEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-15T15:23:44Z",
+            "action": null,
+            "ref": "dependabot/github_actions/actions/setup-node-7.1.0",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/specorator-testrunner",
+            "title": null
+          },
+          {
+            "id": "17312444275",
+            "type": "PullRequestEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-15T15:23:44Z",
+            "action": "labeled",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/specorator-testrunner",
+            "title": null
+          },
+          {
+            "id": "17308579043",
+            "type": "PullRequestEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-15T15:23:44Z",
+            "action": "labeled",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/specorator-testrunner",
+            "title": null
+          },
+          {
+            "id": "17308576150",
+            "type": "PullRequestEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-10-15T15:23:44Z",
+            "action": "opened",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/specorator-testrunner",
+            "title": null
+          }
+        ]
+      }
+    },
+    {
+      "id": 1286478451,
+      "node_id": "R_kgDOTK4acw",
+      "name": "vault-buddy",
+      "full_name": "Luis85/vault-buddy",
+      "owner": "Luis85",
+      "url": "https://github.com/Luis85/vault-buddy",
+      "about": "Your Obsidian desktop companion, a tiny animated buddy that puts vaults and daily notes one click away. Lives on your Windows desktop, opens your Obsidian vaults and daily notes in one click. Local-first, your knowledge stays yours.",
+      "website": "https://github.com/Luis85/vault-buddy/releases/latest",
+      "topics": [
+        "desktop-companion",
+        "knowledge-management",
+        "obsidian",
+        "pkm",
+        "productivity"
+      ],
+      "language": "Rust",
+      "default_branch": "main",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "created_at": "2026-07-01T20:30:30Z",
+      "updated_at": "2026-09-19T18:51:13Z",
+      "pushed_at": "2026-09-28T07:03:39Z",
+      "size_kb": 21106,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "counts": {
+        "stars": 0,
+        "forks": 0,
+        "open_issues_and_pull_requests": 1
+      },
+      "activity": {
+        "status": "available",
+        "latest_commit": {
+          "sha": "01ef8305406f4a22e416b5eb213671630f345053",
+          "url": "https://github.com/Luis85/vault-buddy/commit/01ef8305406f4a22e416b5eb213671630f345053",
+          "message": "add video editor concept",
+          "author": "LuisMendezGeneric",
+          "authored_at": "2026-09-19T18:51:00Z",
+          "committed_at": "2026-09-19T18:51:00Z"
+        },
+        "latest_release": {
+          "id": 359006209,
+          "tag_name": "v0.7.2",
+          "name": "Vault Buddy v0.7.2",
+          "url": "https://github.com/Luis85/vault-buddy/releases/tag/v0.7.2",
+          "created_at": "2026-07-23T23:11:42Z",
+          "published_at": "2026-07-23T23:31:25Z"
+        },
+        "recent_events": [
+          {
+            "id": "22361450602",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-09-28T07:03:40Z",
+            "action": null,
+            "ref": "refs/heads/claude/screen-capture-intake-g0j49q",
+            "ref_type": null,
+            "head": "f9a23b6f936f935d0c73eabd529bc0c3ba5a4733",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/vault-buddy",
+            "title": null
+          },
+          {
+            "id": "22278386452",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-09-26T20:27:03Z",
+            "action": null,
+            "ref": "refs/heads/claude/screen-capture-intake-g0j49q",
+            "ref_type": null,
+            "head": "0b9da7627699875ab93f78b4761cde52b913ed00",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/vault-buddy",
+            "title": null
+          },
+          {
+            "id": "22252755590",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-09-26T20:01:43Z",
+            "action": null,
+            "ref": "refs/heads/claude/screen-capture-intake-g0j49q",
+            "ref_type": null,
+            "head": "16c8bd9b13e9a08556f1fcb5199ad66e91b1accb",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/vault-buddy",
+            "title": null
+          },
+          {
+            "id": "22251632166",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-09-26T19:40:22Z",
+            "action": null,
+            "ref": "refs/heads/claude/screen-capture-intake-g0j49q",
+            "ref_type": null,
+            "head": "b6e9556caa27f4063e459daf89d0b7d70a963f67",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/vault-buddy",
+            "title": null
+          },
+          {
+            "id": "22251096783",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-09-26T19:30:10Z",
+            "action": null,
+            "ref": "refs/heads/claude/screen-capture-intake-g0j49q",
+            "ref_type": null,
+            "head": "823ed3a39bcb7ae6c58d290bdcc6866b858d2830",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/vault-buddy",
+            "title": null
+          },
+          {
+            "id": "22250954989",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-09-26T19:27:26Z",
+            "action": null,
+            "ref": "refs/heads/claude/screen-capture-intake-g0j49q",
+            "ref_type": null,
+            "head": "0a0f70e59867c345198eebd8b3b9116cd81267f9",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/vault-buddy",
+            "title": null
+          },
+          {
+            "id": "22178913046",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-09-25T13:57:28Z",
+            "action": null,
+            "ref": "refs/heads/claude/screen-capture-intake-g0j49q",
+            "ref_type": null,
+            "head": "930eadcfe34a90620cb797fbe543eaf3b00975d6",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/vault-buddy",
+            "title": null
+          }
+        ]
+      }
+    }
+  ]
+}
