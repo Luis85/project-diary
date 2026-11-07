@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "snapshot_date": "2026-11-06",
-  "captured_at": "2026-11-06T02:23:19.468Z",
-  "completed_at": "2026-11-06T02:23:51.243Z",
+  "snapshot_date": "2026-11-07",
+  "captured_at": "2026-11-07T01:53:36.199Z",
+  "completed_at": "2026-11-07T01:54:09.443Z",
   "owner": "Luis85",
   "source": {
     "provider": "github",
@@ -1963,6 +1963,32 @@
         },
         "recent_events": [
           {
+            "id": "26302850968",
+            "type": "CreateEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-11-04T02:35:05Z",
+            "action": null,
+            "ref": "dependabot/npm_and_yarn/projects/component-atlas/iconify-json/lucide-1.2.150",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-plugin-shell",
+            "title": null
+          },
+          {
+            "id": "26302846978",
+            "type": "CreateEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-11-04T02:35:00Z",
+            "action": null,
+            "ref": "dependabot/npm_and_yarn/projects/companion/iconify-json/lucide-1.2.150",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-plugin-shell",
+            "title": null
+          },
+          {
             "id": "26148391720",
             "type": "CreateEvent",
             "actor": "dependabot[bot]",
@@ -2058,32 +2084,6 @@
             "type": "PullRequestEvent",
             "actor": "dependabot[bot]",
             "created_at": "2026-11-04T02:35:18Z",
-            "action": "labeled",
-            "ref": null,
-            "ref_type": null,
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/obsidian-plugin-shell",
-            "title": null
-          },
-          {
-            "id": "19068439906",
-            "type": "PullRequestEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-11-04T02:35:18Z",
-            "action": "opened",
-            "ref": null,
-            "ref_type": null,
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/obsidian-plugin-shell",
-            "title": null
-          },
-          {
-            "id": "19068432954",
-            "type": "PullRequestEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-11-04T02:35:09Z",
             "action": "labeled",
             "ref": null,
             "ref_type": null,
@@ -2515,9 +2515,9 @@
       "archived": false,
       "disabled": false,
       "created_at": "2026-10-25T14:52:04Z",
-      "updated_at": "2026-11-05T02:23:54Z",
-      "pushed_at": "2026-11-05T02:23:49Z",
-      "size_kb": 445,
+      "updated_at": "2026-11-06T02:23:56Z",
+      "pushed_at": "2026-11-06T02:23:52Z",
+      "size_kb": 447,
       "license": {
         "key": "mit",
         "name": "MIT License",
@@ -2532,15 +2532,28 @@
       "activity": {
         "status": "available",
         "latest_commit": {
-          "sha": "c1e1c904af1e6fc3e9c645d0bf93bbce2313bdca",
-          "url": "https://github.com/Luis85/project-diary/commit/c1e1c904af1e6fc3e9c645d0bf93bbce2313bdca",
-          "message": "chore(data): update GitHub diary 2026-11-05",
+          "sha": "726da219c5ce8b41cb74dee5bc8b8e2bd6f4acb4",
+          "url": "https://github.com/Luis85/project-diary/commit/726da219c5ce8b41cb74dee5bc8b8e2bd6f4acb4",
+          "message": "chore(data): update GitHub diary 2026-11-06",
           "author": "github-actions[bot]",
-          "authored_at": "2026-11-05T02:23:47Z",
-          "committed_at": "2026-11-05T02:23:47Z"
+          "authored_at": "2026-11-06T02:23:51Z",
+          "committed_at": "2026-11-06T02:23:51Z"
         },
         "latest_release": null,
         "recent_events": [
+          {
+            "id": "26326051321",
+            "type": "PushEvent",
+            "actor": "github-actions[bot]",
+            "created_at": "2026-11-06T02:23:52Z",
+            "action": null,
+            "ref": "refs/heads/main",
+            "ref_type": null,
+            "head": "726da219c5ce8b41cb74dee5bc8b8e2bd6f4acb4",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/project-diary",
+            "title": null
+          },
           {
             "id": "26056481728",
             "type": "PushEvent",
@@ -2652,19 +2665,6 @@
             "created_at": "2026-10-25T15:18:06Z",
             "action": null,
             "ref": "feat/daily-github-snapshots",
-            "ref_type": "branch",
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/project-diary",
-            "title": null
-          },
-          {
-            "id": "25226221386",
-            "type": "CreateEvent",
-            "actor": "Luis85",
-            "created_at": "2026-10-25T14:52:06Z",
-            "action": null,
-            "ref": "main",
             "ref_type": "branch",
             "head": null,
             "commit_count": null,
