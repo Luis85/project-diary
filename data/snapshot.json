@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "snapshot_date": "2026-11-11",
-  "captured_at": "2026-11-11T01:54:37.931Z",
-  "completed_at": "2026-11-11T01:55:10.631Z",
+  "snapshot_date": "2026-11-12",
+  "captured_at": "2026-11-12T12:38:12.683Z",
+  "completed_at": "2026-11-12T12:38:48.937Z",
   "owner": "Luis85",
   "source": {
     "provider": "github",
@@ -825,6 +825,19 @@
         "latest_release": null,
         "recent_events": [
           {
+            "id": "26811138974",
+            "type": "DeleteEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-11-09T12:28:30Z",
+            "action": null,
+            "ref": "dependabot/npm_and_yarn/lint-13d5bd0477",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/coforge",
+            "title": null
+          },
+          {
             "id": "26662620483",
             "type": "CreateEvent",
             "actor": "dependabot[bot]",
@@ -940,19 +953,6 @@
             "commit_count": null,
             "url": "https://github.com/Luis85/coforge",
             "title": null
-          },
-          {
-            "id": "26116516509",
-            "type": "PushEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-11-02T12:30:06Z",
-            "action": null,
-            "ref": "refs/heads/dependabot/npm_and_yarn/lint-0dcaf1e300",
-            "ref_type": null,
-            "head": "3338c5ef7d547e97c92280d8b56051b7ae4b25b6",
-            "commit_count": null,
-            "url": "https://github.com/Luis85/coforge",
-            "title": null
           }
         ]
       }
@@ -1020,8 +1020,8 @@
       "disabled": false,
       "created_at": "2026-09-24T13:40:08Z",
       "updated_at": "2026-09-24T20:04:26Z",
-      "pushed_at": "2026-10-22T00:24:28Z",
-      "size_kb": 785,
+      "pushed_at": "2026-11-12T00:25:26Z",
+      "size_kb": 781,
       "license": {
         "key": "mit",
         "name": "MIT License",
@@ -1045,6 +1045,71 @@
         },
         "latest_release": null,
         "recent_events": [
+          {
+            "id": "19841947464",
+            "type": "PullRequestEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-11-12T00:25:29Z",
+            "action": "labeled",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/describe",
+            "title": null
+          },
+          {
+            "id": "19841947203",
+            "type": "PullRequestEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-11-12T00:25:29Z",
+            "action": "labeled",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/describe",
+            "title": null
+          },
+          {
+            "id": "19841944743",
+            "type": "PullRequestEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-11-12T00:25:27Z",
+            "action": "opened",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/describe",
+            "title": null
+          },
+          {
+            "id": "19841919543",
+            "type": "PullRequestEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-11-12T00:25:00Z",
+            "action": "closed",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/describe",
+            "title": null
+          },
+          {
+            "id": "19841909953",
+            "type": "IssueCommentEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-11-12T00:25:00Z",
+            "action": "created",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/describe/pull/23#issuecomment-6810628200",
+            "title": "build(deps-dev): bump the development-tooling group across 1 directory with 7 updates"
+          },
           {
             "id": "17870665027",
             "type": "PullRequestEvent",
@@ -1109,71 +1174,6 @@
             "commit_count": null,
             "url": "https://github.com/Luis85/describe/pull/21#issuecomment-6329615753",
             "title": "build(deps-dev): bump wdio-obsidian-service from 3.2.1 to 3.3.0 in the native-testing group"
-          },
-          {
-            "id": "24169805656",
-            "type": "CreateEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-10-15T00:25:34Z",
-            "action": null,
-            "ref": "dependabot/npm_and_yarn/development-tooling-52df317042",
-            "ref_type": "branch",
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/describe",
-            "title": null
-          },
-          {
-            "id": "24169744929",
-            "type": "CreateEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-10-15T00:24:23Z",
-            "action": null,
-            "ref": "dependabot/github_actions/actions-compatible-c673fd7efc",
-            "ref_type": "branch",
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/describe",
-            "title": null
-          },
-          {
-            "id": "24047369608",
-            "type": "CreateEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-10-15T00:24:42Z",
-            "action": null,
-            "ref": "dependabot/npm_and_yarn/webdriverio-10.0.2",
-            "ref_type": "branch",
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/describe",
-            "title": null
-          },
-          {
-            "id": "24047351779",
-            "type": "CreateEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-10-15T00:24:30Z",
-            "action": null,
-            "ref": "dependabot/npm_and_yarn/native-testing-9f6abd43b1",
-            "ref_type": "branch",
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/describe",
-            "title": null
-          },
-          {
-            "id": "24047267826",
-            "type": "DeleteEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-10-15T00:25:06Z",
-            "action": null,
-            "ref": "dependabot/npm_and_yarn/development-tooling-6a384f2c3c",
-            "ref_type": "branch",
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/describe",
-            "title": null
           }
         ]
       }
@@ -1435,110 +1435,6 @@
             "commit_count": null,
             "url": "https://github.com/Luis85/motorsport-manager",
             "title": null
-          },
-          {
-            "id": "23829727499",
-            "type": "DeleteEvent",
-            "actor": "Luis85",
-            "created_at": "2026-10-11T11:39:42Z",
-            "action": null,
-            "ref": "claude/model-forge",
-            "ref_type": "branch",
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/motorsport-manager",
-            "title": null
-          },
-          {
-            "id": "23829723218",
-            "type": "PushEvent",
-            "actor": "Luis85",
-            "created_at": "2026-10-11T11:39:37Z",
-            "action": null,
-            "ref": "refs/heads/main",
-            "ref_type": null,
-            "head": "3f56925b3532f015d9a29f19a998a05286b76f13",
-            "commit_count": null,
-            "url": "https://github.com/Luis85/motorsport-manager",
-            "title": null
-          },
-          {
-            "id": "23824382723",
-            "type": "PushEvent",
-            "actor": "Luis85",
-            "created_at": "2026-10-11T09:58:40Z",
-            "action": null,
-            "ref": "refs/heads/main",
-            "ref_type": null,
-            "head": "90b11788fcb4e8050abdc2926c37406f8091f9a4",
-            "commit_count": null,
-            "url": "https://github.com/Luis85/motorsport-manager",
-            "title": null
-          },
-          {
-            "id": "23822896564",
-            "type": "PushEvent",
-            "actor": "Luis85",
-            "created_at": "2026-10-11T10:32:22Z",
-            "action": null,
-            "ref": "refs/heads/main",
-            "ref_type": null,
-            "head": "cf0f484922992b6a11bc791977a6f44b7a711ff7",
-            "commit_count": null,
-            "url": "https://github.com/Luis85/motorsport-manager",
-            "title": null
-          },
-          {
-            "id": "23818616395",
-            "type": "PushEvent",
-            "actor": "Luis85",
-            "created_at": "2026-10-11T09:05:59Z",
-            "action": null,
-            "ref": "refs/heads/claude/process-studio",
-            "ref_type": null,
-            "head": "3992dbcb4bee9665640f6d81f10b22142a6997c5",
-            "commit_count": null,
-            "url": "https://github.com/Luis85/motorsport-manager",
-            "title": null
-          },
-          {
-            "id": "23812968932",
-            "type": "PushEvent",
-            "actor": "Luis85",
-            "created_at": "2026-10-11T15:11:48Z",
-            "action": null,
-            "ref": "refs/heads/codex/armored-platoon",
-            "ref_type": null,
-            "head": "3ce1c8dfde1e479b9927e4447bcbb6e28e898ba9",
-            "commit_count": null,
-            "url": "https://github.com/Luis85/motorsport-manager",
-            "title": null
-          },
-          {
-            "id": "23785293615",
-            "type": "PushEvent",
-            "actor": "Luis85",
-            "created_at": "2026-10-10T21:47:42Z",
-            "action": null,
-            "ref": "refs/heads/feature/process-studio-followups",
-            "ref_type": null,
-            "head": "289acc67f8c8f932006692bed0180c9b6c12d5d3",
-            "commit_count": null,
-            "url": "https://github.com/Luis85/motorsport-manager",
-            "title": null
-          },
-          {
-            "id": "23781965292",
-            "type": "PushEvent",
-            "actor": "Luis85",
-            "created_at": "2026-10-11T07:15:47Z",
-            "action": null,
-            "ref": "refs/heads/codex/armored-platoon",
-            "ref_type": null,
-            "head": "bbf8475e80d59754bef4df4448492979f492624c",
-            "commit_count": null,
-            "url": "https://github.com/Luis85/motorsport-manager",
-            "title": null
           }
         ]
       }
@@ -1785,21 +1681,7 @@
           "created_at": "2026-10-10T18:44:43Z",
           "published_at": "2026-10-10T18:51:11Z"
         },
-        "recent_events": [
-          {
-            "id": "23769638164",
-            "type": "CreateEvent",
-            "actor": "Luis85",
-            "created_at": "2026-10-10T18:00:07Z",
-            "action": null,
-            "ref": "claude/file-mode-commit-switching-bb8c2f",
-            "ref_type": "branch",
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/obsidian-git-graph",
-            "title": null
-          }
-        ]
+        "recent_events": []
       }
     },
     {
@@ -1865,8 +1747,8 @@
       "disabled": false,
       "created_at": "2026-09-22T09:23:54Z",
       "updated_at": "2026-11-01T21:25:18Z",
-      "pushed_at": "2026-11-04T02:35:30Z",
-      "size_kb": 30995,
+      "pushed_at": "2026-11-11T02:36:33Z",
+      "size_kb": 29744,
       "license": {
         "key": "mit",
         "name": "MIT License",
@@ -1876,7 +1758,7 @@
       "counts": {
         "stars": 0,
         "forks": 0,
-        "open_issues_and_pull_requests": 16
+        "open_issues_and_pull_requests": 34
       },
       "activity": {
         "status": "available",
@@ -1898,12 +1780,12 @@
         },
         "recent_events": [
           {
-            "id": "26302850968",
-            "type": "CreateEvent",
+            "id": "26929728676",
+            "type": "DeleteEvent",
             "actor": "dependabot[bot]",
-            "created_at": "2026-11-04T02:35:05Z",
+            "created_at": "2026-11-11T02:35:46Z",
             "action": null,
-            "ref": "dependabot/npm_and_yarn/projects/component-atlas/iconify-json/lucide-1.2.150",
+            "ref": "dependabot/npm_and_yarn/projects/resource-atlas/iconify-json/lucide-1.2.150",
             "ref_type": "branch",
             "head": null,
             "commit_count": null,
@@ -1911,12 +1793,12 @@
             "title": null
           },
           {
-            "id": "26302846978",
+            "id": "26929687391",
             "type": "CreateEvent",
             "actor": "dependabot[bot]",
-            "created_at": "2026-11-04T02:35:00Z",
+            "created_at": "2026-11-11T02:35:21Z",
             "action": null,
-            "ref": "dependabot/npm_and_yarn/projects/companion/iconify-json/lucide-1.2.150",
+            "ref": "dependabot/npm_and_yarn/projects/sitemap-atlas/iconify-json/lucide-1.2.152",
             "ref_type": "branch",
             "head": null,
             "commit_count": null,
@@ -1924,12 +1806,12 @@
             "title": null
           },
           {
-            "id": "26148391720",
+            "id": "26929685625",
             "type": "CreateEvent",
             "actor": "dependabot[bot]",
-            "created_at": "2026-11-04T02:35:03Z",
+            "created_at": "2026-11-11T02:35:20Z",
             "action": null,
-            "ref": "dependabot/npm_and_yarn/projects/sitemap-atlas/iconify-json/lucide-1.2.150",
+            "ref": "dependabot/npm_and_yarn/projects/component-atlas/iconify-json/lucide-1.2.152",
             "ref_type": "branch",
             "head": null,
             "commit_count": null,
@@ -1937,12 +1819,12 @@
             "title": null
           },
           {
-            "id": "26145862271",
+            "id": "26929664999",
             "type": "CreateEvent",
             "actor": "dependabot[bot]",
-            "created_at": "2026-11-04T02:35:31Z",
+            "created_at": "2026-11-11T02:35:08Z",
             "action": null,
-            "ref": "dependabot/npm_and_yarn/projects/companion/oxlint-1.90.0",
+            "ref": "dependabot/npm_and_yarn/projects/sitemap-atlas/tailwindcss-4.3.5",
             "ref_type": "branch",
             "head": null,
             "commit_count": null,
@@ -1950,12 +1832,12 @@
             "title": null
           },
           {
-            "id": "26145830534",
+            "id": "26929648078",
             "type": "CreateEvent",
             "actor": "dependabot[bot]",
-            "created_at": "2026-11-04T02:35:07Z",
+            "created_at": "2026-11-11T02:34:57Z",
             "action": null,
-            "ref": "dependabot/npm_and_yarn/projects/companion/prettier-3.9.10",
+            "ref": "dependabot/npm_and_yarn/projects/storyloom/tailwindcss-4.3.5",
             "ref_type": "branch",
             "head": null,
             "commit_count": null,
@@ -1963,65 +1845,65 @@
             "title": null
           },
           {
-            "id": "19068458510",
-            "type": "PullRequestEvent",
+            "id": "26928009469",
+            "type": "CreateEvent",
             "actor": "dependabot[bot]",
-            "created_at": "2026-11-04T02:35:31Z",
-            "action": "labeled",
-            "ref": null,
-            "ref_type": null,
+            "created_at": "2026-11-11T02:35:14Z",
+            "action": null,
+            "ref": "dependabot/npm_and_yarn/projects/resource-atlas/tailwindcss-4.3.5",
+            "ref_type": "branch",
             "head": null,
             "commit_count": null,
             "url": "https://github.com/Luis85/obsidian-plugin-shell",
             "title": null
           },
           {
-            "id": "19068458109",
-            "type": "PullRequestEvent",
+            "id": "26927986162",
+            "type": "CreateEvent",
             "actor": "dependabot[bot]",
-            "created_at": "2026-11-04T02:35:31Z",
-            "action": "labeled",
-            "ref": null,
-            "ref_type": null,
+            "created_at": "2026-11-11T02:34:59Z",
+            "action": null,
+            "ref": "dependabot/npm_and_yarn/projects/dissect-canvas/playwright-1.65.0",
+            "ref_type": "branch",
             "head": null,
             "commit_count": null,
             "url": "https://github.com/Luis85/obsidian-plugin-shell",
             "title": null
           },
           {
-            "id": "19068456147",
-            "type": "PullRequestEvent",
+            "id": "26921420343",
+            "type": "CreateEvent",
             "actor": "dependabot[bot]",
-            "created_at": "2026-11-04T02:35:31Z",
-            "action": "opened",
-            "ref": null,
-            "ref_type": null,
+            "created_at": "2026-11-11T02:35:06Z",
+            "action": null,
+            "ref": "dependabot/npm_and_yarn/projects/storyloom/playwright-1.65.0",
+            "ref_type": "branch",
             "head": null,
             "commit_count": null,
             "url": "https://github.com/Luis85/obsidian-plugin-shell",
             "title": null
           },
           {
-            "id": "19068442543",
-            "type": "PullRequestEvent",
+            "id": "26921403224",
+            "type": "CreateEvent",
             "actor": "dependabot[bot]",
-            "created_at": "2026-11-04T02:35:18Z",
-            "action": "labeled",
-            "ref": null,
-            "ref_type": null,
+            "created_at": "2026-11-11T02:34:52Z",
+            "action": null,
+            "ref": "dependabot/npm_and_yarn/projects/sitemap-atlas/vue-3.5.45",
+            "ref_type": "branch",
             "head": null,
             "commit_count": null,
             "url": "https://github.com/Luis85/obsidian-plugin-shell",
             "title": null
           },
           {
-            "id": "19068442138",
-            "type": "PullRequestEvent",
+            "id": "26912709277",
+            "type": "CreateEvent",
             "actor": "dependabot[bot]",
-            "created_at": "2026-11-04T02:35:18Z",
-            "action": "labeled",
-            "ref": null,
-            "ref_type": null,
+            "created_at": "2026-11-11T02:35:12Z",
+            "action": null,
+            "ref": "dependabot/npm_and_yarn/projects/storyloom/vue-3.5.45",
+            "ref_type": "branch",
             "head": null,
             "commit_count": null,
             "url": "https://github.com/Luis85/obsidian-plugin-shell",
@@ -2450,9 +2332,9 @@
       "archived": false,
       "disabled": false,
       "created_at": "2026-10-25T14:52:04Z",
-      "updated_at": "2026-11-10T00:15:08Z",
-      "pushed_at": "2026-11-10T00:15:03Z",
-      "size_kb": 534,
+      "updated_at": "2026-11-11T02:55:17Z",
+      "pushed_at": "2026-11-11T01:55:11Z",
+      "size_kb": 574,
       "license": {
         "key": "mit",
         "name": "MIT License",
@@ -2467,15 +2349,41 @@
       "activity": {
         "status": "available",
         "latest_commit": {
-          "sha": "860af600f097d272e4eb6a62bb18a78781b22313",
-          "url": "https://github.com/Luis85/project-diary/commit/860af600f097d272e4eb6a62bb18a78781b22313",
-          "message": "chore(data): update GitHub diary 2026-11-10",
+          "sha": "8aa630f7490f182217aee924a3859e9326066334",
+          "url": "https://github.com/Luis85/project-diary/commit/8aa630f7490f182217aee924a3859e9326066334",
+          "message": "chore(data): update GitHub diary 2026-11-11",
           "author": "github-actions[bot]",
-          "authored_at": "2026-11-10T00:15:01Z",
-          "committed_at": "2026-11-10T00:15:01Z"
+          "authored_at": "2026-11-11T01:55:10Z",
+          "committed_at": "2026-11-11T01:55:10Z"
         },
         "latest_release": null,
         "recent_events": [
+          {
+            "id": "26917914001",
+            "type": "PushEvent",
+            "actor": "github-actions[bot]",
+            "created_at": "2026-11-11T01:55:12Z",
+            "action": null,
+            "ref": "refs/heads/main",
+            "ref_type": null,
+            "head": "8aa630f7490f182217aee924a3859e9326066334",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/project-diary",
+            "title": null
+          },
+          {
+            "id": "26883877036",
+            "type": "PushEvent",
+            "actor": "github-actions[bot]",
+            "created_at": "2026-11-10T00:15:04Z",
+            "action": null,
+            "ref": "refs/heads/main",
+            "ref_type": null,
+            "head": "860af600f097d272e4eb6a62bb18a78781b22313",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/project-diary",
+            "title": null
+          },
           {
             "id": "26657014714",
             "type": "PushEvent",
@@ -2579,32 +2487,6 @@
             "commit_count": null,
             "url": "https://github.com/Luis85/project-diary",
             "title": null
-          },
-          {
-            "id": "25447903266",
-            "type": "PushEvent",
-            "actor": "github-actions[bot]",
-            "created_at": "2026-10-28T01:19:12Z",
-            "action": null,
-            "ref": "refs/heads/main",
-            "ref_type": null,
-            "head": "8e0a4d6d0d05496025ddbd3f19b38750f29e16fb",
-            "commit_count": null,
-            "url": "https://github.com/Luis85/project-diary",
-            "title": null
-          },
-          {
-            "id": "25316585304",
-            "type": "PushEvent",
-            "actor": "github-actions[bot]",
-            "created_at": "2026-10-27T01:28:46Z",
-            "action": null,
-            "ref": "refs/heads/main",
-            "ref_type": null,
-            "head": "4483df68065b8cd6dc7d387a209ad64e4e7c49ef",
-            "commit_count": null,
-            "url": "https://github.com/Luis85/project-diary",
-            "title": null
           }
         ]
       }
@@ -2651,34 +2533,7 @@
           "committed_at": "2026-10-05T19:17:06Z"
         },
         "latest_release": null,
-        "recent_events": [
-          {
-            "id": "23808002779",
-            "type": "CreateEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-10-11T04:34:27Z",
-            "action": null,
-            "ref": "dependabot/npm_and_yarn/vue/test-utils-2.5.1",
-            "ref_type": "branch",
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/renovation-planner",
-            "title": null
-          },
-          {
-            "id": "23773008606",
-            "type": "CreateEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-10-11T04:34:47Z",
-            "action": null,
-            "ref": "dependabot/npm_and_yarn/types/node-22.20.5",
-            "ref_type": "branch",
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/renovation-planner",
-            "title": null
-          }
-        ]
+        "recent_events": []
       }
     },
     {
