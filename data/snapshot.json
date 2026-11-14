@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "snapshot_date": "2026-11-13",
-  "captured_at": "2026-11-13T02:37:35.900Z",
-  "completed_at": "2026-11-13T02:38:07.990Z",
+  "snapshot_date": "2026-11-14",
+  "captured_at": "2026-11-14T02:23:56.031Z",
+  "completed_at": "2026-11-14T02:24:30.744Z",
   "owner": "Luis85",
   "source": {
     "provider": "github",
@@ -367,7 +367,7 @@
       "archived": false,
       "disabled": false,
       "created_at": "2026-07-30T19:56:01Z",
-      "updated_at": "2026-10-25T19:33:44Z",
+      "updated_at": "2026-11-13T06:03:53Z",
       "pushed_at": "2026-11-08T14:23:30Z",
       "size_kb": 20133,
       "license": {
@@ -377,7 +377,7 @@
         "url": "https://api.github.com/licenses/mit"
       },
       "counts": {
-        "stars": 4,
+        "stars": 5,
         "forks": 0,
         "open_issues_and_pull_requests": 2
       },
@@ -400,6 +400,19 @@
           "published_at": "2026-10-18T19:37:40Z"
         },
         "recent_events": [
+          {
+            "id": "19983796456",
+            "type": "WatchEvent",
+            "actor": "42ama",
+            "created_at": "2026-11-13T06:03:53Z",
+            "action": "started",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/backlog-view",
+            "title": null
+          },
           {
             "id": "26711717113",
             "type": "CreateEvent",
@@ -506,19 +519,6 @@
           },
           {
             "id": "18811652019",
-            "type": "PullRequestEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-11-01T14:27:23Z",
-            "action": "labeled",
-            "ref": null,
-            "ref_type": null,
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/backlog-view",
-            "title": null
-          },
-          {
-            "id": "18811651835",
             "type": "PullRequestEvent",
             "actor": "dependabot[bot]",
             "created_at": "2026-11-01T14:27:23Z",
@@ -751,21 +751,7 @@
           "committed_at": "2026-10-12T15:20:54Z"
         },
         "latest_release": null,
-        "recent_events": [
-          {
-            "id": "23925047752",
-            "type": "DeleteEvent",
-            "actor": "Luis85",
-            "created_at": "2026-10-12T15:21:12Z",
-            "action": null,
-            "ref": "feat/wp-01-codebase-city",
-            "ref_type": "branch",
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/codebase-inspector",
-            "title": null
-          }
-        ]
+        "recent_events": []
       }
     },
     {
@@ -1033,6 +1019,32 @@
         "latest_release": null,
         "recent_events": [
           {
+            "id": "27070024732",
+            "type": "CreateEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-11-12T00:25:27Z",
+            "action": null,
+            "ref": "dependabot/npm_and_yarn/development-tooling-1c6d2a6e45",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/describe",
+            "title": null
+          },
+          {
+            "id": "27050593615",
+            "type": "DeleteEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-11-12T00:25:11Z",
+            "action": null,
+            "ref": "dependabot/npm_and_yarn/development-tooling-52df317042",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/describe",
+            "title": null
+          },
+          {
             "id": "19841947464",
             "type": "PullRequestEvent",
             "actor": "dependabot[bot]",
@@ -1135,32 +1147,6 @@
             "commit_count": null,
             "url": "https://github.com/Luis85/describe",
             "title": null
-          },
-          {
-            "id": "17870654264",
-            "type": "PullRequestEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-10-22T00:23:22Z",
-            "action": "closed",
-            "ref": null,
-            "ref_type": null,
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/describe",
-            "title": null
-          },
-          {
-            "id": "17870653003",
-            "type": "IssueCommentEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-10-22T00:24:21Z",
-            "action": "created",
-            "ref": null,
-            "ref_type": null,
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/describe/pull/21#issuecomment-6329615753",
-            "title": "build(deps-dev): bump wdio-obsidian-service from 3.2.1 to 3.3.0 in the native-testing group"
           }
         ]
       }
@@ -1621,7 +1607,7 @@
       "counts": {
         "stars": 0,
         "forks": 0,
-        "open_issues_and_pull_requests": 0
+        "open_issues_and_pull_requests": 1
       },
       "activity": {
         "status": "available",
@@ -1641,7 +1627,21 @@
           "created_at": "2026-10-10T18:44:43Z",
           "published_at": "2026-10-10T18:51:11Z"
         },
-        "recent_events": []
+        "recent_events": [
+          {
+            "id": "20014860490",
+            "type": "IssuesEvent",
+            "actor": "Si-xiyu",
+            "created_at": "2026-11-13T12:43:07Z",
+            "action": "opened",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-git-graph/issues/7",
+            "title": "[License] layout.ts is a port of a project whose license forbids distributing derivative works"
+          }
+        ]
       }
     },
     {
@@ -2293,8 +2293,8 @@
       "disabled": false,
       "created_at": "2026-10-25T14:52:04Z",
       "updated_at": "2026-11-12T13:38:55Z",
-      "pushed_at": "2026-11-12T12:38:50Z",
-      "size_kb": 577,
+      "pushed_at": "2026-11-13T02:38:09Z",
+      "size_kb": 616,
       "license": {
         "key": "mit",
         "name": "MIT License",
@@ -2309,12 +2309,12 @@
       "activity": {
         "status": "available",
         "latest_commit": {
-          "sha": "d633c015ca1c527649fa8b4a5ec83904e4f516d6",
-          "url": "https://github.com/Luis85/project-diary/commit/d633c015ca1c527649fa8b4a5ec83904e4f516d6",
-          "message": "chore(data): update GitHub diary 2026-11-12",
+          "sha": "2575bea9b7749bb6334996a2854ce69343c2e939",
+          "url": "https://github.com/Luis85/project-diary/commit/2575bea9b7749bb6334996a2854ce69343c2e939",
+          "message": "chore(data): update GitHub diary 2026-11-13",
           "author": "github-actions[bot]",
-          "authored_at": "2026-11-12T12:38:49Z",
-          "committed_at": "2026-11-12T12:38:49Z"
+          "authored_at": "2026-11-13T02:38:08Z",
+          "committed_at": "2026-11-13T02:38:08Z"
         },
         "latest_release": null,
         "recent_events": [
