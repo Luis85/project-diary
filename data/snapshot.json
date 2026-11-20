@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "snapshot_date": "2026-11-19",
-  "captured_at": "2026-11-19T12:57:35.175Z",
-  "completed_at": "2026-11-19T12:58:11.071Z",
+  "snapshot_date": "2026-11-20",
+  "captured_at": "2026-11-20T12:50:00.085Z",
+  "completed_at": "2026-11-20T12:50:36.809Z",
   "owner": "Luis85",
   "source": {
     "provider": "github",
@@ -109,34 +109,7 @@
           "created_at": "2026-10-12T16:59:11Z",
           "published_at": "2026-10-12T17:14:24Z"
         },
-        "recent_events": [
-          {
-            "id": "24616068890",
-            "type": "DeleteEvent",
-            "actor": "Luis85",
-            "created_at": "2026-10-18T12:50:59Z",
-            "action": null,
-            "ref": "claude/fervent-davinci-we8qnn",
-            "ref_type": "branch",
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/agent-cli",
-            "title": null
-          },
-          {
-            "id": "24607396228",
-            "type": "PushEvent",
-            "actor": "Luis85",
-            "created_at": "2026-10-18T08:48:47Z",
-            "action": null,
-            "ref": "refs/heads/claude/fervent-davinci-we8qnn",
-            "ref_type": null,
-            "head": "6113f645376717d7acf564cd3052543fc26d9f3d",
-            "commit_count": null,
-            "url": "https://github.com/Luis85/agent-cli",
-            "title": null
-          }
-        ]
+        "recent_events": []
       }
     },
     {
@@ -1616,8 +1589,8 @@
       "disabled": false,
       "created_at": "2026-09-22T09:23:54Z",
       "updated_at": "2026-11-01T21:25:18Z",
-      "pushed_at": "2026-11-18T20:07:16Z",
-      "size_kb": 30172,
+      "pushed_at": "2026-11-19T19:40:13Z",
+      "size_kb": 30173,
       "license": {
         "key": "mit",
         "name": "MIT License",
@@ -1627,86 +1600,112 @@
       "counts": {
         "stars": 0,
         "forks": 0,
-        "open_issues_and_pull_requests": 9
+        "open_issues_and_pull_requests": 8
       },
       "activity": {
         "status": "available",
         "latest_commit": {
-          "sha": "c3c22b5fe2e3418855b60396c81f31db8b4a04db",
-          "url": "https://github.com/Luis85/obsidian-plugin-shell/commit/c3c22b5fe2e3418855b60396c81f31db8b4a04db",
-          "message": "Merge pull request #317 from Luis85/claude/remove-ci-scope-approval\n\nRemove the merged ci-scope self-review approval",
-          "author": "Luis85",
-          "authored_at": "2026-11-18T20:02:21Z",
-          "committed_at": "2026-11-18T20:02:21Z"
+          "sha": "0f8fccf30ad94cea853254765d5bcd5a65e04724",
+          "url": "https://github.com/Luis85/obsidian-plugin-shell/commit/0f8fccf30ad94cea853254765d5bcd5a65e04724",
+          "message": "Merge release 0.7.0 (#318)\n\nRelease 0.7.0",
+          "author": "github-actions[bot]",
+          "authored_at": "2026-11-19T19:39:57Z",
+          "committed_at": "2026-11-19T19:39:57Z"
         },
         "latest_release": {
-          "id": 446254009,
-          "tag_name": "0.6.1",
-          "name": "0.6.1",
-          "url": "https://github.com/Luis85/obsidian-plugin-shell/releases/tag/0.6.1",
-          "created_at": "2026-11-15T16:31:26Z",
-          "published_at": "2026-11-15T18:02:10Z"
+          "id": 451839907,
+          "tag_name": "0.7.0",
+          "name": "0.7.0",
+          "url": "https://github.com/Luis85/obsidian-plugin-shell/releases/tag/0.7.0",
+          "created_at": "2026-11-18T20:07:14Z",
+          "published_at": "2026-11-19T19:40:11Z"
         },
         "recent_events": [
           {
-            "id": "27618004114",
-            "type": "PushEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-11-18T02:35:25Z",
+            "id": "27712889038",
+            "type": "CreateEvent",
+            "actor": "Luis85",
+            "created_at": "2026-11-18T19:15:54Z",
             "action": null,
-            "ref": "refs/heads/dependabot/npm_and_yarn/projects/dissect-canvas/minor-and-patch-3eb65a13d6",
-            "ref_type": null,
-            "head": "3db08d46ff6d6e8538fbbc1bee06de330962bdbf",
+            "ref": "claude/remove-ci-scope-approval",
+            "ref_type": "branch",
+            "head": null,
             "commit_count": null,
             "url": "https://github.com/Luis85/obsidian-plugin-shell",
             "title": null
           },
           {
-            "id": "20613441537",
-            "type": "PullRequestReviewEvent",
+            "id": "27708028515",
+            "type": "PushEvent",
             "actor": "Luis85",
-            "created_at": "2026-11-19T07:30:09Z",
-            "action": "created",
+            "created_at": "2026-11-18T20:02:23Z",
+            "action": null,
+            "ref": "refs/heads/main",
+            "ref_type": null,
+            "head": "c3c22b5fe2e3418855b60396c81f31db8b4a04db",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-plugin-shell",
+            "title": null
+          },
+          {
+            "id": "27654003828",
+            "type": "DeleteEvent",
+            "actor": "Luis85",
+            "created_at": "2026-11-18T20:02:24Z",
+            "action": null,
+            "ref": "claude/remove-ci-scope-approval",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-plugin-shell",
+            "title": null
+          },
+          {
+            "id": "20682638233",
+            "type": "ReleaseEvent",
+            "actor": "github-actions[bot]",
+            "created_at": "2026-11-19T19:40:11Z",
+            "action": "published",
             "ref": null,
             "ref_type": null,
             "head": null,
             "commit_count": null,
-            "url": "https://github.com/Luis85/obsidian-plugin-shell/pull/318#pullrequestreview-5970967502",
-            "title": null
+            "url": "https://github.com/Luis85/obsidian-plugin-shell/releases/tag/0.7.0",
+            "title": "0.7.0"
           },
           {
-            "id": "27601696026",
-            "type": "PushEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-11-18T02:35:17Z",
-            "action": null,
-            "ref": "refs/heads/dependabot/npm_and_yarn/projects/resource-atlas/minor-and-patch-629a06457a",
+            "id": "20682621294",
+            "type": "PullRequestEvent",
+            "actor": "github-actions[bot]",
+            "created_at": "2026-11-19T19:39:58Z",
+            "action": "merged",
+            "ref": null,
             "ref_type": null,
-            "head": "8fcd04e17cd0799ea545d9e77a780730c7468cbf",
+            "head": null,
             "commit_count": null,
             "url": "https://github.com/Luis85/obsidian-plugin-shell",
             "title": null
           },
           {
-            "id": "27596379932",
-            "type": "PushEvent",
+            "id": "27649699579",
+            "type": "CreateEvent",
             "actor": "Luis85",
-            "created_at": "2026-11-17T22:42:20Z",
+            "created_at": "2026-11-17T22:36:42Z",
             "action": null,
-            "ref": "refs/heads/claude/core-shell-pr-gate",
-            "ref_type": null,
-            "head": "013b8f73628e4fe52f5ec690681f8bab59aab4c9",
+            "ref": "claude/core-shell-pr-gate",
+            "ref_type": "branch",
+            "head": null,
             "commit_count": null,
             "url": "https://github.com/Luis85/obsidian-plugin-shell",
             "title": null
           },
           {
-            "id": "27593984345",
+            "id": "27640894554",
             "type": "CreateEvent",
             "actor": "dependabot[bot]",
-            "created_at": "2026-11-17T21:10:01Z",
+            "created_at": "2026-11-17T21:10:19Z",
             "action": null,
-            "ref": "dependabot/npm_and_yarn/projects/component-atlas/minor-and-patch-3eb65a13d6",
+            "ref": "dependabot/npm_and_yarn/projects/sitemap-atlas/minor-and-patch-3eb65a13d6",
             "ref_type": "branch",
             "head": null,
             "commit_count": null,
@@ -1714,51 +1713,12 @@
             "title": null
           },
           {
-            "id": "27592321045",
-            "type": "DeleteEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-11-18T02:36:58Z",
-            "action": null,
-            "ref": "dependabot/npm_and_yarn/projects/companion/minor-and-patch-c17533696f",
-            "ref_type": "branch",
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/obsidian-plugin-shell",
-            "title": null
-          },
-          {
-            "id": "27592086499",
-            "type": "PushEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-11-18T02:35:09Z",
-            "action": null,
-            "ref": "refs/heads/dependabot/npm_and_yarn/projects/sitemap-atlas/minor-and-patch-3eb65a13d6",
-            "ref_type": null,
-            "head": "d9033637de8ae258cbb7707ee71adbe9602a6ac1",
-            "commit_count": null,
-            "url": "https://github.com/Luis85/obsidian-plugin-shell",
-            "title": null
-          },
-          {
-            "id": "27586849996",
-            "type": "PushEvent",
-            "actor": "Luis85",
-            "created_at": "2026-11-17T21:16:04Z",
-            "action": null,
-            "ref": "refs/heads/main",
-            "ref_type": null,
-            "head": "6658ff49f6ba8b91d004957936dd393e55e24691",
-            "commit_count": null,
-            "url": "https://github.com/Luis85/obsidian-plugin-shell",
-            "title": null
-          },
-          {
-            "id": "27586103034",
+            "id": "27640870205",
             "type": "CreateEvent",
             "actor": "dependabot[bot]",
-            "created_at": "2026-11-17T21:10:20Z",
+            "created_at": "2026-11-17T21:10:03Z",
             "action": null,
-            "ref": "dependabot/npm_and_yarn/projects/storyloom/minor-and-patch-3eb65a13d6",
+            "ref": "dependabot/npm_and_yarn/projects/workbench-site/minor-and-patch-f39fd755f9",
             "ref_type": "branch",
             "head": null,
             "commit_count": null,
@@ -1766,14 +1726,27 @@
             "title": null
           },
           {
-            "id": "27585961150",
-            "type": "PushEvent",
+            "id": "27633292077",
+            "type": "CreateEvent",
             "actor": "dependabot[bot]",
-            "created_at": "2026-11-18T02:35:52Z",
+            "created_at": "2026-11-18T02:38:08Z",
             "action": null,
-            "ref": "refs/heads/dependabot/npm_and_yarn/projects/component-atlas/minor-and-patch-3eb65a13d6",
-            "ref_type": null,
-            "head": "ffdd7fb0a722c3b96c1b92e647395f6225f1043f",
+            "ref": "dependabot/npm_and_yarn/minor-and-patch-2bebda7db4",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-plugin-shell",
+            "title": null
+          },
+          {
+            "id": "27633278313",
+            "type": "CreateEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-11-18T02:38:00Z",
+            "action": null,
+            "ref": "dependabot/npm_and_yarn/projects/companion/minor-and-patch-4e5e8d1043",
+            "ref_type": "branch",
+            "head": null,
             "commit_count": null,
             "url": "https://github.com/Luis85/obsidian-plugin-shell",
             "title": null
@@ -2202,8 +2175,8 @@
       "disabled": false,
       "created_at": "2026-10-25T14:52:04Z",
       "updated_at": "2026-11-12T13:38:55Z",
-      "pushed_at": "2026-11-18T13:00:26Z",
-      "size_kb": 705,
+      "pushed_at": "2026-11-19T12:58:12Z",
+      "size_kb": 744,
       "license": {
         "key": "mit",
         "name": "MIT License",
@@ -2218,15 +2191,28 @@
       "activity": {
         "status": "available",
         "latest_commit": {
-          "sha": "f8d8d1b2b1d1fff3fbbfb6cfb423c25da75c86fe",
-          "url": "https://github.com/Luis85/project-diary/commit/f8d8d1b2b1d1fff3fbbfb6cfb423c25da75c86fe",
-          "message": "chore(data): update GitHub diary 2026-11-18",
+          "sha": "2f66cf9917be61c15fa445cd6abce834eccdbb55",
+          "url": "https://github.com/Luis85/project-diary/commit/2f66cf9917be61c15fa445cd6abce834eccdbb55",
+          "message": "chore(data): update GitHub diary 2026-11-19",
           "author": "github-actions[bot]",
-          "authored_at": "2026-11-18T13:00:24Z",
-          "committed_at": "2026-11-18T13:00:24Z"
+          "authored_at": "2026-11-19T12:58:11Z",
+          "committed_at": "2026-11-19T12:58:11Z"
         },
         "latest_release": null,
         "recent_events": [
+          {
+            "id": "27685403720",
+            "type": "PushEvent",
+            "actor": "github-actions[bot]",
+            "created_at": "2026-11-18T13:00:26Z",
+            "action": null,
+            "ref": "refs/heads/main",
+            "ref_type": null,
+            "head": "f8d8d1b2b1d1fff3fbbfb6cfb423c25da75c86fe",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/project-diary",
+            "title": null
+          },
           {
             "id": "27419010190",
             "type": "PushEvent",
@@ -2340,19 +2326,6 @@
             "ref": "refs/heads/main",
             "ref_type": null,
             "head": "48a4465baf1fc54f97537cb86350af00de6dc60f",
-            "commit_count": null,
-            "url": "https://github.com/Luis85/project-diary",
-            "title": null
-          },
-          {
-            "id": "26573945720",
-            "type": "PushEvent",
-            "actor": "github-actions[bot]",
-            "created_at": "2026-11-07T01:54:11Z",
-            "action": null,
-            "ref": "refs/heads/main",
-            "ref_type": null,
-            "head": "e561a1dff542ff0330203d45c792408612d65d69",
             "commit_count": null,
             "url": "https://github.com/Luis85/project-diary",
             "title": null
