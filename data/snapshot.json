@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "snapshot_date": "2026-11-20",
-  "captured_at": "2026-11-20T12:50:00.085Z",
-  "completed_at": "2026-11-20T12:50:36.809Z",
+  "snapshot_date": "2026-11-21",
+  "captured_at": "2026-11-21T12:35:34.434Z",
+  "completed_at": "2026-11-21T12:36:09.847Z",
   "owner": "Luis85",
   "source": {
     "provider": "github",
@@ -420,8 +420,8 @@
       "disabled": false,
       "created_at": "2026-10-25T09:00:16Z",
       "updated_at": "2026-10-26T23:34:51Z",
-      "pushed_at": "2026-11-17T22:08:08Z",
-      "size_kb": 152938,
+      "pushed_at": "2026-11-20T16:51:24Z",
+      "size_kb": 570119,
       "license": {
         "key": "mit",
         "name": "MIT License",
@@ -436,12 +436,12 @@
       "activity": {
         "status": "available",
         "latest_commit": {
-          "sha": "b5982038380efcb35ae099cb51114f92de3a33f3",
-          "url": "https://github.com/Luis85/bevy-experiments/commit/b5982038380efcb35ae099cb51114f92de3a33f3",
-          "message": "docs(horde): record the push of main to origin (R67)\n\nThe user chose on 2026-11-17 to push local main to origin with the R64\nmerge and the next-iterations plan. R67 replaces the R64 rule that\nnothing is pushed; 12.10 and the next-iterations plan say so.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+          "sha": "523e238f5a67c80addec0257c5a7fd60c8ce646e",
+          "url": "https://github.com/Luis85/bevy-experiments/commit/523e238f5a67c80addec0257c5a7fd60c8ce646e",
+          "message": "docs(terra-world): restore the workspace AGENTS.md\n\nThe main-folder snapshot carried a deletion of terra-world/AGENTS.md with no\nreplacement, while the root AGENTS.md still names it as terra-world's entry\npoint and every other workspace keeps one. Restored from a3d6fdb8.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
           "author": "LuisMendezGeneric",
-          "authored_at": "2026-11-17T22:06:46Z",
-          "committed_at": "2026-11-17T22:06:46Z"
+          "authored_at": "2026-11-20T10:50:29Z",
+          "committed_at": "2026-11-20T10:50:29Z"
         },
         "latest_release": null,
         "recent_events": [
@@ -990,45 +990,6 @@
             "commit_count": null,
             "url": "https://github.com/Luis85/describe/pull/23#issuecomment-6810628200",
             "title": "build(deps-dev): bump the development-tooling group across 1 directory with 7 updates"
-          },
-          {
-            "id": "17870665027",
-            "type": "PullRequestEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-10-22T00:24:32Z",
-            "action": "labeled",
-            "ref": null,
-            "ref_type": null,
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/describe",
-            "title": null
-          },
-          {
-            "id": "17870664658",
-            "type": "PullRequestEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-10-22T00:24:32Z",
-            "action": "labeled",
-            "ref": null,
-            "ref_type": null,
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/describe",
-            "title": null
-          },
-          {
-            "id": "17870662808",
-            "type": "PullRequestEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-10-22T00:24:31Z",
-            "action": "opened",
-            "ref": null,
-            "ref_type": null,
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/describe",
-            "title": null
           }
         ]
       }
@@ -2175,8 +2136,8 @@
       "disabled": false,
       "created_at": "2026-10-25T14:52:04Z",
       "updated_at": "2026-11-12T13:38:55Z",
-      "pushed_at": "2026-11-19T12:58:12Z",
-      "size_kb": 744,
+      "pushed_at": "2026-11-20T12:50:38Z",
+      "size_kb": 747,
       "license": {
         "key": "mit",
         "name": "MIT License",
@@ -2191,15 +2152,28 @@
       "activity": {
         "status": "available",
         "latest_commit": {
-          "sha": "2f66cf9917be61c15fa445cd6abce834eccdbb55",
-          "url": "https://github.com/Luis85/project-diary/commit/2f66cf9917be61c15fa445cd6abce834eccdbb55",
-          "message": "chore(data): update GitHub diary 2026-11-19",
+          "sha": "ba6b423c045f3971562214521b9021fcec891735",
+          "url": "https://github.com/Luis85/project-diary/commit/ba6b423c045f3971562214521b9021fcec891735",
+          "message": "chore(data): update GitHub diary 2026-11-20",
           "author": "github-actions[bot]",
-          "authored_at": "2026-11-19T12:58:11Z",
-          "committed_at": "2026-11-19T12:58:11Z"
+          "authored_at": "2026-11-20T12:50:36Z",
+          "committed_at": "2026-11-20T12:50:36Z"
         },
         "latest_release": null,
         "recent_events": [
+          {
+            "id": "27814220287",
+            "type": "PushEvent",
+            "actor": "github-actions[bot]",
+            "created_at": "2026-11-19T12:58:12Z",
+            "action": null,
+            "ref": "refs/heads/main",
+            "ref_type": null,
+            "head": "2f66cf9917be61c15fa445cd6abce834eccdbb55",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/project-diary",
+            "title": null
+          },
           {
             "id": "27685403720",
             "type": "PushEvent",
@@ -2313,19 +2287,6 @@
             "ref": "refs/heads/main",
             "ref_type": null,
             "head": "533a6f805290bbadafdbf9e315a222d9135ab740",
-            "commit_count": null,
-            "url": "https://github.com/Luis85/project-diary",
-            "title": null
-          },
-          {
-            "id": "26611680632",
-            "type": "PushEvent",
-            "actor": "github-actions[bot]",
-            "created_at": "2026-11-08T01:25:06Z",
-            "action": null,
-            "ref": "refs/heads/main",
-            "ref_type": null,
-            "head": "48a4465baf1fc54f97537cb86350af00de6dc60f",
             "commit_count": null,
             "url": "https://github.com/Luis85/project-diary",
             "title": null
@@ -2913,8 +2874,8 @@
       "disabled": false,
       "created_at": "2026-11-15T09:57:05Z",
       "updated_at": "2026-11-15T19:18:37Z",
-      "pushed_at": "2026-11-15T19:20:44Z",
-      "size_kb": 15192,
+      "pushed_at": "2026-11-21T12:32:44Z",
+      "size_kb": 17709,
       "license": {
         "key": "mit",
         "name": "MIT License",
@@ -2924,27 +2885,131 @@
       "counts": {
         "stars": 1,
         "forks": 0,
-        "open_issues_and_pull_requests": 3
+        "open_issues_and_pull_requests": 4
       },
       "activity": {
         "status": "available",
         "latest_commit": {
-          "sha": "f38aff62d1b4d6fe4991a8cd06e7d640fdf94195",
-          "url": "https://github.com/Luis85/weg-manager/commit/f38aff62d1b4d6fe4991a8cd06e7d640fdf94195",
-          "message": "update readme",
-          "author": "Symprowire",
-          "authored_at": "2026-11-15T19:20:39Z",
-          "committed_at": "2026-11-15T19:20:39Z"
+          "sha": "1c2a4a08dc70fcc23ea4e064ce3db1f63c1b89d9",
+          "url": "https://github.com/Luis85/weg-manager/commit/1c2a4a08dc70fcc23ea4e064ce3db1f63c1b89d9",
+          "message": "add obsidian plugin shell implementation plan",
+          "author": "LuisMendezGeneric",
+          "authored_at": "2026-11-21T08:07:53Z",
+          "committed_at": "2026-11-21T08:07:53Z"
         },
         "latest_release": null,
         "recent_events": [
           {
-            "id": "27435860834",
+            "id": "27818197507",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-11-21T11:46:24Z",
+            "action": null,
+            "ref": "refs/heads/claude/upbeat-lovelace-v4rir1",
+            "ref_type": null,
+            "head": "ca6385d2f2c41babe75ee1a950d813822ec9b806",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/weg-manager",
+            "title": null
+          },
+          {
+            "id": "27818183592",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-11-21T11:46:10Z",
+            "action": null,
+            "ref": "refs/heads/claude/upbeat-lovelace-v4rir1",
+            "ref_type": null,
+            "head": "10a8dabdc7cc2c0813bb51ade88bc88cd28133bb",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/weg-manager",
+            "title": null
+          },
+          {
+            "id": "27817741585",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-11-21T11:26:27Z",
+            "action": null,
+            "ref": "refs/heads/claude/upbeat-lovelace-v4rir1",
+            "ref_type": null,
+            "head": "f770ff63c55448e1b0b858c40a41d7159f94003b",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/weg-manager",
+            "title": null
+          },
+          {
+            "id": "27817632712",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-11-21T11:25:16Z",
+            "action": null,
+            "ref": "refs/heads/claude/upbeat-lovelace-v4rir1",
+            "ref_type": null,
+            "head": "c29a7cc1e8f03f91c0148258b99fdd2911de40ba",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/weg-manager",
+            "title": null
+          },
+          {
+            "id": "27817607652",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-11-21T11:25:01Z",
+            "action": null,
+            "ref": "refs/heads/claude/upbeat-lovelace-v4rir1",
+            "ref_type": null,
+            "head": "2d676da882f87d2c8979b164b7115a93e03b382e",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/weg-manager",
+            "title": null
+          },
+          {
+            "id": "27816044230",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-11-21T11:10:56Z",
+            "action": null,
+            "ref": "refs/heads/claude/upbeat-lovelace-v4rir1",
+            "ref_type": null,
+            "head": "f67d0432ffcb4e55ae47ca08b9a1361f05008192",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/weg-manager",
+            "title": null
+          },
+          {
+            "id": "27815699432",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-11-21T11:00:55Z",
+            "action": null,
+            "ref": "refs/heads/claude/upbeat-lovelace-v4rir1",
+            "ref_type": null,
+            "head": "5586f98130d9f862ed1255ed230e70c8ac37d433",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/weg-manager",
+            "title": null
+          },
+          {
+            "id": "20848361301",
+            "type": "PullRequestEvent",
+            "actor": "Luis85",
+            "created_at": "2026-11-21T10:17:14Z",
+            "action": "opened",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/weg-manager",
+            "title": null
+          },
+          {
+            "id": "27809731968",
             "type": "CreateEvent",
             "actor": "Luis85",
-            "created_at": "2026-11-15T09:57:07Z",
+            "created_at": "2026-11-21T09:42:26Z",
             "action": null,
-            "ref": "main",
+            "ref": "claude/upbeat-lovelace-v4rir1",
             "ref_type": "branch",
             "head": null,
             "commit_count": null,
@@ -2952,66 +3017,14 @@
             "title": null
           },
           {
-            "id": "20380707804",
-            "type": "IssuesEvent",
-            "actor": "evenhoist",
-            "created_at": "2026-11-17T10:44:45Z",
-            "action": "opened",
-            "ref": null,
-            "ref_type": null,
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/weg-manager/issues/3",
-            "title": "Ablageort des Vaults: Ordner im Drive des Beiratskontos"
-          },
-          {
-            "id": "20380663484",
-            "type": "IssuesEvent",
-            "actor": "evenhoist",
-            "created_at": "2026-11-17T10:44:15Z",
-            "action": "opened",
-            "ref": null,
-            "ref_type": null,
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/weg-manager/issues/2",
-            "title": "Prototyp: Nachfassen als Vorschlag je Punkt, mit Fallkontext bestätigen oder anpassen (PBI-21/22)"
-          },
-          {
-            "id": "20380612230",
-            "type": "IssuesEvent",
-            "actor": "evenhoist",
-            "created_at": "2026-11-17T10:43:41Z",
-            "action": "opened",
-            "ref": null,
-            "ref_type": null,
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/weg-manager/issues/1",
-            "title": "Kontextnotiz neben dem Entwurf zeigen, nicht in den Brieftext übernehmen"
-          },
-          {
-            "id": "27400111944",
+            "id": "27802143936",
             "type": "PushEvent",
             "actor": "Luis85",
-            "created_at": "2026-11-15T19:20:45Z",
+            "created_at": "2026-11-21T08:02:20Z",
             "action": null,
             "ref": "refs/heads/main",
             "ref_type": null,
-            "head": "f38aff62d1b4d6fe4991a8cd06e7d640fdf94195",
-            "commit_count": null,
-            "url": "https://github.com/Luis85/weg-manager",
-            "title": null
-          },
-          {
-            "id": "20174681974",
-            "type": "WatchEvent",
-            "actor": "evenhoist",
-            "created_at": "2026-11-15T11:20:25Z",
-            "action": "started",
-            "ref": null,
-            "ref_type": null,
-            "head": null,
+            "head": "0b16f003cb6fedf3963313afa226645346c64b5b",
             "commit_count": null,
             "url": "https://github.com/Luis85/weg-manager",
             "title": null
