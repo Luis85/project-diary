@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "snapshot_date": "2026-11-27",
-  "captured_at": "2026-11-27T00:33:33.854Z",
-  "completed_at": "2026-11-27T00:34:10.290Z",
+  "snapshot_date": "2026-11-28",
+  "captured_at": "2026-11-28T00:01:41.843Z",
+  "completed_at": "2026-11-28T00:02:14.512Z",
   "owner": "Luis85",
   "source": {
     "provider": "github",
@@ -467,32 +467,6 @@
             "ref": "refs/heads/main",
             "ref_type": null,
             "head": "b5982038380efcb35ae099cb51114f92de3a33f3",
-            "commit_count": null,
-            "url": "https://github.com/Luis85/bevy-experiments",
-            "title": null
-          },
-          {
-            "id": "25397225450",
-            "type": "PushEvent",
-            "actor": "Luis85",
-            "created_at": "2026-10-26T22:38:59Z",
-            "action": null,
-            "ref": "refs/heads/main",
-            "ref_type": null,
-            "head": "9cece7a49d47cd72f9c4b5d23e5354e99e40ff56",
-            "commit_count": null,
-            "url": "https://github.com/Luis85/bevy-experiments",
-            "title": null
-          },
-          {
-            "id": "25392518840",
-            "type": "PushEvent",
-            "actor": "Luis85",
-            "created_at": "2026-10-26T23:34:48Z",
-            "action": null,
-            "ref": "refs/heads/main",
-            "ref_type": null,
-            "head": "71ba898405fdaee27c99dbe12a58cac326aefda4",
             "commit_count": null,
             "url": "https://github.com/Luis85/bevy-experiments",
             "title": null
@@ -1388,6 +1362,71 @@
         },
         "recent_events": [
           {
+            "id": "28388326665",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-11-26T18:20:57Z",
+            "action": null,
+            "ref": "refs/heads/claude/sweet-mayer-3zobj1",
+            "ref_type": null,
+            "head": "c8d2962f83811aa4039b04fea2b063e2f6a6d0a1",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-csv-importer",
+            "title": null
+          },
+          {
+            "id": "28387199102",
+            "type": "DeleteEvent",
+            "actor": "Luis85",
+            "created_at": "2026-11-26T18:30:58Z",
+            "action": null,
+            "ref": "claude/sweet-mayer-3zobj1",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-csv-importer",
+            "title": null
+          },
+          {
+            "id": "28381744873",
+            "type": "DeleteEvent",
+            "actor": "Luis85",
+            "created_at": "2026-11-26T17:24:02Z",
+            "action": null,
+            "ref": "dependabot/github_actions/actions/attest-build-provenance-4.2.2",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-csv-importer",
+            "title": null
+          },
+          {
+            "id": "28378115280",
+            "type": "DeleteEvent",
+            "actor": "Luis85",
+            "created_at": "2026-11-26T16:51:59Z",
+            "action": null,
+            "ref": "claude/sweet-mayer-3zobj1",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-csv-importer",
+            "title": null
+          },
+          {
+            "id": "28370586906",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-11-26T15:46:15Z",
+            "action": null,
+            "ref": "refs/heads/claude/sweet-mayer-3zobj1",
+            "ref_type": null,
+            "head": "e2c457b72a4739fd32832f65a480adb84a989d59",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-csv-importer",
+            "title": null
+          },
+          {
             "id": "21416314377",
             "type": "ReleaseEvent",
             "actor": "github-actions[bot]",
@@ -1445,71 +1484,6 @@
             "actor": "dependabot[bot]",
             "created_at": "2026-11-26T17:40:07Z",
             "action": "opened",
-            "ref": null,
-            "ref_type": null,
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/obsidian-csv-importer",
-            "title": null
-          },
-          {
-            "id": "21408706940",
-            "type": "PullRequestEvent",
-            "actor": "Luis85",
-            "created_at": "2026-11-26T17:26:09Z",
-            "action": "opened",
-            "ref": null,
-            "ref_type": null,
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/obsidian-csv-importer",
-            "title": null
-          },
-          {
-            "id": "21408509095",
-            "type": "PullRequestEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-11-26T17:23:59Z",
-            "action": "merged",
-            "ref": null,
-            "ref_type": null,
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/obsidian-csv-importer",
-            "title": null
-          },
-          {
-            "id": "21408505406",
-            "type": "PullRequestEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-11-26T17:23:55Z",
-            "action": "merged",
-            "ref": null,
-            "ref_type": null,
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/obsidian-csv-importer",
-            "title": null
-          },
-          {
-            "id": "21408499451",
-            "type": "PullRequestEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-11-26T17:23:52Z",
-            "action": "merged",
-            "ref": null,
-            "ref_type": null,
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/obsidian-csv-importer",
-            "title": null
-          },
-          {
-            "id": "21408486869",
-            "type": "PullRequestEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-11-26T17:23:44Z",
-            "action": "merged",
             "ref": null,
             "ref_type": null,
             "head": null,
@@ -1844,6 +1818,19 @@
         },
         "recent_events": [
           {
+            "id": "28373213620",
+            "type": "DeleteEvent",
+            "actor": "dependabot[bot]",
+            "created_at": "2026-11-25T02:35:44Z",
+            "action": null,
+            "ref": "dependabot/npm_and_yarn/projects/storyloom/minor-and-patch-3eb65a13d6",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/obsidian-plugin-shell",
+            "title": null
+          },
+          {
             "id": "28308854897",
             "type": "DeleteEvent",
             "actor": "dependabot[bot]",
@@ -1954,19 +1941,6 @@
             "created_at": "2026-11-25T02:38:30Z",
             "action": null,
             "ref": "dependabot/npm_and_yarn/projects/companion/minor-and-patch-188239115b",
-            "ref_type": "branch",
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/obsidian-plugin-shell",
-            "title": null
-          },
-          {
-            "id": "28266879302",
-            "type": "DeleteEvent",
-            "actor": "dependabot[bot]",
-            "created_at": "2026-11-25T02:35:30Z",
-            "action": null,
-            "ref": "dependabot/npm_and_yarn/projects/dissect-canvas/minor-and-patch-3eb65a13d6",
             "ref_type": "branch",
             "head": null,
             "commit_count": null,
@@ -2225,7 +2199,7 @@
       "counts": {
         "stars": 0,
         "forks": 0,
-        "open_issues_and_pull_requests": 0
+        "open_issues_and_pull_requests": 1
       },
       "activity": {
         "status": "available",
@@ -2246,6 +2220,45 @@
           "published_at": "2026-11-26T19:51:33Z"
         },
         "recent_events": [
+          {
+            "id": "21507036238",
+            "type": "IssuesEvent",
+            "actor": "github-actions[bot]",
+            "created_at": "2026-11-27T15:56:04Z",
+            "action": "opened",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/product-engineering/issues/4",
+            "title": "Nightly mutation run failed"
+          },
+          {
+            "id": "28394688710",
+            "type": "DeleteEvent",
+            "actor": "Luis85",
+            "created_at": "2026-11-26T19:18:26Z",
+            "action": null,
+            "ref": "codex/release-0.1.1",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/product-engineering",
+            "title": null
+          },
+          {
+            "id": "28371229207",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-11-26T16:03:29Z",
+            "action": null,
+            "ref": "refs/heads/codex/product-views",
+            "ref_type": null,
+            "head": "fa532d86c2c2212c3701a3271fd89ed57964ca21",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/product-engineering",
+            "title": null
+          },
           {
             "id": "28366617434",
             "type": "CreateEvent",
@@ -2336,45 +2349,6 @@
             "commit_count": null,
             "url": "https://github.com/Luis85/product-engineering/releases/tag/0.1.0",
             "title": "0.1.0"
-          },
-          {
-            "id": "21402781107",
-            "type": "PullRequestEvent",
-            "actor": "Luis85",
-            "created_at": "2026-11-26T16:23:26Z",
-            "action": "merged",
-            "ref": null,
-            "ref_type": null,
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/product-engineering",
-            "title": null
-          },
-          {
-            "id": "21397472854",
-            "type": "PullRequestEvent",
-            "actor": "Luis85",
-            "created_at": "2026-11-26T15:27:58Z",
-            "action": "opened",
-            "ref": null,
-            "ref_type": null,
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/product-engineering",
-            "title": null
-          },
-          {
-            "id": "27936765080",
-            "type": "CreateEvent",
-            "actor": "Luis85",
-            "created_at": "2026-11-22T14:02:01Z",
-            "action": null,
-            "ref": "main",
-            "ref_type": "branch",
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/product-engineering",
-            "title": null
           }
         ]
       }
@@ -2428,47 +2402,7 @@
           "created_at": "2026-10-26T20:54:13Z",
           "published_at": "2026-10-26T21:12:53Z"
         },
-        "recent_events": [
-          {
-            "id": "25373079466",
-            "type": "DeleteEvent",
-            "actor": "Luis85",
-            "created_at": "2026-10-26T18:50:44Z",
-            "action": null,
-            "ref": "feat/worker-workflow-dashboard",
-            "ref_type": "branch",
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/production-line",
-            "title": null
-          },
-          {
-            "id": "25354688519",
-            "type": "PushEvent",
-            "actor": "Luis85",
-            "created_at": "2026-10-26T16:09:25Z",
-            "action": null,
-            "ref": "refs/heads/feat/worker-workflow-dashboard",
-            "ref_type": null,
-            "head": "ff26bd0f4cd15ed2367a1acbcf91f9c4409f98cb",
-            "commit_count": null,
-            "url": "https://github.com/Luis85/production-line",
-            "title": null
-          },
-          {
-            "id": "25353804502",
-            "type": "PushEvent",
-            "actor": "Luis85",
-            "created_at": "2026-10-26T16:02:13Z",
-            "action": null,
-            "ref": "refs/heads/feat/worker-workflow-dashboard",
-            "ref_type": null,
-            "head": "aeb103217e8ce28ffd82d3df497936476c5f4985",
-            "commit_count": null,
-            "url": "https://github.com/Luis85/production-line",
-            "title": null
-          }
-        ]
+        "recent_events": []
       }
     },
     {
@@ -2489,8 +2423,8 @@
       "disabled": false,
       "created_at": "2026-10-25T14:52:04Z",
       "updated_at": "2026-11-12T13:38:55Z",
-      "pushed_at": "2026-11-26T00:17:41Z",
-      "size_kb": 878,
+      "pushed_at": "2026-11-27T00:34:11Z",
+      "size_kb": 919,
       "license": {
         "key": "mit",
         "name": "MIT License",
@@ -2505,15 +2439,28 @@
       "activity": {
         "status": "available",
         "latest_commit": {
-          "sha": "ccf4f5a0ceb8b88989e1fc10fa1b89afa06a4cb5",
-          "url": "https://github.com/Luis85/project-diary/commit/ccf4f5a0ceb8b88989e1fc10fa1b89afa06a4cb5",
-          "message": "chore(data): update GitHub diary 2026-11-26",
+          "sha": "9f268fa63b508219657f4bc88cca18dab5752cc9",
+          "url": "https://github.com/Luis85/project-diary/commit/9f268fa63b508219657f4bc88cca18dab5752cc9",
+          "message": "chore(data): update GitHub diary 2026-11-27",
           "author": "github-actions[bot]",
-          "authored_at": "2026-11-26T00:17:39Z",
-          "committed_at": "2026-11-26T00:17:39Z"
+          "authored_at": "2026-11-27T00:34:10Z",
+          "committed_at": "2026-11-27T00:34:10Z"
         },
         "latest_release": null,
         "recent_events": [
+          {
+            "id": "28431712836",
+            "type": "PushEvent",
+            "actor": "github-actions[bot]",
+            "created_at": "2026-11-26T00:17:41Z",
+            "action": null,
+            "ref": "refs/heads/main",
+            "ref_type": null,
+            "head": "ccf4f5a0ceb8b88989e1fc10fa1b89afa06a4cb5",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/project-diary",
+            "title": null
+          },
           {
             "id": "28151889006",
             "type": "PushEvent",
@@ -2627,19 +2574,6 @@
             "ref": "refs/heads/main",
             "ref_type": null,
             "head": "2575bea9b7749bb6334996a2854ce69343c2e939",
-            "commit_count": null,
-            "url": "https://github.com/Luis85/project-diary",
-            "title": null
-          },
-          {
-            "id": "27118738078",
-            "type": "PushEvent",
-            "actor": "github-actions[bot]",
-            "created_at": "2026-11-12T12:38:50Z",
-            "action": null,
-            "ref": "refs/heads/main",
-            "ref_type": null,
-            "head": "d633c015ca1c527649fa8b4a5ec83904e4f516d6",
             "commit_count": null,
             "url": "https://github.com/Luis85/project-diary",
             "title": null
@@ -3260,6 +3194,58 @@
         },
         "recent_events": [
           {
+            "id": "28461695548",
+            "type": "CreateEvent",
+            "actor": "Luis85",
+            "created_at": "2026-11-26T09:53:35Z",
+            "action": null,
+            "ref": "claude/funny-dirac-o6p0t2",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/weg-manager",
+            "title": null
+          },
+          {
+            "id": "28459075370",
+            "type": "PushEvent",
+            "actor": "Luis85",
+            "created_at": "2026-11-26T09:29:51Z",
+            "action": null,
+            "ref": "refs/heads/main",
+            "ref_type": null,
+            "head": "24bc369cea6b6512ec23bfb3e714211f12ab8551",
+            "commit_count": null,
+            "url": "https://github.com/Luis85/weg-manager",
+            "title": null
+          },
+          {
+            "id": "21491255592",
+            "type": "IssueCommentEvent",
+            "actor": "github-actions[bot]",
+            "created_at": "2026-11-27T12:59:03Z",
+            "action": "created",
+            "ref": null,
+            "ref_type": null,
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/weg-manager/issues/69#issuecomment-7218915067",
+            "title": "Nightly mutation run failed"
+          },
+          {
+            "id": "28390157923",
+            "type": "CreateEvent",
+            "actor": "Luis85",
+            "created_at": "2026-11-26T18:58:24Z",
+            "action": null,
+            "ref": "claude/funny-dirac-o6p0t2",
+            "ref_type": "branch",
+            "head": null,
+            "commit_count": null,
+            "url": "https://github.com/Luis85/weg-manager",
+            "title": null
+          },
+          {
             "id": "21423084722",
             "type": "PullRequestEvent",
             "actor": "Luis85",
@@ -3336,58 +3322,6 @@
             "commit_count": null,
             "url": "https://github.com/Luis85/weg-manager/releases/tag/0.3.0",
             "title": "0.3.0"
-          },
-          {
-            "id": "21408219576",
-            "type": "PullRequestEvent",
-            "actor": "Luis85",
-            "created_at": "2026-11-26T17:20:50Z",
-            "action": "merged",
-            "ref": null,
-            "ref_type": null,
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/weg-manager",
-            "title": null
-          },
-          {
-            "id": "21407880818",
-            "type": "PullRequestEvent",
-            "actor": "Luis85",
-            "created_at": "2026-11-26T17:17:15Z",
-            "action": "opened",
-            "ref": null,
-            "ref_type": null,
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/weg-manager",
-            "title": null
-          },
-          {
-            "id": "21403359215",
-            "type": "PullRequestEvent",
-            "actor": "Luis85",
-            "created_at": "2026-11-26T16:29:29Z",
-            "action": "merged",
-            "ref": null,
-            "ref_type": null,
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/weg-manager",
-            "title": null
-          },
-          {
-            "id": "21401934893",
-            "type": "PullRequestEvent",
-            "actor": "Luis85",
-            "created_at": "2026-11-26T16:14:53Z",
-            "action": "opened",
-            "ref": null,
-            "ref_type": null,
-            "head": null,
-            "commit_count": null,
-            "url": "https://github.com/Luis85/weg-manager",
-            "title": null
           }
         ]
       }
